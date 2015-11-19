@@ -1,0 +1,275 @@
+\documentclass[preprint]{elsarticle}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+%\usepackage[T1]{fontenc}
+%\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{color}
+%\usepackage{setspace}
+\usepackage{url}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{PETRA: SPIP2014-1437}
+% Antonio - Esto es por poner algo, hay que cambiarlo, claro
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Pablo García Sánchez}
+\ead{\{author1, author2, author3, author4\}@ugr.es}
+\address{Departamento de Arquitectura y Tecnología de Computadores.\\ ETSIIT - CITIC. University of Granada, Spain}
+
+%\maketitle
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{abstract} 
+The wonderful abstract
+\end{abstract}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   KEYWORDS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{keyword}
+Smart traffic \sep Transit indicators \sep Traffic forecast \sep Mobility analysis
+\end{keyword}
+% Antonio - A añadir y mejorar
+
+\end{frontmatter}
+
+
+%-------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------------------
+
+\section{Introducción}
+\label{sec:intro}
+
+Esta memoria presenta copón copón ñañaña
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   TRAFFIC in a HIGHWAY  %%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Descripción detallada del trabajo desarrollado}
+\label{sec:description of the work}
+
+\subsection{Participación e implicación de los distintos investigadores en el proyecto}
+
+\subsection{Coordinación del equipo en la ejecución del proyecto}
+
+Los investigadores participantes se han involucrado en varias tareas, dependiendo principalmente del tipo de problema a resolver (clasificación, clustering o predicción) y del tipo de datos a tratar (de flujos de tráfico, etc). Para gestionar estas colaboraciones se han utilizado herramientas libres, tanto para la implementación del software (control de versiones con Git), como para la escritura de artículos y documentos relacionados (Google Docs y GitHub).
+
+
+
+
+\subsection{Cumplimento de las fases, actividades y tareas}
+
+A continuación se detallan los distintos paquetes de trabajo:
+
+\subsubsection{Paquete 01: Coordinación}
+
+\subsubsection{Paquete 02: Hardware}
+
+\subsubsection{Paquete 03: Infraestructura}
+
+\subsubsection{Paquete 04: Predicción}
+
+\subsubsection{Paquete 05: Difusión}
+
+\subsection{Dificultades y problemas surgidos}
+
+\subsubsection{Detección de errores en el código}
+
+\subsubsection{Comunicación con el servidor}
+
+\subsection{Planteamiento metodológico}
+
+\subsection{Protección de datos y seguridad}
+
+
+This section describes the experimental analysis of the data gathered by a different number of devices placed in statal highways.
+
+The main difference with respect to the other experimental scenarios are that, in this case, the devices detected are cars that are moving at higher velocities. However, in this scenario we have access to the information collected by Spanish Direcci\'on General de Tr\'afico (DGT) using their ESPIRAS, so in this section we can use real data to validate our approach and obtain a realistic ratio of real devices and detected ones.
+
+6 nodes have been placed near to different roads in Andalusia. Table \ref{tab:nodosDGT} shows the identifiers of the devices and their exact location. These locations have been chosen because are the nearest ones to existent ESPIRAS monitored by the DGT, and also, they count with Internet connection to allow the data transmission to our server.
+
+\begin{table}
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|c|c|p{5cm}|c|c|}
+\hline
+ID   & Provincia & Localización & Latitud & Longitud \\ \hline
+1010 & Granada  & A-44 K.P. 118+300 increasing direction (link A-44 K.P. 118+300 with A-92 K.P. 241+000) & 37.241668  & -3.6526 \\ \hline
+1020 & Granada  & A-92 K.P. 294+300 increasing direction  & 37.318763 & -3.137978 \\ \hline
+1030 & Granada  & A-92 K.P. 344+950, increasing direction & 37.141298 & -2.710871 \\ \hline
+1040 & Málaga  & A-7  K.P. 241+800, decreasing direction (Link A-7 K.P. 241+800 with A-45 K.P. 142+400) &  36.757427 & -4.426879 \\ \hline
+1050 & Málaga  & A-45 K.P. 121+700, decreasing direction & 36.910454 & -4.444769 \\ \hline
+1060 & Granada & A-92 K.P. 177+900, decreasing direction (Link A-92 with A-92M) & 37.136209 & -4.282619 \\ \hline
+\end{tabular}
+}
+\caption{Location of the devices for the highway traffic scenario (K.P. = Kilometric Point).}
+\label{tab:nodosDGT}
+\end{table}
+
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   OBJETIVOS  %%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+\section{Grado de consecución de los objetivos propuestos y otros posibles objetivos alcanzados}
+
+\subsection{Objetivo 1}
+
+\subsection{Objetivo 2}
+
+\subsection{Objetivo 3: Fuentes de datos}
+Para ello, lo primero que hicimos fue diseñar una encuesta que nos permita saber qué hábitos de uso tienen los usuarios de teléfonos móviles para ver si todos los dispositivos móviles podrían ser captados monitorizando la tecnología BT. Esta encuesta fue publicada de forma abierta y difundida a través de redes sociales y correo electrónico. Los puntos más importantes de esta encuesta pueden resumirse como:
+El rango de edad más frecuente de los informantes es el que abarca entre los 20 y los 50 años formando un total de 528 respuestas de una muestra de 601. Este rango concuerda en lo esperado puesto que los principales usuarios de teléfonos o dispositivos relacionados con la tecnología que nosotros detectamos están dentro de ese rango.
+Del total de la muestra, el 25,46\% no son conductores habituales
+Del resto de la muestra, que sí son conductores habituales, más de la mitad, un 52,64\% no utilizan habitualmente la tecnología BlueTooth (BT) mientras conduces y sólo el 22,56\% lo utilizan siempre, lo que deja un rango demasiado grande de conductores sin monitorizar.
+Si tomamos sólo los conductores habituales, el 50,2\% no saben o no tienen BT integrado en su vehículo, y el resto de la muestra sí lo tiene ya sea integrado o no, lo que nos indica que aunque para nosotros, que nos movemos en el mundo tecnológico y de la investigación la tecnología BT es algo conocido, no lo es para el ciudadano de a pie, puesto que perderíamos un 49,8\% de dispositivos móviles si  utilizamos sólo la monitorización de las señales BT.
+Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras que no lo están utilizando, sin embargo, sólo el 31,11\% apagan la señal Wifi mientras que no lo están utilizando. Este dato nos indica que aunque el usuario conozca la tecnología y la use, la gran mayoría de usuarios lo llevan desconectado. Sin embargo, si incluimos en el proyecto la tecnología Wifi y tenemos en cuenta que el 69,89\% de la gente la llevan permanentemente activada, el rango de datos capturados es mejor. Es por eso que hemos incluido la captación de señales Wifi dentro del desarrollo normal del proyecto además de las de BT que era lo inicialmente previsto.
+
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   DESCRIPCION DE RESULTADOS  %%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Descripción global de los resultados alcanzados y significación de los mismos en las correspondientes áreas de conocimiento}
+
+Publicaciones científicas	
+Participación (presentando resultados) en congresos, seminarios o jornadas, para presentar los resultados del proyecto	
+Generación de conocimientos que supongan un avance importante en el estado del arte	
+Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación	
+Tesis doctorales	
+Nuevos productos, servicios o protocolos	
+Participación en nuevos proyectos (contratos) de I+D	
+Nuevas patentes, modelos de utilidad, prototipos o licencias	
+Otros resultados
+
+\subsection{Referentes teóricos y metodológicos de especial interés}
+
+\subsection{Riesgo científico}
+
+\subsection{Novedad de las conclusiones y resultados alcanzados}
+
+\subsection{Contribución de los resultados al avance de la ciencia-técnica}
+
+El dinamismo económico del país	
+La sostenibilidad del modelo económico	
+La concentración e integración de la investigación en la UE	
+La estructuración del espacio europeo en investigación	
+El incremento del tamaño de los proyectos científicos en España	
+La mejora de la calidad de la investigación científica en España	
+Potenciar el papel del sistema público de I+D como generador de conocimiento	
+Mejora de la imagen de la ciencia en España	
+Promover un tejido empresarial innovador	
+Reducción de las emisiones contaminantes a la atmósfera	
+Aumento de la participación de las PYMES en el sistema de investigación e innovación	
+Fomentar la transferencia de los resultados de la investigación financiada con fondos públicos	
+Adecuación de las actividades de I+D a la demanda del sector productivo	
+Realización de investigación en las fronteras del conocimiento	
+
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   TRAFFIC in a HIGHWAY  %%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Interés de los resultados para el entorno socio-económico}
+
+\subsection{Proyectos y colaboraciones empresariales}
+
+Participación en H2020	
+Incremento de la capacidad de liderazgo en H2020	
+Creación de consorcios españoles para nuevos proyectos en H2020	
+Incremento del número de proyectos en los que participa su Grupo de Investigación	
+Aumento del volumen de fondos recibidos por su Grupo de Investigación (sin incluir los de la DGT al proyecto)	
+Ampliación de la red de socios internacionales	
+Mejora de la calidad y nivel tecnológico del Grupo de Investigación	
+Mejora del posicionamiento de su Grupo de Investigación dentro de la red de socios internacionales	
+Acceso a becas o financiación internacional para los integrantes del Grupo de Investigación	
+Colaboración con grupos de investigación internacionales
+
+\subsection{Formación del personal especializado en I+D+i}
+
+Formación del personal especializado en I+D+i	
+Aumento del número de personas dedicadas a I+D+i	
+Captación/ retención de personal especialmente cualificado	
+Incremento de la capacidad científico-tecnológica del Grupo de Investigación	
+Mejora de la posición competitiva del Grupo de Investigación	
+Incremento de la productividad del Grupo de Investigación	
+Aumento del prestigio del Grupo de Investigación	
+Identificación de nuevos mercados/áreas de investigación	
+Internacionalización del Grupo de Investigación	
+Explotación o venta de patentes, licencias, modelos, etc.	
+Firma de contratos con empresas
+
+
+
+Potenciar la formación y ocupación de los recursos humanos en actividades de I+D+i	
+Aumentar la calidad de la investigación científica y técnica para alcanzar el máximo nivel de excelencia e impacto	
+Fortalecer las capacidades y el liderazgo internacional de las instituciones y centros de investigación científica y técnica	
+Facilitar el acceso a las infraestructuras científicas y tecnológicas y al equipamiento científico	
+Impulsar el liderazgo empresarial en I+D+i de las empresas y las PYME	
+Favorecer la creación y el crecimiento de empresas de base tecnológica	
+Incrementar la colaboración en materia de I+D+I entre el sector público y el sector empresarial	
+Estimular la I+D+I orientada para respuesta a los retos de nuestra sociedad	
+Impulsar la internacionalización de las actividades de I+D+I de los agentes del Sistema Español de Ciencia, Tecnología e Innovación	
+Incrementar la cultura científica, tecnológica e innovadora de la sociedad española	
+Profundizar en las políticas de I+D+I basadas en la demanda
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   GRADO DE INNOVACION %%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Grado de innovación que se ha conseguido con la investigación}
+
+\subsection{Aprendizaje de nuevos conocimientos y técnicas}
+
+
+
+\subsection{Ambito de originalidad}
+
+\subsection{Originalidad y posibilidad de repercusión de los resultados en distintos ámbitos}
+
+\subsection{Impacto de los resultados en la transferencia de tecnología alcanzada o previsible}
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   CONCLUSIONES  %%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Difusión de los resultados}
+
+\subsection{Publicaciones en revistas}
+
+\subsection{Publicaciones en congresos}
+
+\subsection{Otras publicaciones relacionadas con el proyecto}
+
+\subsection{Otros medios de difusión}
+
+Dentro del congreso International Work-Conference on Time Series Analysis, ITISE 2015. El personal investigador de este proyecto ha organizado una sesión especial relacionada con el la predicción del flujo de tráfico real. Concretamente, la descripción de la sesión especial puede verse en http://itise.ugr.es/sessions\_proposals.php en el apartado SS6 y la descripción de la sesión especial está en \url{http://itise.ugr.es/pdf/ProposalSpecialSession.pdf}.
+
+Esta sesión especial se ha presentado como un reto a los asistentes al congreso. Los datos utilizados para dicho reto están en \url{http://geneura.ugr.es/timeseries/} y el reto consistía en realizar una predicción de dichas series cometiendo el menor error posible utilizando métodos de predicción tanto heurísticos como estadísticos.
+
+\section{Conclusiones}
+\label{sec:conclusions}
+
+En este proyecto
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Agradecimientos}
+This paper has been funded in part by...
+
+\bibliographystyle{elsarticle-num}
+\bibliography{memoria-final}
+
+\end{document}
