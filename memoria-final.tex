@@ -62,7 +62,7 @@ Esta memoria presenta copón copón ñañaña
 
 \subsection{Coordinación del equipo en la ejecución del proyecto}
 
-Los investigadores participantes se han involucrado en varias tareas, dependiendo principalmente del tipo de problema a resolver (clasificación, clustering o predicción) y del tipo de datos a tratar (de flujos de tráfico, etc). Para gestionar estas colaboraciones se han utilizado herramientas libres, tanto para la implementación del software (control de versiones con Git), como para la escritura de artículos y documentos relacionados (Google Docs y GitHub).
+Los investigadores participantes se han involucrado en varias tareas, dependiendo principalmente del tipo de problema a resolver (desarrollo del hardware, infraestrcutura o predicción) y del tipo de datos a tratar (de flujos de tráfico, etc). Para gestionar estas colaboraciones se han utilizado herramientas libres, tanto para la implementación del software (control de versiones con Git), como para la escritura de artículos y documentos relacionados (Google Docs y GitHub).
 
 
 
@@ -73,9 +73,51 @@ A continuación se detallan los distintos paquetes de trabajo:
 
 \subsubsection{Paquete 01: Coordinación}
 
+En este paquete, liderado por el IP se han realizado las tareas de coordinación tales como organización de reuniones y control del proyecto. Para ello se han usado herramientas libres, como gestores de tickets y otros mecanismos de comunicación y desarrollo.
+
 \subsubsection{Paquete 02: Hardware}
 
+Este paquete ha sido el que más esfuerzo ha requerido, ya que ha implicado el montaje, diseño y programación de los dispositivos de monitorización. Se han desarrollado varios prototipos del sistema, comparando el rendimiento de distintos componentes Bluetooth y WiFi.
+
+El dispositivo de monitorización está basado en \textit{Raspberry Pi}\footnote{\url{https://www.raspberrypi.org/}}, 
+en concreto el sistema funcional presentado
+en este artículo hace uso de Raspberry Pi Model B (Figura \ref{fig:raspberry}), aunque se está actualizando el sistema operativo y software para hacerlo funcionar sobre Raspberry Pi 2 Model B, pues su mayor capacidad de cómputo paralelo puede suponer una optimización significativa del funcionamiento del dispositivo de captación. Sin embargo, el cambio de arquitectura sufrido entre los modelos, hace que sea necesario un estudio concienzudo de la migración.
+
+Además de la Raspberry Pi que hace de centro de procesamiento, son necesarios otros elementos hardware:
+\begin{itemize}
+\item Tarjeta de red Wifi
+\item Tarjeta de red Bluetooth
+\item Antenas de captación
+\item Caja protectora estanca certificada.
+\end{itemize}
+
+La elección de la tarjeta de red no ha sido trivial, pues ha de cumplir varios requisitos: Es necesario que sea compatible con el sistema operativo elegido, que sea capaz de operar en modo monitor, lo que permitirá la captura promiscua de paquetes (conocido como \textit{sniffering}). Además, según el emplazamiento del dispositivo, puede ser requerida una antena con características especiales (omnidireccional o direccional, con mayor o menor ganancia, integrada en el dispositivo o alejada varios metros) por lo que disponer de un sistema estándar de antena es un requerimiento añadido. La tarjeta elegida es una \textit{TP-Link TL-WN722N} 
+que dispone de interfaz USB de conexión y conexión RP-SMA 
+para la antena.
+
+La tarjeta Bluetooth elegida es una \textit{Conceptronic CBT40 NANO} 
+ya que es una de las más comunes en el mercado compatibles con Bluetooth 4.0 y de Clase 1. 
+
+Su interfaz de conexión es USB, pero lamentablemente la antena está integrada dentro del chipset por lo que no es posible cambiarla de forma estándar. Sin embargo, el alcance teórico es de 100 metros, con uno efectivo de 25-30 metros, lo cual es un radio de acción más que suficiente para el propósito.
+
+
+La caja estanca empleada para albergar el dispositivo de monitorización cumple las certificaciones IP67 de protección frente a polvo y humedad y Clase II de aislamiento eléctrico. 
+
+
+\begin{figure*}[htb] 
+\centering
+%\includegraphics[width=10cm]{imags/raspi.eps}
+\caption{Raspberry Pi Model B utilizada en los dispositivos de monitorización.} 
+\label{fig:raspberry} 
+\end{figure*}
+
+% -------------------------------------------------------------------------
+
+
+
 \subsubsection{Paquete 03: Infraestructura}
+
+
 
 \subsubsection{Paquete 04: Predicción}
 
@@ -84,6 +126,8 @@ A continuación se detallan los distintos paquetes de trabajo:
 \subsection{Dificultades y problemas surgidos}
 
 \subsubsection{Detección de errores en el código}
+
+El código fuente del dispositivo tiene más de ***LINEAS de código. Debido a que es difícil simular su uso real, se realizaron distintas pruebas de concepto para depurar.
 
 \subsubsection{Comunicación con el servidor}
 
@@ -126,18 +170,13 @@ ID   & Provincia & Localización & Latitud & Longitud \\ \hline
 \subsection{Objetivo 1: Obtención de datos de tráfico más precisos y completos.}
 Para ello se propone el aumento del área de recolección de datos de tráfico para análisis y predicción (distintas ciudades y vías) colocándolos además cerca de fuentes de información conocidas. 
 
-\subsection{Objetivo 2}
-
-
-
-
 
 \subsection{Objetivo 2: Aumento de las fuentes de datos para obtención de datos más fiables} 
-Se proponen usar otras fuentes, como los aforadores oficiales de la DGT o datos públicos, como Google Traffic y la mejora en el sistema de monitorización de los dispositivos a colocar (sensores wifi, NFC o BT) para mejorar la precisión.
+Se propuso usar otras fuentes, como los aforadores oficiales de la DGT o datos públicos, como Google Traffic y la mejora en el sistema de monitorización de los dispositivos a colocar (sensores wifi, NFC o BT) para mejorar la precisión.
 
 \subsection{Objetivo 3: Predicción del tráfico de forma más precisa}
 
-, usando estas nuevas fuentes de datos, junto con un estudio de distintos métodos de predicción de series temporales.
+Usando las nuevas fuentes de datos anterirmente mencionas, se ha realizado un estudio de distintos métodos de predicción de series temporales.
 
 \subsection{Objetivo 4: Facilitar el acceso a los resultados}
 , permitiendo a otros investigadores (no sólo de las administraciones, sino a cualquier usuario) extraer información relevante a partir de  los datos obtenidos, promoviendo el Open Data
@@ -161,15 +200,15 @@ Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras q
 
 \section{Descripción global de los resultados alcanzados y significación de los mismos en las correspondientes áreas de conocimiento}
 
-Publicaciones científicas	
-Participación (presentando resultados) en congresos, seminarios o jornadas, para presentar los resultados del proyecto	
-Generación de conocimientos que supongan un avance importante en el estado del arte	
-Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación	
-Tesis doctorales	
-Nuevos productos, servicios o protocolos	
-Participación en nuevos proyectos (contratos) de I+D	
-Nuevas patentes, modelos de utilidad, prototipos o licencias	
-Otros resultados
+\subsection{Publicaciones científicas}
+\subsection{Participación (presentando resultados) en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
+\subsection{Generación de conocimientos que supongan un avance importante en el estado del arte}
+\subsection{Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación}	
+\subsection{Tesis doctorales}	
+\subsection{Nuevos productos, servicios o protocolos}
+\subsection{Participación en nuevos proyectos (contratos) de I+D}
+\subsection{Nuevas patentes, modelos de utilidad, prototipos o licencias}	
+\subsection{Otros resultados}
 
 \subsection{Referentes teóricos y metodológicos de especial interés}
 
@@ -196,9 +235,6 @@ Realización de investigación en las fronteras del conocimiento
 
 
 
-%----------------------------------------------------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   TRAFFIC in a HIGHWAY  %%%%%%%%%%%%%%%%%%%%%%%%%
-%----------------------------------------------------------------------------
 
 \section{Interés de los resultados para el entorno socio-económico}
 
