@@ -56,9 +56,13 @@ Esta memoria presenta copón copón ñañaña
 %----------------------------------------------------------------------------
 
 \section{Descripción detallada del trabajo desarrollado}
-\label{sec:description of the work}
+\label{sec:descdetallada}
+
+Esta sección describe en detalle las tareas realizadas por los miembros del proyecto. Se ha divido en los distintos paquetes propuestos en la memoria solicitud, para poder cubrir todas las áreas del proyecto.
 
 \subsection{Participación e implicación de los distintos investigadores en el proyecto}
+
+Durante el desarrollo del proyecto se añadieron dos nuevos investigadores. Antonio Fernández Ares y Pedro García Fernández.
 
 \subsection{Coordinación del equipo en la ejecución del proyecto}
 
@@ -69,21 +73,23 @@ Los investigadores participantes se han involucrado en varias tareas, dependiend
 
 \subsection{Cumplimento de las fases, actividades y tareas}
 
-A continuación se detallan los distintos paquetes de trabajo:
+A continuación se detallarán los distintos paquetes de trabajo, tareas realizadas y resultados obtenidos en cada uno de ellos. Además, se justifican cada una de las partidas de gastos del proyecto. ***HACERLO
 
 \subsubsection{Paquete 01: Coordinación}
 
 En este paquete, liderado por el IP se han realizado las tareas de coordinación tales como organización de reuniones y control del proyecto. Para ello se han usado herramientas libres, como gestores de tickets y otros mecanismos de comunicación y desarrollo.
 
+Justificación de los gastos:
+Reuniones en la DGT
+
 \subsubsection{Paquete 02: Hardware}
 
-Este paquete ha sido el que más esfuerzo ha requerido, ya que ha implicado el montaje, diseño y programación de los dispositivos de monitorización. Se han desarrollado varios prototipos del sistema, comparando el rendimiento de distintos componentes Bluetooth y WiFi.
+Este paquete ha sido el que más esfuerzo ha requerido, ya que ha implicado el montaje, diseño y programación de los dispositivos de monitorización. Se han desarrollado varios prototipos del sistema, comparando el rendimiento de distintos componentes Bluetooth y WiFi. Los resultados pueden verse a continuación.
 
-El dispositivo de monitorización está basado en \textit{Raspberry Pi}\footnote{\url{https://www.raspberrypi.org/}}, 
-en concreto el sistema funcional presentado
-en este artículo hace uso de Raspberry Pi Model B (Figura \ref{fig:raspberry}), aunque se está actualizando el sistema operativo y software para hacerlo funcionar sobre Raspberry Pi 2 Model B, pues su mayor capacidad de cómputo paralelo puede suponer una optimización significativa del funcionamiento del dispositivo de captación. Sin embargo, el cambio de arquitectura sufrido entre los modelos, hace que sea necesario un estudio concienzudo de la migración.
+El dispositivo de monitorización final está basado en \textit{Raspberry Pi}\footnote{\url{https://www.raspberrypi.org/}}, 
+en concreto se ha optado por una placa Raspberry Pi 2 Model B (Figura \ref{fig:raspberry}), ya que cuenta con una mayor capacidad de cómputo paralelo que su predecesora puede suponer una optimización significativa del funcionamiento del dispositivo de captación.
 
-Además de la Raspberry Pi que hace de centro de procesamiento, son necesarios otros elementos hardware:
+Además de la Raspberry Pi que hace de centro de procesamiento, se han optado por los siguientes elementos hardware:
 \begin{itemize}
 \item Tarjeta de red Wifi
 \item Tarjeta de red Bluetooth
@@ -91,15 +97,12 @@ Además de la Raspberry Pi que hace de centro de procesamiento, son necesarios ot
 \item Caja protectora estanca certificada.
 \end{itemize}
 
-La elección de la tarjeta de red no ha sido trivial, pues ha de cumplir varios requisitos: Es necesario que sea compatible con el sistema operativo elegido, que sea capaz de operar en modo monitor, lo que permitirá la captura promiscua de paquetes (conocido como \textit{sniffering}). Además, según el emplazamiento del dispositivo, puede ser requerida una antena con características especiales (omnidireccional o direccional, con mayor o menor ganancia, integrada en el dispositivo o alejada varios metros) por lo que disponer de un sistema estándar de antena es un requerimiento añadido. La tarjeta elegida es una \textit{TP-Link TL-WN722N} 
+La elección de la tarjeta de red no ha sido trivial, pues debía cumplir varios requisitos: Era necesario que fuera compatible con el sistema operativo elegido, que fuera capaz de operar en modo monitor, lo que ha permitido la captura promiscua de paquetes (conocido como \textit{sniffering}). Además, según el emplazamiento del dispositivo, puede ser requerida una antena con características especiales (omnidireccional o direccional, con mayor o menor ganancia, integrada en el dispositivo o alejada varios metros) por lo que disponer de un sistema estándar de antena ha sido un requerimiento añadido. La tarjeta finalmente elegida fue una \textit{TP-Link TL-WN722N} 
 que dispone de interfaz USB de conexión y conexión RP-SMA 
 para la antena.
 
 La tarjeta Bluetooth elegida es una \textit{Conceptronic CBT40 NANO} 
-ya que es una de las más comunes en el mercado compatibles con Bluetooth 4.0 y de Clase 1. 
-
-Su interfaz de conexión es USB, pero lamentablemente la antena está integrada dentro del chipset por lo que no es posible cambiarla de forma estándar. Sin embargo, el alcance teórico es de 100 metros, con uno efectivo de 25-30 metros, lo cual es un radio de acción más que suficiente para el propósito.
-
+ya que es una de las más comunes en el mercado compatibles con Bluetooth 4.0 y de Clase 1. El alcance teórico es de 100 metros, con uno efectivo de 25-30 metros, lo cual ha sido un radio de acción más que suficiente para el proyecto.
 
 La caja estanca empleada para albergar el dispositivo de monitorización cumple las certificaciones IP67 de protección frente a polvo y humedad y Clase II de aislamiento eléctrico. 
 
@@ -111,19 +114,225 @@ La caja estanca empleada para albergar el dispositivo de monitorización cumple l
 \label{fig:raspberry} 
 \end{figure*}
 
-% -------------------------------------------------------------------------
+Como se puede apreciar en la Figura \ref{fig:sistema}, se han programado cinco partes bien diferenciadas a las que hemos etiquetado con un nombre, \textit{Raziel, Lilith, Abdiel, Ezequiel} y \textit{Anan}, 
+que se relacionan entre ellas unidireccionalmente según el flujo de los datos. En el dispositivo se ejecutan Raziel y Lilith, que están implementados en Java y en PHP respectivamente. Ambas se ejecutan sobre el sistema operativo, llamado Horeb en este sistema. 
+Ambas partes envían datos a Abdiel de forma independiente. Éste también está  implementado en PHP, y es el único que tiene acceso de escritura en la base de datos Alejandría gestionada por MySQL. 
 
+Las Raspberry Pi 2 Model B empleadas tienen un procesador ARM7 por lo cual es necesario instalar un sistema operativo que sea compatible con la arquitectura de dicho procesador. En este caso el Sistema Operativo elegido es Raspbian, distribución basada en Debian enfocada en la compatibilidad con Raspberry Pi. Hace uso de la versión 3.10.24+ del kernel de Linux y nos permite disponer de un entorno Linux completo en un sistema de placa única como es Raspberry.
 
+Las ventajas de emplear un sistema operativo completo son numerosas: administración remota, sistema de logs y cron nativos, repositorios de software, etc. Se incorporaron también las librerías necesarias para la ejecución del software, siendo destacadas las librerías JDK de Java, JSR para el Bluetooth, {\em aircraft} para la captura Wifi o {\em Sakis3G} para las comunicaciones mediante 3G.
+
+Respecto al \textbf{software} desarrollado, llamado Raziel, es software integrado como demonio del sistema encargado de la detección de pasos de dispositivos (correspondientes a personas o vehículos) mediante la captura de paquetes Wifi y la localización de dispositivos Bluetooth cercanos. Estas capturas son procesadas enviadas a un servidor (Abdiel) periódicamente.
+El software ha sido desarrollado en Java siguiendo un metodología de programación orientada a eventos y multihebrada.
+
+Se ha implementado de forma modular cada una de las funcionalidades del software de forma que operen de manera autónoma. Las distintas hebras y subsistemas se comunicarán por medio de memoria compartida. Entre las tareas del software se encuentran funciones para el mantenimiento de sí mismo, ya que cabe la posibilidad de que el sistema no disponga de administración remota (dependiendo de la infraestructura de red donde sea colocado).
+
+De modo que, por ejemplo, dependiendo de la red, el software es capaz de establecer mecanismos para la conexión con el exterior mediante Ethernet, Wifi o 3G. En el caso de la conexión Wifi, la misma tarjeta de red es empleada tanto para la captura de paquetes como para establecer dicha conexión. Esto es posible gracias a la virtualización de dos interfaces de red al mismo tiempo.
+
+Cada sistema de captación (Bluetooth y Wifi) tiene un funcionamiento similar compuesto por cuatro elementos:
+
+\begin{itemize}
+\item Hebra de control
+\item Escaneador
+\item Monitor
+\item Difusor
+\end{itemize}
+
+La \textbf{hebra de control} es la encargada de iniciar las interfaces y comunicaciones con el dispositivo físico, así como estar a la escucha de las peticiones del sistema, como por ejemplo, para detenerse.
+El \textbf{escaneador} es el encargado implementar el \textit{listener} que obedece al evento de captura de paquete \textit{wifiRaw} o la detección de dispositivos Bluetooth. Éste realiza la interpretación de los octetos conseguidos por la interfaz de red, es decir, todos los bits capturados como trama.
+
+Si el octeto obedece a un formato conocido e interpretable se genera una ocurrencia de dispositivo que es enviado al monitor mediante memoria compartida. Esta ocurrencia de dispositivo incluye la hora en la que ha sido detectado, la intensidad de la señal (solo en Wifi) así como un hash de la MAC del dispositivo que ha realizado el envío, así como el fabricante, gracias a que los primeros 24 bits de la MAC son otorgados por el IEEE y pueden usarse para identificar univocamente al fabricante del dispositivo que genera la MAC. 
+
+En Wifi esta información se obtiene gracias al protocolo {\em radiotap}, que permite conseguir información de la propia tarjeta sobre el paquete capturado. De esta forma se consigue la intensidad de la señal con la que ha sido capturado el paquete y la cabecera 802.11 que incluye las MACs. En ningún momento, se procesa ni accede a los octetos capturados pertenecientes al cuerpo de la trama.
+En Bluetooth, se obedece al evento de dispositivo visible, es decir, actualmente solo podemos detectar dispositivos que se encuentran visibles de forma pública. Sin embargo, gracias al protocolo Bluetooth podemos saber que tipo de dispositivo es el que hemos detectado gracias a los bits de tipo de dispositivo y servicios ofrecidos.
+El \textbf{monitor} gestiona la cola de ocurrencias detectadas. Esta hebra es la encargada de determinar si un dispositivo es descubierto por primera vez o ya ha sido detectado anteriormente a lo largo del tiempo. Actualiza la lista de dispositivos detectados recientemente con la información de la ocurrencia del nuevo. De forma periódica comprueba dicha lista, buscando dispositivos que no hayan sido detectados transcurrido un tiempo prudencial. Los dispositivos que no han sido localizados en dicho periodo de tiempo, son empaquetados como pasos de dispositivos y enviados como memoria compartida al difusor. Un paso de dispositivo está compuesto por dos instantes de tiempo que indican la primera y última vez que se localizó al dispositivo, las intensidades de las señales en esas dos ocasiones y un hash de la MAC de dicho dispositivo.
+El \textbf{difusor}, manda periódicamente al servidor, mediante una petición REST, los datos comprimidos de los pasos de los dispositivos.
+
+Dado que el sistema puede ser implantado en una arquitectura de red compleja, como puede ser la perteneciente a un organismo público, nos hemos visto en la problemática de comunicar los dispositivos con el servidor de forma que no suponga una vulnerabilidad en la red o en redes que no dispongan de salida a Internet (las de ámbito local).
+Para ello se puede habilitar una Raspberry Pi con Horeb como sistema operativo, que haría uso del sistema \textit{Lilith} para hacer la transmisión del tráfico entre las otras Raspberry y el Servidor.
+De esta forma Lilith sirve como pasarela entre las dos redes, la local y la red global que comunica al servidor.
 
 \subsubsection{Paquete 03: Infraestructura}
 
+Esta subsección describe la programación y diseño de la infraestructura desarrollada.
 
+
+
+Abdiel (\textbf{servidor de captura de datos}) es el software que provee los servicios de la API REST de comunicación empleados por Raziel. Está desarrollado en PHP considerando especialmente la atomicidad de las operaciones.
+Entre otros servicios, proporciona la conexión y desconexión al sistema del software de captación, el sistema de privilegios, el servicio de actualización del software y el almacenamiento de pasos de dispositivos al sistema.
+Este servicio es el encargado de almacenar los datos de los pasos, por tanto, se encarga de descomprimirlos, procesarlos y mandarlos en lotes a la base de datos (Alejandría).
+% -------------------------------------------------------------------
+
+Alejandría es la \textbf{base de datos} donde se almacena la información de los pasos capturada en los dispositivos. Está basada en MySQL haciendo uso de diversos mecanismos de optimización tales como particionado de tablas e índices, que permiten el acceso a la información en tiempo constante. Esta base de datos es privada y no es difundida en la nube, ya que contiene los pasos individuales.
+Dispone de procedimientos optimizados para el cálculo del número total de pasos captados en ventanas temporales para los dispositivos de captación, así como para el cálculo de re-ocurrencia de dispositivos (detectados) en distintos nodos.
+Estos procedimientos son invocados por el software \textit{Ezequiel} para recolectar los datos y publicarlos en la nube.
+
+\subsubsection{Ezequiel: Publicación en la nube}
+Ezequiel es el \textbf{software para publicación en la nube} encargado del acceso a la base datos, consulta y generación de resúmenes de datos, aplicación de algoritmos de predicción y minería de datos y difusión los resultados en la nube \textit{Anan}.
+Actualmente realiza predicción en tiempo real empleando tanto métodos basados en regresión lineal como en máquinas de vector soporte.
+
+Anan es el nombre otorgado a \textbf{la nube} basada en la tecnología de Google en la que se almacenan los datos con el fin de darle difusión a los mismos. En Anan los datos son almacenados en tablas \textit{BigTable NoSQL} mediante la tecnología de Google Fusion Tables. Esta tecnología provee una base de datos geolocalizada (empleada en otras tecnologías de Google como Google Maps).
+Anan se encarga también de proveer gráficas interactivas y mapas del estado histórico, actual y predicho de los distintos nodos.
+***MENCIONAR AZURE
+
+***MENCIONAR LA COLOCACIÓN DE LOS DISPOSITIVOS
 
 \subsubsection{Paquete 04: Predicción}
 
+En este paquete se han realizado distintas tareas de predicción y validación de los datos.
+
+
+Inicialmente se compararon distintas métricas para obtener una correlación correcta entre el número de dispositivos detectado y el número de real detectado por las espiras de la DGT
+
+\begin{itemize}
+\item {\em Ratio total}: ration entre el número total de vehículos detectado por la DGT y el número de vehículos detectados por nuestros dispositivos.
+\item {\em Ratio medio}: ya la granularidad máxima de los datos de la DGT es de 15 minutos la suma de todos los ratios en esas secciones ha sido dividida por el número total de secciones para calcular la media.
+\item {\em Ratio mediana}: en lugar del ratio medio, este usa la mediana de todos los ratios de las secciones de 15 minutos.
+\item {\em Ratio medio por cuarto de hora}: esta métrica calcula un vector de ratios separado por cuartos de hora, en lugar de un ratio total para todos los datos. Se ha calculado un ratio medio por cada cuarto de hora durante cada día.
+\item {\em Ratio mediana por cuarto de hora}: como en la métrica anterior, este utiliza un vector de ratios por cuarto de hora, pero cada elemento es calculado usando la mediana en lugar de la media.
+\end{itemize}
+
+
+La Tabla \ref{tab:ratiosDGT} muestra los ratios obtenidos  Para simplificar la discusiónTo simplify the data analysis and discussion only the data of one node (1010) are shown. Results show that our device detects one vehicle per approximately 19 detected by the DGT, according Total, Mean and Median ratios. However, best results in MAE and MAPE are attained obtaining ratios dividing by quarter. Therefore, for the rest of the paper this ratio has been chosen, as we need to deal with absolute values to perform forecasting analysis later.
+
+\begin{table}[htb]
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+			 &RATIO	  & MAE    &   MAPE   & MSE    & RMSE \\
+ \hline
+Total Ratio  & 17.230 &   60.373 & 36.265 & \textbf{7371.579}  & \textbf{85.857} \\
+Mean Ratio   & 20.792 &   72.323 & 43.443 & 11216.070 & 105.905 \\
+Median Ratio & 18.2 &    62.454  & 37.515 & 8060.136  & 89.778 \\
+Mean By Quarter of Hour Ratio &   Depends on the hour  & 66.791 & 40.120 & 9890.978 & 99.453 \\
+Median By Quarter of Hour Ratio & Depends on the hour  & \textbf{58.326} & \textbf{35.035} & 7617.613 & 87.278 \\
+\hline
+
+\end{tabular}
+}
+\caption{Different ratios between the DGT data and the data gathered by MOBYWIT in node 1010.}
+\label{tab:ratiosDGT}
+\end{table}
+
+
+Figure \ref{fig:dgtRatios} shows the number of devices of the node 1010, applying the chosen correction ratio. As it can be seen, certain correlation exists. However, different peaks appear in the figure, being those elements the product of detecting few devices in comparison with the DGT.
+
+
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[scale=0.22]{imgs/petra_graph_DGT-Mobywit-mended.eps}
+		\caption{Devices detected by DGT and detected by our device (node 1010) applying the correction ratio (median by quarter). Note: no DGT data available during October 14th.}
+	\label{fig:dgtRatios}
+	\end{center}
+\end{figure}
+
+\subsection{Traffic forecasting}
+\label{sub:ts_forecasting}
+Capturing data about traffic on a highway worth not only for describing its current situation, but also for forecasting future conditions. In this sense, counting the number of cars that have passed for a given point in a given time can be considered as a time series, allowing the use of automatic tools to perform forecasting.
+
+For this work, four methods (three widely used time series forecasters, and one control method) have been used to, automatically, predict the number of cars that will pass in the next period. These methods are included in the forecast package ~\cite{Hyndman08automatictime} of the R program~\cite{R:Bloomfield:2014}, and are the following:
+
+\begin{itemize}
+\item {\em Exponential smoothing state space model (ETS)~\cite{ETS:2008}}: Represent a set of methods that decompose the time-series in three different characteristics: error, trend and seasonal, modelling each one with a given equation. The forecasted values are obtained joining the previous equations by addition or multiplication. The corresponding function in the forecast package builds the different models included in the ETS set, and select the one with the best according to the Akaike's Information Criterion (AIC)~\cite{Akaike1973}.
+\item {\em ARIMA~\cite{BoxJenk}: This well known method, due to Box and Jenkins } integrates autoregressive (AR) and moving average (MA) models in a three-stage iterative cycle. The phases of every cycle consist of: identifying the time series, estimating of the model's parameters, and verifying the built model. Briefly, every model is defined as a sum of $p+q$ terms. The first $p$  terms are defined by $p$ past values, any of them multiplied by a coefficient; while the last $q$ terms represent the moving averages, also multiplied by their own coefficients.
+\item {\em Theta~\cite{Assima2000}}: This univariate forecasting method is based on modifying the local curvature of the time-series, after having applied a second difference to the data. It decomposes the original time series into several modified ones, which are separately extrapolated so that they have to be combined in order to provide the forecasting.
+\item {\em Mean}: This is the control method. The future values are computed as the mean of the previous ones.
+\end{itemize}
+
+The data used for the experiments are the ones provided by the node 1010 starting on 12-Oct-2015, 00:00 hours, and finishing on 31-Oct-2015, 23:45 hours, i.e., three entire weeks less one day (there exist no data for November, the first). As data is aggregated every 15 minutes, this means the time-series was composed of $20(days)*24(hours)*4(quarters)=1920$ values.
+
+
+
+Table ~\ref{tab:forecasting} shows the values for the ten used measures computed over $576$ values, the ones corresponding to the last 6 days (i.e., $30\%$ of the data). The horizon has been set to 1, so that, in order to forecast any given moment all the previous real known data were used to build and train the models and, after this, the next value was forecasted. This way, the problem has been faced as a simulation of what could happen in a continuous system in which new real data were received every 15 minutes so that forecasting models could be also continuously adapted.
+
+As the results show, ETS, ARIMA and Theta behave clearly better than the control method. The differences between the three considered methods are, almost nonexistent. In any case, ETS yields the lowest values in four of the measures being used. For these reasons, it could be probably considered the best candidate to be chosen as the preferred method to forecast this kind of time-series. Figure \ref{fig:forecasted-values} depicts the values forecasted by ETS comparing them with the expected ones.
+
+\begin{figure}[!ht]
+    \begin{center}
+        \includegraphics[width=14cm]{imgs/PETRA/forecasting-PETRA-1011.eps}
+        \caption{Expected vs forecasted number of cars in node 1011, according to MOBYWIT's records. Forecasted values are provided by smoothing state space model (ETS). }
+        \label{fig:forecasted-values}
+    \end{center}
+\end{figure}
+
+\begin{table}[htb]
+\centering
+\resizebox{8cm}{!}{
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Measure vs Method &Mean &ETS &ARIMA &Theta\\
+\hline
+MAE &$4.4611$ & $\textbf{2.7106}$ & $2.7409$ & $2.7126$\\
+MAPE &$4.7226$ & $\textbf{1.0128}$ & $1.0822$ & $1.0599$\\
+MSE &$28.5711$ & $\textbf{13.0194}$ & $13.2775$ & $13.0421$\\
+RMSE &$5.3452$ & $\textbf{3.6082}$ & $3.6438$ & $3.6114$\\
+\hline
+\end{tabular}
+}
+\caption{Error values yielded when forecasting data recorded by MOBYWIT. Measures are computed using differences between expected values and yielded ones from 25-Oct-2015, 00:00 hours to 31-Oct-2105, 23:45 hours, establishing the horizon to 1. Best (=lowest) values are highlighted in bold.}
+\label{tab:forecasting}
+\end{table}
+
+Finally, once forecasting with MOBYWIT's data has been carried out, the number of cars that would have been detected by the DGT can be estimated by the ratios previously calculated (see table \ref{tab:ratiosDGT}). Concretely, table \ref{tab:errorForecastingRatio} shows the error computed when applying the Median Ratio By Quarter conversion. As can be seen, newly ETS stands for its capability of yielding the lowest errors. 
+
+\begin{table}[htb]
+\centering
+\resizebox{8cm}{!}{
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Measure vs Method &Mean &ETS &ARIMA &Theta\\
+ \hline
+MAE   & $72.162$ & $\textbf{42.789}$ & $43.335$ & $43.158$ \\
+MAPE  & $27.961$ & $\textbf{27.609}$ & $27.961$ & $27.847$ \\
+MSE   & $7040.303$ & $\textbf{3472.145}$ & $3569.706$ & $3517.506$ \\
+RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
+\hline
+
+
+\end{tabular}
+}
+
+\caption{Error values computed using the differences between DGT real data and data recorded by MOBYWIT with Median Ratio By Quarter Hour conversion. The period to be forecasted started on 25-Oct-2015, 00:00 hours and finished on 31-Oct-2105, 23:45 hours, establishing the horizon to 1. Best (=lowest) values are highlighted in bold.}
+
+\label{tab:errorForecastingRatio}
+\end{table}
+
+\begin{figure}[!ht]
+    \begin{center}
+        \includegraphics[width=14cm]{imgs/PETRA/petra_graph_ts-forecasting.eps}
+        \caption{Real DGT number of cars in node 1011 vs forecasted according to MOBYWIT's records with Median Ratio By Quarter conversion. Forecasted values are provided by Mean, ETS, ARIMA and THETA methods. }
+        \label{fig:forecasted-values-ratio}
+    \end{center}
+\end{figure}
+
+Finally, according to the results obtained, performing traffic forecasting using data provided by MOBYWIT seems to be an affordable task for traditional methods (i.e., ETS or ARIMA). Furthermore, ratios computed from data recorded by DGT allow to convert forecasted values to their equivalent representing the number of cars in a given location. Thus, the joint use of this two techniques makes possible to closely approximate the number of cars that will have passed 15 minutes later by the position of the MOBYWIT; and this process can be newly repeated every 15 minutes so that forecasting models can be enhanced and adapted to the new conditions of the road.
+
+
 \subsubsection{Paquete 05: Difusión}
 
+Página web https://proyectopetra.wordpress.com/
+
 \subsection{Dificultades y problemas surgidos}
+
+\subsubsection{Problemas relacionados con el hardware}
+
+El uso de un tarjeta Raspberry Pi Model 2 y el sistema operativo Raspbian ha aportado numerosas ventajas mencionadas en secciones anteriores.
+Sin embargo ha sido necesario realizar algunas modificaciones al SO para optimizarlo al problema de captación del proyecto: el almacenamiento físico de las Raspberry Pi está basado en tarjetas SD (microSD en Model B+ o superiores). Si bien las velocidades que alcanzan las tarjetas de Clase 10 es más que suficiente para que funcione un sistema operativo, existe un problema documentado de corrupción 
+de las tarjetas SD ante fallos eléctricos tales como perdida de alimentación o subidas de tensión.
+
+Al estar los dispositivos utilizados en este proyecto ubicados en zonas de complicado acceso frecuente, tener un sistema operativo 
+tan vulnerable a fallos (corrupciones) suposo un problema.
+
+Es por ello que se ha modificó el SO de modo que funcione como un Sistema Operativo de Solo Lectura. De esta forma, se minimizaron las escrituras en el medio y se garantiza que, en todos los arranques del dispositivo, se disponía de una versión estable no corrupta de los archivos necesarios para su inicio.
+
+Sin embargo, un sistema operativo Linux requiere de numerosos directorios donde poder escribir para el correcto funcionamiento del mismo. Esto se resolvió con particiones \textit{tmpfs} montadas en memoria volátil. Esto aportó numerosas ventajas, ya que, al ser mucho más rápida la memoria volátil que la física, las operaciones son generalmente mucho más rápidas. Sin embargo, al ser memoria volátil, los datos no persisten después de los reinicios del sistema. Además, al estar alojada en la memoria RAM de la Raspberry Pi, se pierde capacidad máxima de dicha memoria. Se sacrificó por tanto al almacenamiento a lo largo del tiempo y parte de la memoria RAM con el fin de conseguir un sistema operativo más robusto ante fallos, corrupciones de datos y más eficiente en general. 
+
+Además, debido al uso intensivo del hardware USB (las tarjetas Wifi y Bluetooth), era necesario indicarle al SO que no podía suspender los dispositivos USB para ahorrar energía. Esta medida que en Sistemas Operativos de propósito general es muy útil y supone un ahorro en el consumo bastante significativo, en nuestro sistema suponía la perdida de captación de datos en los momentos en los que la tarjeta estuviese suspendida, por lo que tuvo que modificar las opciones de arranque. 
+
+Debido a que las Raspberry Pi no incorporan una pila para el reloj interno, era necesario solicitar la fecha y hora mediante un servidor NTP con el fin de garantizar la correcta sincronización todos los dispositivos de captación. Esto se consiguió gracias al acceso a la red de las casetas de la DGT y gestionadas por la empresa UTE-ACISA.
+
 
 \subsubsection{Detección de errores en el código}
 
@@ -201,14 +410,36 @@ Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras q
 \section{Descripción global de los resultados alcanzados y significación de los mismos en las correspondientes áreas de conocimiento}
 
 \subsection{Publicaciones científicas}
+
+Durante el desarrollo del proyecto se han realizado varias publicaciones en revistas ***TERMINA***
 \subsection{Participación (presentando resultados) en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
+
+Las publicacaciones en congresos en el área de ingeniería informática y las ciencias de la computación también requieren
+
 \subsection{Generación de conocimientos que supongan un avance importante en el estado del arte}
+
 \subsection{Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación}	
-\subsection{Tesis doctorales}	
+
+\subsection{Tesis doctorales}
+
+Además de esta tesis, se el 23 de Julio de 2015 se leyó el siguiente Trabajo Fin de Grado
+(Grado en Ingeniería Electrónica Industrial)
+
+\begin{itemize}
+\item Título: SISTEMA PARA RECONOCIMIENTO DE DISPOSITIVOS EN TIEMPO REAL
+\item Autora: María Tíscar Rodríguez Ortiz
+\item Director: Pedro García Fernández
+\item Departamento: Electrónica y Tecnología de Computadores
+\end{itemize}
+
 \subsection{Nuevos productos, servicios o protocolos}
+
 \subsection{Participación en nuevos proyectos (contratos) de I+D}
+
 \subsection{Nuevas patentes, modelos de utilidad, prototipos o licencias}	
+
 \subsection{Otros resultados}
+
 
 \subsection{Referentes teóricos y metodológicos de especial interés}
 
@@ -238,14 +469,28 @@ Realización de investigación en las fronteras del conocimiento
 
 \section{Interés de los resultados para el entorno socio-económico}
 
+Asistencia a tres reuniones en la Dirección General de Tráfico para presentar los avances en el proyecto ``Predicción del estado del tráfico usando un sistema de monitorización de bajo coste (PETRA)''.
+
 \subsection{Proyectos y colaboraciones empresariales}
 
 Participación en H2020	
 Incremento de la capacidad de liderazgo en H2020	
 Creación de consorcios españoles para nuevos proyectos en H2020	
-Incremento del número de proyectos en los que participa su Grupo de Investigación	
+
+
+\subsection{Incremento del número de proyectos en los que participa su Grupo de Investigación}
+
 Aumento del volumen de fondos recibidos por su Grupo de Investigación (sin incluir los de la DGT al proyecto)	
-Ampliación de la red de socios internacionales	
+\subsubsection{Ampliación de la red de socios internacionales}
+
+Asistencia a reunión ``Metaheuristics in the Large'' organizada por la U. de Nottingham
+ Inicio de colaboración con Jerry Swan
+ 29 y 30 de abril de 2015
+
+    - Estancia de Alexander Lyubchenko, de la Omsk State Transport University (OSTU), Rusia. 1 de septiembre de 2015 al 30 de junio de 2016.
+
+
+
 Mejora de la calidad y nivel tecnológico del Grupo de Investigación	
 Mejora del posicionamiento de su Grupo de Investigación dentro de la red de socios internacionales	
 Acceso a becas o financiación internacional para los integrantes del Grupo de Investigación	
@@ -295,9 +540,7 @@ Profundizar en las políticas de I+D+I basadas en la demanda
 
 \subsection{Impacto de los resultados en la transferencia de tecnología alcanzada o previsible}
 
-%----------------------------------------------------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   CONCLUSIONES  %%%%%%%%%%%%%%%%%%%%%%%%%
-%----------------------------------------------------------------------------
+
 
 \section{Difusión de los resultados}
 
@@ -315,9 +558,13 @@ Dentro del congreso International Work-Conference on Time Series Analysis, ITISE
 
 Esta sesión especial se ha presentado como un reto a los asistentes al congreso. Los datos utilizados para dicho reto están en \url{http://geneura.ugr.es/timeseries/} y el reto consistía en realizar una predicción de dichas series cometiendo el menor error posible utilizando métodos de predicción tanto heurísticos como estadísticos.
 
-Hackathon Open Data
+Organización de dos hackathones relacionados con la predicción del estado del tráfico y datos abiertos: Open Data Day (celebrado en Granada) y  Hackathon Fujitsu-UGR (celebrado en Málaga).
+Resultados de los hackathones:
+   - Estudio del estado del arte en artículos de predicción del tráfico.
+   - Desarrollo de programas que extraen estado de la predicción del tráfico a partir de distintas fuentes.
 
-Hackathon Fujitsu-UGR
+
+Noche de los investigadores
 
 \section{Conclusiones}
 \label{sec:conclusions}
