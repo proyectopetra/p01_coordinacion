@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{Pablo García Sánchez}
-\ead{\{author1, author2, author3, author4\}@ugr.es}
+\ead{pablogarcia@ugr.es}
 \address{Departamento de Arquitectura y Tecnología de Computadores.\\ ETSIIT - CITIC. University of Granada, Spain}
 
 %\maketitle
@@ -62,12 +62,15 @@ Esta sección describe en detalle las tareas realizadas por los miembros del proy
 
 \subsection{Participación e implicación de los distintos investigadores en el proyecto}
 
-Durante el desarrollo del proyecto se añadieron dos nuevos investigadores. Antonio Fernández Ares y Pedro García Fernández.
+Durante el desarrollo del proyecto se añadieron dos nuevos investigadores. Antonio Fernández Ares y Pedro García Fernández. El primero es un estudiante de doctorado recientemente añadido al Grupo de Investigación GeNeura, cuya futura tesis está directamente relacionada con los datos obtenidos en este proyecto. Ha colaborado en los paquetes 3 y 4, realizando la programación del software de monitorización. Por otro lado, el Doctor Pedro Fernández, del Departamento de Electrónica, ha aportado su experiencia a nivel hardware en el paquete 3. 
+
+El resto de miembros del proyecto han colaborado en las distintas tareas que fueron asignadas en la memoria inicial.
 
 \subsection{Coordinación del equipo en la ejecución del proyecto}
 
 Los investigadores participantes se han involucrado en varias tareas, dependiendo principalmente del tipo de problema a resolver (desarrollo del hardware, infraestrcutura o predicción) y del tipo de datos a tratar (de flujos de tráfico, etc). Para gestionar estas colaboraciones se han utilizado herramientas libres, tanto para la implementación del software (control de versiones con Git), como para la escritura de artículos y documentos relacionados (Google Docs y GitHub).
 
+Se han realizado reuniones semanales con todos los miembros del proyecto, dentro de las reuniones semanales del grupo GeNeura, para mostrar y discutir los avances. Estas reuniones son abiertas a cualquier miembro, por lo que en algunas ocasiones alumnos y profesores externos han aportado su opinión.
 
 
 
@@ -175,7 +178,35 @@ Anan es el nombre otorgado a \textbf{la nube} basada en la tecnología de Google 
 Anan se encarga también de proveer gráficas interactivas y mapas del estado histórico, actual y predicho de los distintos nodos.
 ***MENCIONAR AZURE
 
-***MENCIONAR LA COLOCACIÓN DE LOS DISPOSITIVOS
+Finalmente, los dispositivos se colocaron en distintas localizaciones propuestas por el Centro de Gestión del Tráfico del Sureste. Estas localizaciones fueron elegidas porque son las más cercanas a las espiras de la DGT, y además cuentan con conexión a Internet para el envío de datos a nuestro servidor y a la nube. Se crearon dos grupos de nodos: un grupo en la provincia de Granada (1010,1020 y 1030) y otro en la provincia de Málaga (1040, 1050 y 1060).
+
+La Figura \ref{fig:nodosDGT} muestra los identificadores de esos dispositivos y su emplazamiento.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[scale=0.4]{imgs/nodos_dgt.eps}
+		\caption{Localización de los dispositivos en la carretera.}
+	\label{fig:nodosDGT}
+	\end{center}
+\end{figure}
+
+\begin{table}
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|c|c|p{5cm}|c|c|}
+\hline
+ID   & Provincia & Localización & Latitud & Longitud \\ \hline
+1010 & Granada  & A-44 P.K. 118+300 sentido creciente (link A-44 P.K. 118+300 with A-92 P.K. 241+000) & 37.241668  & -3.6526 \\ \hline
+1020 & Granada  & A-92 P.K. 294+300 sentido creciente  & 37.318763 & -3.137978 \\ \hline
+1030 & Granada  & A-92 P.K. 344+950, sentido creciente & 37.141298 & -2.710871 \\ \hline
+1040 & Málaga  & A-7  P.K. 241+800, sentido decreciente (Link A-7 P.K. 241+800 with A-45 P.K. 142+400) &  36.757427 & -4.426879 \\ \hline
+1050 & Málaga  & A-45 P.K. 121+700, sentido decreciente & 36.910454 & -4.444769 \\ \hline
+1060 & Granada & A-92 P.K. 177+900, sentido decreciente (Link A-92 with A-92M) & 37.136209 & -4.282619 \\ \hline
+\end{tabular}
+}
+\caption{Localización de los dispositivos (P.K. = Punto Kilométrico).}
+\label{tab:nodosDGT}
+\end{table}
 
 \subsubsection{Paquete 04: Predicción}
 
@@ -345,29 +376,8 @@ El código fuente del dispositivo tiene más de ***LINEAS de código. Debido a que 
 \subsection{Protección de datos y seguridad}
 
 
-This section describes the experimental analysis of the data gathered by a different number of devices placed in statal highways.
 
-The main difference with respect to the other experimental scenarios are that, in this case, the devices detected are cars that are moving at higher velocities. However, in this scenario we have access to the information collected by Spanish Direcci\'on General de Tr\'afico (DGT) using their ESPIRAS, so in this section we can use real data to validate our approach and obtain a realistic ratio of real devices and detected ones.
 
-6 nodes have been placed near to different roads in Andalusia. Table \ref{tab:nodosDGT} shows the identifiers of the devices and their exact location. These locations have been chosen because are the nearest ones to existent ESPIRAS monitored by the DGT, and also, they count with Internet connection to allow the data transmission to our server.
-
-\begin{table}
-\centering
-\resizebox{12cm}{!}{
-\begin{tabular}{|c|c|p{5cm}|c|c|}
-\hline
-ID   & Provincia & Localización & Latitud & Longitud \\ \hline
-1010 & Granada  & A-44 K.P. 118+300 increasing direction (link A-44 K.P. 118+300 with A-92 K.P. 241+000) & 37.241668  & -3.6526 \\ \hline
-1020 & Granada  & A-92 K.P. 294+300 increasing direction  & 37.318763 & -3.137978 \\ \hline
-1030 & Granada  & A-92 K.P. 344+950, increasing direction & 37.141298 & -2.710871 \\ \hline
-1040 & Málaga  & A-7  K.P. 241+800, decreasing direction (Link A-7 K.P. 241+800 with A-45 K.P. 142+400) &  36.757427 & -4.426879 \\ \hline
-1050 & Málaga  & A-45 K.P. 121+700, decreasing direction & 36.910454 & -4.444769 \\ \hline
-1060 & Granada & A-92 K.P. 177+900, decreasing direction (Link A-92 with A-92M) & 37.136209 & -4.282619 \\ \hline
-\end{tabular}
-}
-\caption{Location of the devices for the highway traffic scenario (K.P. = Kilometric Point).}
-\label{tab:nodosDGT}
-\end{table}
 
 
 
@@ -377,11 +387,11 @@ ID   & Provincia & Localización & Latitud & Longitud \\ \hline
 \section{Grado de consecución de los objetivos propuestos y otros posibles objetivos alcanzados}
 
 \subsection{Objetivo 1: Obtención de datos de tráfico más precisos y completos.}
-Para ello se propone el aumento del área de recolección de datos de tráfico para análisis y predicción (distintas ciudades y vías) colocándolos además cerca de fuentes de información conocidas. 
+Para ello se propuso el aumento del área de recolección de datos de tráfico para análisis y predicción (distintas ciudades y vías) colocándolos además cerca de fuentes de información conocidas. 
 
 
 \subsection{Objetivo 2: Aumento de las fuentes de datos para obtención de datos más fiables} 
-Se propuso usar otras fuentes, como los aforadores oficiales de la DGT o datos públicos, como Google Traffic y la mejora en el sistema de monitorización de los dispositivos a colocar (sensores wifi, NFC o BT) para mejorar la precisión.
+Se propuso usar otras fuentes, como los aforadores oficiales de la DGT o datos públicos, como Google Traffic y la mejora en el sistema de monitorización de los dispositivos a colocar (sensores wifi, NFC o BT) para mejorar la precisión. Podemos considerar este objetivo cubierto, ya que el haber añadido nuevas fuentes de datos, la captación de datos WiFi y su comparación con datos de espiras proporcionados por la DGT, los datos de monitorización y predicción han sido validados. ***MAS BONICO***
 
 \subsection{Objetivo 3: Predicción del tráfico de forma más precisa}
 
@@ -409,12 +419,15 @@ Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras q
 
 \section{Descripción global de los resultados alcanzados y significación de los mismos en las correspondientes áreas de conocimiento}
 
+Durante el desarrollo del proyecto se han realizado varias publicaciones en revistas, que pueden consultarse en la sección \ref{subsec:publicacionesrevistas}.
+
 \subsection{Publicaciones científicas}
 
-Durante el desarrollo del proyecto se han realizado varias publicaciones en revistas ***TERMINA***
+ 
+
 \subsection{Participación (presentando resultados) en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
 
-Las publicacaciones en congresos en el área de ingeniería informática y las ciencias de la computación también requieren
+Las publicaciones en congresos en el área de ingeniería informática y las ciencias de la computación también requieren
 
 \subsection{Generación de conocimientos que supongan un avance importante en el estado del arte}
 
@@ -436,7 +449,9 @@ Además de esta tesis, se el 23 de Julio de 2015 se leyó el siguiente Trabajo Fin
 
 \subsection{Participación en nuevos proyectos (contratos) de I+D}
 
-\subsection{Nuevas patentes, modelos de utilidad, prototipos o licencias}	
+\subsection{Nuevas patentes, modelos de utilidad, prototipos o licencias}
+
+Aunque no se ha desarrollado aún ninguna patente, está en trámite el desarrollo de una patente para ***TERMINA***
 
 \subsection{Otros resultados}
 
@@ -471,16 +486,42 @@ Realización de investigación en las fronteras del conocimiento
 
 Asistencia a tres reuniones en la Dirección General de Tráfico para presentar los avances en el proyecto ``Predicción del estado del tráfico usando un sistema de monitorización de bajo coste (PETRA)''.
 
+
+
 \subsection{Proyectos y colaboraciones empresariales}
 
 Participación en H2020	
 Incremento de la capacidad de liderazgo en H2020	
 Creación de consorcios españoles para nuevos proyectos en H2020	
 
+La temática del proyecto fue utilizada en el ``H2020 Face2Face'' en el ICT Proposers Day 2015, organizado por ICT Proposers Day (ICT 2015 - Innovate, Connect, Transform) y la Red EEN (Lisboa, Portugal).
+
 
 \subsection{Incremento del número de proyectos en los que participa su Grupo de Investigación}
 
 Aumento del volumen de fondos recibidos por su Grupo de Investigación (sin incluir los de la DGT al proyecto)	
+
+Se concurrió al Programa de Ayudas GENIL Para Realización De Actividades Por Grupos De Investigación Interdisciplinares (RAGII-2015) para formar el grupo interdisciplinar llamado ``Gestión de la movilidad en smart cities mediante técnicas de geomárketing''.
+
+
+
+El objeto del grupo interdisciplinar formado se centra en la investigación en el área de la 
+gestión de la movilidad, internet de las cosas y smart cities.
+A continuación se detalla el listado de grupos y miembros que se integran en el Grupo 
+Interdisciplinar:
+\begin{itemize}
+\item PAIDI TIC024 - Software Libre Para Optimización, Búsqueda y Aprendizaje 
+(GeNeura)
+\item PAIDI TIC164 - Especificación, diseño y evolución de software (GEDES)
+\item PAIDI TIC117 - Circuitos y Sistemas de Procesamiento de la Información (CASIP)
+\item PAIDI FQM150 - MODELOS PROBABILISTICOS APLICADOS A CIENCIAS SOCIALES 
+\item PAIDI RNM357 - Laboratorio de Urbanismo y Ordenación del Territorio
+\end{itemize}
+
+
+
+
+
 \subsubsection{Ampliación de la red de socios internacionales}
 
 Asistencia a reunión ``Metaheuristics in the Large'' organizada por la U. de Nottingham
@@ -498,17 +539,11 @@ Colaboración con grupos de investigación internacionales
 
 \subsection{Formación del personal especializado en I+D+i}
 
-Formación del personal especializado en I+D+i	
-Aumento del número de personas dedicadas a I+D+i	
-Captación/ retención de personal especialmente cualificado	
-Incremento de la capacidad científico-tecnológica del Grupo de Investigación	
-Mejora de la posición competitiva del Grupo de Investigación	
-Incremento de la productividad del Grupo de Investigación	
-Aumento del prestigio del Grupo de Investigación	
-Identificación de nuevos mercados/áreas de investigación	
-Internacionalización del Grupo de Investigación	
-Explotación o venta de patentes, licencias, modelos, etc.	
-Firma de contratos con empresas
+Este proyecto ha permitido una formación del personal especializado en I+D+i, principalmente para el IP, Pablo García Sánchez, que se ha enfrentado por primera vez a la dirección de un proyecto de investigación. Además, ha permitido el aumento del número de personas dedicadas a I+D+i dentro del Grupo de Investigación, permitiendo la incorporación de miembros de otros departamentos (como el de Electrónica), así como la captación/ retención de personal especialmente cualificado. 
+
+Además, este proyecto ha permitido un incremento de la capacidad científico-tecnológica, prestigio y posición competitiva del Grupo de Investigación, establenciendo una linea de investigación que ha recibido interés por parte de distintas empresas y organismos públicos (DGT, Universidad de Málaga y Ayuntamiento de Granada).
+
+Se ha permitido identificar nuevos mercados/áreas de investigación (como el marketing y la monitorización de personas en lugares públicos), así como una mejora en la internacionalización del Grupo de Investigación (con una futura propuesta H20202) y la firma de contratos con empresas.
 
 
 
@@ -544,7 +579,10 @@ Profundizar en las políticas de I+D+I basadas en la demanda
 
 \section{Difusión de los resultados}
 
+En esta sección se describe la difusión de resultados en distintos medios.
+
 \subsection{Publicaciones en revistas}
+\ref{subsec:publicacionesrevistas}
 
 \subsection{Publicaciones en congresos}
 
@@ -566,6 +604,23 @@ Resultados de los hackathones:
 
 Noche de los investigadores
 
+
+
+
+El día 26 de noviembre de 2015 se celebró en la sala de usos múltiples del
+CITIC de la Universidad de Granada la ``Jornada de Smart Cities y Movilidad'' a la que 
+asistieron 30 personas:
+https://geneura.wordpress.com/2015/12/03/jornada-sobre-smart-cities-y-movilidad/  
+
+Los objetivos finales fueron crear sinergia entre los diversos grupos de investigación y 
+empresas en el área de la gestión de la movilidad, internet de las cosas y smart cities, así 
+como facilitar el contacto de cara a promover colaboraciones, tales como solicitar 
+proyectos, o realizar transferencia de conocimiento a partir de los resultados de 
+investigación.
+
+H2020 Face2Face en el ICT Proposers Day 2015, organizado por ICT Proposers
+Day (ICT 2015 - Innovate, Connect, Transform) y la Red EEN (Lisboa, Portugal).
+
 \section{Conclusiones}
 \label{sec:conclusions}
 
@@ -575,7 +630,7 @@ En este proyecto
 
 \section{Agradecimientos}
 
-También queremos agradecer personalmente al personal de la DGT en Madrid (), en Málaga () y a los técnicos de la UTE-ACISA (), ya que sin su colaboración este proyecto no podría haber sido llevado a cabo.
+También queremos agradecer personalmente al personal de la DGT en Madrid (), en Málaga (Alberto Serrano, Silvia Cabo y Adolfo Santos del Centro de Gestión del Tráfico del Sureste) y a los técnicos de la UTE-ACISA (), ya que sin su colaboración este proyecto no podría haber sido llevado a cabo.
 
 \bibliographystyle{elsarticle-num}
 \bibliography{memoria-final}
