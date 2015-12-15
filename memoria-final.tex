@@ -86,7 +86,7 @@ Justificación de los gastos:
 Reuniones en la DGT
 
 \subsubsection{Paquete 02: Hardware}
-
+\label{subsubsec:paquete02}
 Este paquete ha sido el que más esfuerzo ha requerido, ya que ha implicado el montaje, diseño y programación de los dispositivos de monitorización. Se han desarrollado varios prototipos del sistema, comparando el rendimiento de distintos componentes Bluetooth y WiFi. Los resultados pueden verse a continuación.
 
 El dispositivo de monitorización final está basado en \textit{Raspberry Pi}\footnote{\url{https://www.raspberrypi.org/}}, 
@@ -112,7 +112,7 @@ La caja estanca empleada para albergar el dispositivo de monitorización cumple l
 
 \begin{figure*}[htb] 
 \centering
-%\includegraphics[width=10cm]{imags/raspi.eps}
+\includegraphics[width=10cm]{imags/raspi.eps}
 \caption{Raspberry Pi Model B utilizada en los dispositivos de monitorización.} 
 \label{fig:raspberry} 
 \end{figure*}
@@ -178,6 +178,9 @@ Anan es el nombre otorgado a \textbf{la nube} basada en la tecnología de Google 
 Anan se encarga también de proveer gráficas interactivas y mapas del estado histórico, actual y predicho de los distintos nodos.
 ***MENCIONAR AZURE
 
+***ETSIIT****
+Una primera prueba de concepto se realizó en la ETS. de Ingeniería y Telecomunicación de la Universidad de Granada. ***TERMINA***
+
 Finalmente, los dispositivos se colocaron en distintas localizaciones propuestas por el Centro de Gestión del Tráfico del Sureste. Estas localizaciones fueron elegidas porque son las más cercanas a las espiras de la DGT, y además cuentan con conexión a Internet para el envío de datos a nuestro servidor y a la nube. Se crearon dos grupos de nodos: un grupo en la provincia de Granada (1010,1020 y 1030) y otro en la provincia de Málaga (1040, 1050 y 1060).
 
 La Figura \ref{fig:nodosDGT} muestra los identificadores de esos dispositivos y su emplazamiento.
@@ -196,12 +199,12 @@ La Figura \ref{fig:nodosDGT} muestra los identificadores de esos dispositivos y 
 \begin{tabular}{|c|c|p{5cm}|c|c|}
 \hline
 ID   & Provincia & Localización & Latitud & Longitud \\ \hline
-1010 & Granada  & A-44 P.K. 118+300 sentido creciente (link A-44 P.K. 118+300 with A-92 P.K. 241+000) & 37.241668  & -3.6526 \\ \hline
+1010 & Granada  & A-44 P.K. 118+300 sentido creciente (enlace A-44 P.K. 118+300 con A-92 P.K. 241+000) & 37.241668  & -3.6526 \\ \hline
 1020 & Granada  & A-92 P.K. 294+300 sentido creciente  & 37.318763 & -3.137978 \\ \hline
 1030 & Granada  & A-92 P.K. 344+950, sentido creciente & 37.141298 & -2.710871 \\ \hline
-1040 & Málaga  & A-7  P.K. 241+800, sentido decreciente (Link A-7 P.K. 241+800 with A-45 P.K. 142+400) &  36.757427 & -4.426879 \\ \hline
+1040 & Málaga  & A-7  P.K. 241+800, sentido decreciente (enlace A-7 P.K. 241+800 con A-45 P.K. 142+400) &  36.757427 & -4.426879 \\ \hline
 1050 & Málaga  & A-45 P.K. 121+700, sentido decreciente & 36.910454 & -4.444769 \\ \hline
-1060 & Granada & A-92 P.K. 177+900, sentido decreciente (Link A-92 with A-92M) & 37.136209 & -4.282619 \\ \hline
+1060 & Granada & A-92 P.K. 177+900, sentido decreciente (enlace A-92 con A-92M) & 37.136209 & -4.282619 \\ \hline
 \end{tabular}
 }
 \caption{Localización de los dispositivos (P.K. = Punto Kilométrico).}
@@ -209,14 +212,14 @@ ID   & Provincia & Localización & Latitud & Longitud \\ \hline
 \end{table}
 
 \subsubsection{Paquete 04: Predicción}
-
+\label{subsubsec:paquete04}
 En este paquete se han realizado distintas tareas de predicción y validación de los datos.
 
 
 Inicialmente se compararon distintas métricas para obtener una correlación correcta entre el número de dispositivos detectado y el número de real detectado por las espiras de la DGT
 
 \begin{itemize}
-\item {\em Ratio total}: ration entre el número total de vehículos detectado por la DGT y el número de vehículos detectados por nuestros dispositivos.
+\item {\em Ratio total}: ratio entre el número total de vehículos detectado por la DGT y el número de vehículos detectados por nuestros dispositivos.
 \item {\em Ratio medio}: ya la granularidad máxima de los datos de la DGT es de 15 minutos la suma de todos los ratios en esas secciones ha sido dividida por el número total de secciones para calcular la media.
 \item {\em Ratio mediana}: en lugar del ratio medio, este usa la mediana de todos los ratios de las secciones de 15 minutos.
 \item {\em Ratio medio por cuarto de hora}: esta métrica calcula un vector de ratios separado por cuartos de hora, en lugar de un ratio total para todos los datos. Se ha calculado un ratio medio por cada cuarto de hora durante cada día.
@@ -282,7 +285,7 @@ As the results show, ETS, ARIMA and Theta behave clearly better than the control
 
 \begin{figure}[!ht]
     \begin{center}
-        \includegraphics[width=14cm]{imgs/PETRA/forecasting-PETRA-1011.eps}
+        \includegraphics[width=14cm]{imgs/forecasting-PETRA-1011.eps}
         \caption{Expected vs forecasted number of cars in node 1011, according to MOBYWIT's records. Forecasted values are provided by smoothing state space model (ETS). }
         \label{fig:forecasted-values}
     \end{center}
@@ -332,7 +335,7 @@ RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
 
 \begin{figure}[!ht]
     \begin{center}
-        \includegraphics[width=14cm]{imgs/PETRA/petra_graph_ts-forecasting.eps}
+        \includegraphics[width=14cm]{imgs/petra_graph_ts-forecasting.eps}
         \caption{Real DGT number of cars in node 1011 vs forecasted according to MOBYWIT's records with Median Ratio By Quarter conversion. Forecasted values are provided by Mean, ETS, ARIMA and THETA methods. }
         \label{fig:forecasted-values-ratio}
     \end{center}
@@ -340,12 +343,29 @@ RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
 
 Finally, according to the results obtained, performing traffic forecasting using data provided by MOBYWIT seems to be an affordable task for traditional methods (i.e., ETS or ARIMA). Furthermore, ratios computed from data recorded by DGT allow to convert forecasted values to their equivalent representing the number of cars in a given location. Thus, the joint use of this two techniques makes possible to closely approximate the number of cars that will have passed 15 minutes later by the position of the MOBYWIT; and this process can be newly repeated every 15 minutes so that forecasting models can be enhanced and adapted to the new conditions of the road.
 
+Para ello, lo primero que hicimos fue diseñar una encuesta que nos permita saber qué hábitos de uso tienen los usuarios de teléfonos móviles para ver si todos los dispositivos móviles podrían ser captados monitorizando la tecnología BT. Esta encuesta fue publicada de forma abierta y difundida a través de redes sociales y correo electrónico. Los puntos más importantes de esta encuesta pueden resumirse como:
+El rango de edad más frecuente de los informantes es el que abarca entre los 20 y los 50 años formando un total de 528 respuestas de una muestra de 601. Este rango concuerda en lo esperado puesto que los principales usuarios de teléfonos o dispositivos relacionados con la tecnología que nosotros detectamos están dentro de ese rango.
+Del total de la muestra, el 25,46\% no son conductores habituales
+Del resto de la muestra, que sí son conductores habituales, más de la mitad, un 52,64\% no utilizan habitualmente la tecnología BlueTooth (BT) mientras conduces y sólo el 22,56\% lo utilizan siempre, lo que deja un rango demasiado grande de conductores sin monitorizar.
+Si tomamos sólo los conductores habituales, el 50,2\% no saben o no tienen BT integrado en su vehículo, y el resto de la muestra sí lo tiene ya sea integrado o no, lo que nos indica que aunque para nosotros, que nos movemos en el mundo tecnológico y de la investigación la tecnología BT es algo conocido, no lo es para el ciudadano de a pie, puesto que perderíamos un 49,8\% de dispositivos móviles si  utilizamos sólo la monitorización de las señales BT.
+Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras que no lo están utilizando, sin embargo, sólo el 31,11\% apagan la señal Wifi mientras que no lo están utilizando. Este dato nos indica que aunque el usuario conozca la tecnología y la use, la gran mayoría de usuarios lo llevan desconectado. Sin embargo, si incluimos en el proyecto la tecnología Wifi y tenemos en cuenta que el 69,89\% de la gente la llevan permanentemente activada, el rango de datos capturados es mejor. Es por eso que hemos incluido la captación de señales Wifi dentro del desarrollo normal del proyecto además de las de BT que era lo inicialmente previsto.
 
 \subsubsection{Paquete 05: Difusión}
 
-Página web https://proyectopetra.wordpress.com/
+En este paquete el IP ha sido el encargado de realizar la coordinación de la difusión de resultados, tanto en la publicación de artículos científicos (ver sección \ref{subsec:publicacionescientificas}) como otros tipos de difusión. Por ejemplo, las noticias relacionadas con el proyecto se han publicado en la página web \url{https://proyectopetra.wordpress.com/} o en la cuenta de Twitter \url{https://twitter.com/proyectoPETRA}, así como en distintos eventos de divulgación científica, como la Noche de los Investigadores (consultar sección \ref{subsec:otrosmedios}).
 
 \subsection{Dificultades y problemas surgidos}
+
+En esta subsección se describen los problemas encontrados durante la realización del proyecto.
+Otros problemas surgidos durante el proyecto han venido dados principalmente por la naturaleza de los dispositivos de captación, al tener que estar colocados en zonas de difícil acceso. Estos problemas han sido resueltos utilizando distintas técnicas que se describen a continuación.
+
+\subsubsection{Administración del presupuesto}
+
+A la hora de realizar la solicitud del proyecto se destinó una partida del presupuesto al montaje de los dispositivos, suponiendo que la empresa de mantenimiento de carreteras UTE-ACISA cobraría por mano de obra y acceso a sus sistemas. Sin embargo, nos encontramos que de la colocación de los dispositivos, y el acceso a las redes de datos nos fue ofrecido de forma gratuita por parte de Acisa, por lo que esa parte del presupuesto no se ha gastado. Esto también se debió a que la colocación se realizó en la parte final del proyecto, por lo que no hubo tiempo de solicitar la modificación del presupuesto.
+
+En esta partida también había destinada una cantidad para la fabricación de piezas por parte del Centro de Investigación Científica de la UGR. Sin embargo, y debido a la inexperiencia del IP, no se tuvo en cuenta que el coste de fabricación para miembros de la UGR tiene un descuento del 80\%. Estas dos modificaciones (costes de colocación y fabricación de piezas) han hecho que exista un remanente del proyecto de 6408,2 euros.
+
+Además, se han realizado cambios en una de las partidas del presupuesto. Se han transferido 473,31 euros del apartado ``Otros gastos'' al de ``Viajes y dietas''. Este dinero, que en principio estaba destinado a la compra de material bibliográfico, se ha invertido en distintos viajes a reuniones con otros grupos de investigación y asistencias a congresos.
 
 \subsubsection{Problemas relacionados con el hardware}
 
@@ -354,7 +374,7 @@ Sin embargo ha sido necesario realizar algunas modificaciones al SO para optimiz
 de las tarjetas SD ante fallos eléctricos tales como perdida de alimentación o subidas de tensión.
 
 Al estar los dispositivos utilizados en este proyecto ubicados en zonas de complicado acceso frecuente, tener un sistema operativo 
-tan vulnerable a fallos (corrupciones) suposo un problema.
+tan vulnerable a fallos (corrupciones) supuso un problema.
 
 Es por ello que se ha modificó el SO de modo que funcione como un Sistema Operativo de Solo Lectura. De esta forma, se minimizaron las escrituras en el medio y se garantiza que, en todos los arranques del dispositivo, se disponía de una versión estable no corrupta de los archivos necesarios para su inicio.
 
@@ -367,13 +387,21 @@ Debido a que las Raspberry Pi no incorporan una pila para el reloj interno, era 
 
 \subsubsection{Detección de errores en el código}
 
-El código fuente del dispositivo tiene más de ***LINEAS de código. Debido a que es difícil simular su uso real, se realizaron distintas pruebas de concepto para depurar.
+El código fuente del sistema (dispositivo, servidor y sistema de procesamiento) tiene más de 25.000 líneas de código. Debido a que es difícil simular su uso real, se realizaron distintas pruebas de concepto para depurar.
 
 \subsubsection{Comunicación con el servidor}
 
+Una de las características más importantes del sistema es la comunicación con el servidor para el envío de datos y la sincronización de los relojes de los dispositivos. Sin esta sincronización los datos recogidos podrían estar erróneos, por lo que se añadieron mecanismos en el código para evitar este problema, como el uso de relojes hardware o un servidor NTP específico.
+
 \subsection{Planteamiento metodológico}
 
+Como se ha mencionado anteriormente, el haber colocado los dispositivos en la etapa final del proyecto ha supuesto algunos problemas de gestión de recursos. Para nuevas convocatorias, quizás habría sido una mejor opción colocar los dispositivos al principio del proyecto e ir actualizándolos con cada nueva mejora, en vez de colocar la versión final y testeada. Esto habría supuesto más gasto en viajes y dietas, pero habría permitido tener mayor número de datos, y aunque en principio fueran erróneos y no pudieran usarse, con las distintas actualizaciones del software se podría haber mejorado iterativamente el sistema.
+
 \subsection{Protección de datos y seguridad}
+
+Para cumplir con la LOPD, los datos recogidos por el sistema (MAC de los dispositivos) no se guardan en la base de datos. En lugar de eso se realiza una función Hash que genera un nuevo identificador para anonimizar los datos. Es decir, sabemos que un dispositivo X ha pasado por cierto dispositivo en cierta hora, pero nunca podremos saber la MAC real del usuario.
+
+En lo relativo a la seguridad de red, los dispositivos colocados están aislados del resto de elementos de la red de la empresa UTE-Acisa, y su comunicación con el servidor se realiza utilizando unas credenciales VPN que cifra toda la comunicación.
 
 
 
@@ -386,30 +414,32 @@ El código fuente del dispositivo tiene más de ***LINEAS de código. Debido a que 
 %----------------------------------------------------------------------------
 \section{Grado de consecución de los objetivos propuestos y otros posibles objetivos alcanzados}
 
+Una vez explicada la descripción detallada de todos los trabajos realizados se resumen los objetivos alcanzados respecto a los objetivos que se presentaron en la solicitud.
+
 \subsection{Objetivo 1: Obtención de datos de tráfico más precisos y completos.}
-Para ello se propuso el aumento del área de recolección de datos de tráfico para análisis y predicción (distintas ciudades y vías) colocándolos además cerca de fuentes de información conocidas. 
+
+Para ello se propuso el aumento del área de recolección de datos de tráfico para análisis y predicción (distintas ciudades y vías) colocándolos además cerca de fuentes de información conocidas. Los datos mostrados en la sección \ref{subsubsec:paquete04} demuestran el grado de error obtenido en la monitorización usando nuestros dispositivos respecto a los datos de la DGT. Se han propuesto distintos tipos de ratio para extrapolación de resultados y se ha decidido optar por un ratio basado en medianas por tiempo.
 
 
 \subsection{Objetivo 2: Aumento de las fuentes de datos para obtención de datos más fiables} 
-Se propuso usar otras fuentes, como los aforadores oficiales de la DGT o datos públicos, como Google Traffic y la mejora en el sistema de monitorización de los dispositivos a colocar (sensores wifi, NFC o BT) para mejorar la precisión. Podemos considerar este objetivo cubierto, ya que el haber añadido nuevas fuentes de datos, la captación de datos WiFi y su comparación con datos de espiras proporcionados por la DGT, los datos de monitorización y predicción han sido validados. ***MAS BONICO***
+
+Se propuso usar otras fuentes, como los aforadores oficiales de la DGT o datos públicos, como Google Traffic y la mejora en el sistema de monitorización de los dispositivos a colocar (sensores wifi, NFC o BT) para mejorar la precisión. Una de los grandes resultados de este proyecto ha sido el desarrollo y programación de un nuevo sistema de monitorización completamente desde cero, habiendo permitido cubrir este objetivo, al haber añadido la posibilidad de monitorizar datos WiFi. Además, el uso de encuestas,  el haber añadido nuevas fuentes de datos en carretera, y su comparación con datos de espiras proporcionados por la DGT, los datos de monitorización y predicción han podido validarse.
 
 \subsection{Objetivo 3: Predicción del tráfico de forma más precisa}
 
-Usando las nuevas fuentes de datos anterirmente mencionas, se ha realizado un estudio de distintos métodos de predicción de series temporales.
+Usando las nuevas fuentes de datos anterirmente mencionadas, se ha realizado un estudio de distintos métodos de predicción de series temporales. Se han utilizado distintas técnicas de predicción como ETS, ARIMA y Theta. Estas técnicas se han aplicado tanto sobre los datos reales de la DGT, como sobre los datos obtenidos por nuestro sistema, mostrando la posibilidad de predecir a 15 minutos la situación del tráfico de forma precisa.
 
 \subsection{Objetivo 4: Facilitar el acceso a los resultados}
-, permitiendo a otros investigadores (no sólo de las administraciones, sino a cualquier usuario) extraer información relevante a partir de  los datos obtenidos, promoviendo el Open Data
+Los resultados y datasets están disponibles de forma abierta en el repositorio Github del proyecto \footnote{\url{https://github.com/proyectopetra}}, permitiendo a otros investigadores (no sólo de las administraciones, sino a cualquier usuario) extraer información relevante a partir de  los datos obtenidos, promoviendo el Open Data. Se han promovido además, distintos Hackathones que han permitido a la comunidad científica colaborar en la mejora de este proyecto.
+
+\subsection{Otros objetivos alcanzados}
+A pesar de no haberse planteado en la memoria de solicitud, podemos considerar que se han alcanzado otros objetivos, como la creación de sinergias con otras empresas y grupos de investigación (consultar sección \ref{subsec:nuevosproyectos} y \ref{subsec:proyectosycolaboraciones}). Además, durante la duración del proyecto se han avanzado en otras líneas del grupo de investigación relacionadas con el Data Mining o la optimización (ver sección \ref{subsec:otrosresultados}).
 
 
 
 
 
-Para ello, lo primero que hicimos fue diseñar una encuesta que nos permita saber qué hábitos de uso tienen los usuarios de teléfonos móviles para ver si todos los dispositivos móviles podrían ser captados monitorizando la tecnología BT. Esta encuesta fue publicada de forma abierta y difundida a través de redes sociales y correo electrónico. Los puntos más importantes de esta encuesta pueden resumirse como:
-El rango de edad más frecuente de los informantes es el que abarca entre los 20 y los 50 años formando un total de 528 respuestas de una muestra de 601. Este rango concuerda en lo esperado puesto que los principales usuarios de teléfonos o dispositivos relacionados con la tecnología que nosotros detectamos están dentro de ese rango.
-Del total de la muestra, el 25,46\% no son conductores habituales
-Del resto de la muestra, que sí son conductores habituales, más de la mitad, un 52,64\% no utilizan habitualmente la tecnología BlueTooth (BT) mientras conduces y sólo el 22,56\% lo utilizan siempre, lo que deja un rango demasiado grande de conductores sin monitorizar.
-Si tomamos sólo los conductores habituales, el 50,2\% no saben o no tienen BT integrado en su vehículo, y el resto de la muestra sí lo tiene ya sea integrado o no, lo que nos indica que aunque para nosotros, que nos movemos en el mundo tecnológico y de la investigación la tecnología BT es algo conocido, no lo es para el ciudadano de a pie, puesto que perderíamos un 49,8\% de dispositivos móviles si  utilizamos sólo la monitorización de las señales BT.
-Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras que no lo están utilizando, sin embargo, sólo el 31,11\% apagan la señal Wifi mientras que no lo están utilizando. Este dato nos indica que aunque el usuario conozca la tecnología y la use, la gran mayoría de usuarios lo llevan desconectado. Sin embargo, si incluimos en el proyecto la tecnología Wifi y tenemos en cuenta que el 69,89\% de la gente la llevan permanentemente activada, el rango de datos capturados es mejor. Es por eso que hemos incluido la captación de señales Wifi dentro del desarrollo normal del proyecto además de las de BT que era lo inicialmente previsto.
+
 
 
 
@@ -419,21 +449,39 @@ Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras q
 
 \section{Descripción global de los resultados alcanzados y significación de los mismos en las correspondientes áreas de conocimiento}
 
-Durante el desarrollo del proyecto se han realizado varias publicaciones en revistas, que pueden consultarse en la sección \ref{subsec:publicacionesrevistas}.
+Esta sección describe los resultados obtenidos durante la realización del proyecto.
 
 \subsection{Publicaciones científicas}
+\label{subsec:publicacionescientificas}
 
+Durante el desarrollo del proyecto se han realizado varias publicaciones científicas. Las publicaciones en congresos en el área de ingeniería informática y las ciencias de la computación también requieren el envío de un artículo completo y revisión por pares, al igual que en revistas, así que se han añadido en esta sección \cite{MOBYWIT15,Odeh15Fuzzy,GarciaSanchez15JCE,Romero15ITISE,Castillo15ITISE,RIVAS15MAEB,Castillo15MAEB}.
+
+En estas publicaciones se ha descrito el sistema desarrollado \cite{GarciaSanchez15JCE}, experimentación en predicción con datos recogidos \cite{Romero15ITISE,Castillo15ITISE,RIVAS15MAEB,Castillo15MAEB}.
+
+La publicación más relevente \cite{MOBYWIT15}, ya que es la que describe el proyecto PETRA, se encuentra actualmente en proceso de revisión por pares en la revista Future Generation Computer Systems, con índice de calidad IF = 2.786, posición 8 de 102 Q1 en la rama Computer Science, Theory and Methods. Este trabajo describe el sistema de captación realizado, sus elementos y sus posibles aplicaciones. Los resultados experimentales mostrados en la sección \ref{subsubsec:paquete04}, descritos con más profundidad en ese trabajo, han permitido obtener información sobre el ratio real de vehículos detectados por el sistema.
+
+Otro artículo de revista está en revisión ***IGI AQUI***
+
+Además de estas publicaciones, la sección \ref{subsec:otrosresultados} describe otras publicaciones derivadas durante la realización del proyecto, en temáticas como el Data Mining o la optimización.
  
 
-\subsection{Participación (presentando resultados) en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
+\subsection{Participación en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
 
-Las publicaciones en congresos en el área de ingeniería informática y las ciencias de la computación también requieren
+Se ha asistido a varios congresos donde se han presentado los resultados de varias de las publicaciones mencionadas. En el Congreso ITISE (International Work Conference on Time Series Analysis) se presentaron los trabajos \ref{Romero15ITISE,Castillo15ITISE}. La descripción del sistema desarrollado fue presentado en las Jornadas de Computación Empotrada, celebradas en Córdoba \cite{GarciaSanchez15JCE}.
+
+Otros medios de difusión, de caracter divulgativo como la Noche de los Investigadores, se mencionan más adelante en la sección \ref{subsec:otrosmedios}.
 
 \subsection{Generación de conocimientos que supongan un avance importante en el estado del arte}
 
-\subsection{Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación}	
+Los principales conocimientos obtenidos pueden dividirse en dos grandes campos: conocimientos a nivel Ingeniería de Computadores (relacionados con el hardware y software del sistema) y a nivel de Ciencias Informáticas (aplicación de algoritmos a grandes conjuntos de datos). En el primero cabe destacar el uso de ordenadores de baja potencia, como el Raspberry Pi y la aplicación de distintas técnicas de optimización en este tipo de dispositivos. En el segudno bloque podemos destacar la aplicación de operaciones sobre grandes cantidades de datos y gestión y administración de instancias en Cloud Computing.
+
+\subsection{Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación}
+
+La prueba de concepto que se realizó en la ETS Ingeniería informática y Telecomunicación ha servido para abrir una nueva línea de investigación en el grupo, el {\em geomárketing}. El geomárketing se basa en el estudio espacial del comportamiento para la ayuda a la toma de decisiones empresariales. Esta nueva línea permite la optimización de costes/beneficios, un mayor conocimiento del mercado deseado y la posibilidad de identificar puntos calientes, determinar áreas de influencia o diseño de rutas.
 
 \subsection{Tesis doctorales}
+
+Los resultados de este proyecto han servido para impulsar la tesis del investigador Antonio Fernández Ares, titualada ``Sistema Inteligente de captación, análisis y predicción de movilidad basado en técnicas de soft computing''. Concretamente, el artículo \cite{MOBYWIT15} es el que le permitirá leer su tesis en 2016, según la normativa de la Universidad de Granada.
 
 Además de esta tesis, se el 23 de Julio de 2015 se leyó el siguiente Trabajo Fin de Grado
 (Grado en Ingeniería Electrónica Industrial)
@@ -447,14 +495,20 @@ Además de esta tesis, se el 23 de Julio de 2015 se leyó el siguiente Trabajo Fin
 
 \subsection{Nuevos productos, servicios o protocolos}
 
+Una versión modificada del dispositivo desarrollado, al que hemos denominado MOBIWIT, se ha convertido en un producto base para futuros proyectos, como puede verse en las secciones \ref{subsec:nuevosproyectos} y \ref{subsec:proyectosycolaboraciones}.
+
 \subsection{Participación en nuevos proyectos (contratos) de I+D}
+\label{subsec:nuevosproyectos}
+Dentro de la nueva línea de investigación sobre geomárketing, descrita anteriormente, ha surgido el contrato de investigación ``TDAs con conectividad 3G en GranadaSound'', con un importe 3891.68 Euros. Las empresas firmantes fueron ``Smart and Leisure Mobile Technologies, S.L'' y la Fundación General Universidad de Granada-Empresa. La fecha de realización fue desde el 15/9/2015 hasta 15/10/2015. El proyecto ha sido dirigido por Juan Julián Merelo y María Isabel García Arenas, con la participación del IP de este proyecto y del investigador Antonio Fernández-Ares.
 
 \subsection{Nuevas patentes, modelos de utilidad, prototipos o licencias}
 
-Aunque no se ha desarrollado aún ninguna patente, está en trámite el desarrollo de una patente para ***TERMINA***
+Aunque no se ha desarrollado aún ninguna, está en trámite el desarrollo de una patente para el dispositivo desarrollado y descrito en la sección \ref{subsubsec:paquete02}.
 
 \subsection{Otros resultados}
+\label{subsec:otrosresultados}
 
+***AQUI SE EXPLICA LO DE LA SEGURIDAD Y OPTIMIZACION Y TODO ESO ***
 
 \subsection{Referentes teóricos y metodológicos de especial interés}
 
@@ -483,25 +537,23 @@ Realización de investigación en las fronteras del conocimiento
 
 
 \section{Interés de los resultados para el entorno socio-económico}
-
+\label{section:interesdelosresultados}
 Asistencia a tres reuniones en la Dirección General de Tráfico para presentar los avances en el proyecto ``Predicción del estado del tráfico usando un sistema de monitorización de bajo coste (PETRA)''.
 
 
 
 \subsection{Proyectos y colaboraciones empresariales}
+\label{subsec:proyectosycolaboraciones}
+Esta sección es de especial interés, ya que a raíz de la difusión de resultados en eventos, como la ``Jornada de Smart Cities y Movilidad'', han surgido distintas oportunidades de participación en distintos tipos de proyectos. Por ejemplo, la temática del proyecto fue utilizada en el ``H2020 Face2Face'' en el ICT Proposers Day 2015, organizado por ICT Proposers Day (ICT 2015 - Innovate, Connect, Transform) y la Red EEN (Lisboa, Portugal). Esto ha supuesto un incremento de la capacidad de liderazgo en H2020 y la creación de consorcios españoles para nuevos proyectos en H2020, ya que el grupo está dirigiendo la propuesta ***TERMINAR***, junto con las empresas Evozon (Rumanía), UXMobile (España) y Sweden Conectivity (Suecia). 
 
-Participación en H2020	
-Incremento de la capacidad de liderazgo en H2020	
-Creación de consorcios españoles para nuevos proyectos en H2020	
 
-La temática del proyecto fue utilizada en el ``H2020 Face2Face'' en el ICT Proposers Day 2015, organizado por ICT Proposers Day (ICT 2015 - Innovate, Connect, Transform) y la Red EEN (Lisboa, Portugal).
 
 
 \subsection{Incremento del número de proyectos en los que participa su Grupo de Investigación}
 
-Aumento del volumen de fondos recibidos por su Grupo de Investigación (sin incluir los de la DGT al proyecto)	
+Se ha producido un aumento del volumen de fondos recibidos por su Grupo de Investigación (sin incluir los de la DGT al proyecto), gracias a los resultados dentro del programa financiador a grupos de la junta de Andalucía.
 
-Se concurrió al Programa de Ayudas GENIL Para Realización De Actividades Por Grupos De Investigación Interdisciplinares (RAGII-2015) para formar el grupo interdisciplinar llamado ``Gestión de la movilidad en smart cities mediante técnicas de geomárketing''.
+Además, se concurrió al Programa de Ayudas GENIL Para Realización De Actividades Por Grupos De Investigación Interdisciplinares (RAGII-2015) para formar el grupo interdisciplinar llamado ``Gestión de la movilidad en smart cities mediante técnicas de geomárketing''.
 
 
 
@@ -539,9 +591,9 @@ Colaboración con grupos de investigación internacionales
 
 \subsection{Formación del personal especializado en I+D+i}
 
-Este proyecto ha permitido una formación del personal especializado en I+D+i, principalmente para el IP, Pablo García Sánchez, que se ha enfrentado por primera vez a la dirección de un proyecto de investigación. Además, ha permitido el aumento del número de personas dedicadas a I+D+i dentro del Grupo de Investigación, permitiendo la incorporación de miembros de otros departamentos (como el de Electrónica), así como la captación/ retención de personal especialmente cualificado. 
+Este proyecto ha permitido una formación del personal especializado en I+D+i, principalmente para el IP, Pablo García Sánchez, que se ha enfrentado por primera vez a la dirección de un proyecto de investigación. Además, ha permitido el aumento del número de personas dedicadas a I+D+i dentro del Grupo de Investigación, facilitando la incorporación de miembros de otros departamentos (como el de Electrónica), así como la captación/ retención de personal especialmente cualificado. 
 
-Además, este proyecto ha permitido un incremento de la capacidad científico-tecnológica, prestigio y posición competitiva del Grupo de Investigación, establenciendo una linea de investigación que ha recibido interés por parte de distintas empresas y organismos públicos (DGT, Universidad de Málaga y Ayuntamiento de Granada).
+Además, este proyecto ha supuesto un incremento de la capacidad científico-tecnológica, prestigio y posición competitiva del Grupo de Investigación, establenciendo una linea de investigación que ha recibido interés por parte de distintas empresas y organismos públicos (DGT, Universidad de Málaga y Ayuntamiento de Granada).
 
 Se ha permitido identificar nuevos mercados/áreas de investigación (como el marketing y la monitorización de personas en lugares públicos), así como una mejora en la internacionalización del Grupo de Investigación (con una futura propuesta H20202) y la firma de contratos con empresas.
 
@@ -567,7 +619,12 @@ Profundizar en las políticas de I+D+I basadas en la demanda
 
 \subsection{Aprendizaje de nuevos conocimientos y técnicas}
 
+Durante el desarrollo del proyecto los distintos investigadores han adquirido una serie de destrezas en distintos ámbitos ***TERMINA
 
+\subsubsection{Gestión y coordinación} Al ser el primer proyecto de dirigido por el IP, el haber tenido que coordinar y dirigir un equipo investigador, además una serie de recursos, ha supuesto la mejora en las destrezas como investigador senior, habiendo supuesto una mejora en la experiencia.
+\subsubsection{Desarrollo en sistemas de tiempo real y dispositivos empotrados} El uso de la tarjeta Raspberry Pi ha supuesto una serie de mejoras en los conocimientos de Sistemas Operativos y programación concurrente.
+\subsubsection{Análisis y predicción}
+\subsubsection{}
 
 \subsection{Ambito de originalidad}
 
@@ -581,30 +638,27 @@ Profundizar en las políticas de I+D+I basadas en la demanda
 
 En esta sección se describe la difusión de resultados en distintos medios.
 
-\subsection{Publicaciones en revistas}
-\ref{subsec:publicacionesrevistas}
+\subsection{Publicaciones en revistas y congresos}
 
-\subsection{Publicaciones en congresos}
+Puede consultarse la sección \ref{subsec:publicacionescientificas}
 
 \subsection{Otras publicaciones relacionadas con el proyecto}
 
 Durante el desarrollo del proyecto el grupo de investigación ha estado trabajando en otras investigaciones relacionadas con el proyecto.
 
 \subsection{Otros medios de difusión}
+\label{subsec:otrosmedios}
 
-Dentro del congreso International Work-Conference on Time Series Analysis, ITISE 2015. El personal investigador de este proyecto ha organizado una sesión especial relacionada con el la predicción del flujo de tráfico real. Concretamente, la descripción de la sesión especial puede verse en http://itise.ugr.es/sessions\_proposals.php en el apartado SS6 y la descripción de la sesión especial está en \url{http://itise.ugr.es/pdf/ProposalSpecialSession.pdf}.
+Dentro del congreso International Work-Conference on Time Series Analysis, ITISE 2015. El personal investigador de este proyecto ha organizado una sesión especial relacionada con el la predicción del flujo de tráfico real. Concretamente, la descripción de la sesión especial puede verse en \url{http://itise.ugr.es/sessions\_proposals.php} en el apartado SS6 y la descripción de la sesión especial está en \url{http://itise.ugr.es/pdf/ProposalSpecialSession.pdf}.
 
 Esta sesión especial se ha presentado como un reto a los asistentes al congreso. Los datos utilizados para dicho reto están en \url{http://geneura.ugr.es/timeseries/} y el reto consistía en realizar una predicción de dichas series cometiendo el menor error posible utilizando métodos de predicción tanto heurísticos como estadísticos.
 
-Organización de dos hackathones relacionados con la predicción del estado del tráfico y datos abiertos: Open Data Day (celebrado en Granada) y  Hackathon Fujitsu-UGR (celebrado en Málaga).
-Resultados de los hackathones:
-   - Estudio del estado del arte en artículos de predicción del tráfico.
-   - Desarrollo de programas que extraen estado de la predicción del tráfico a partir de distintas fuentes.
+Organización de dos hackathones relacionados con la predicción del estado del tráfico y datos abiertos: Open Data Day (celebrado en Granada) y  Hackathon Fujitsu-UGR (celebrado en Málaga). Los resultados de los hackathones fueron un estudio preliminar del estado del arte en artículos de predicción del tráfico y desarrollo de programas que extraen estado de la predicción del tráfico a partir de distintas fuentes.
 
 
 Noche de los investigadores
 
-
+Página web https://proyectopetra.wordpress.com/
 
 
 El día 26 de noviembre de 2015 se celebró en la sala de usos múltiples del
