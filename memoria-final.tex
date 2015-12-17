@@ -14,7 +14,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{PETRA: SPIP2014-1437}
+\title{PETRA: Predicción del Estado del Tráfico usando un sistema de monitorización de bajo coste (SPIP2014-1437)}
 % Antonio - Esto es por poner algo, hay que cambiarlo, claro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,7 +29,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{abstract} 
-The wonderful abstract
+Esta memoria describe el proyecto PETRA (Predicción del Estado del Tráfico usando un sistema de monitorización de bajo coste), financiado por la Dirección General de Tráfico. Este proyecto propone el uso de dispositivos de bajo coste para monitorizar y rastrear el tráfico utilizando Bluetooth y Wifi, junto con la aplicación de distintas técnicas de Data Mining. Durante este proyecto se ha desarrollado un nuevo sistema de monitorización que ha sido aplicado para resolver problemas presentes en una Smart City, como la optimización de flujos de tráfico en viajes (Smart Traffic), y la mejora de seguridad o problemas energéticos dentro de un edificio.
+
+El sistema registra el movimiento de personas y vehículos monitorizando el espacio radioeléctrico, detectado las señales WiFi y Bluetooth emitidos por los dispositivos personales de los usuarios, como los smartphones o los manos-libres. Se ha realizado un estudio en dos escenarios reales, es decir, con datos reales obtenidos por el sistema: uno relacionado con la movilidad de la gente (un edificio público); y un despliegue centrado en la monitorización de los vehículos (carreteras provinciales).
+
+El análisis ha consistido en la aplicación de distintas técnicas de Data Mining para extraer conocimiento útil, métodos de predicción de tráfico para realizar predicciones precisas y análisis estadísticos para validar la fiabilidad del sistema (utilizando otras fuentes de datos).
+
+Los resultados obtenidos muestran la viabilidad y utilidad del sistema, junto con algunas de sus múltiples aplicaciones para resolver distintos problemas. Finalmente, este proyecto ha supuesto la generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación, y la creación de nuevos proyectos y colaboraciones empresariales en materia de I+D+i.
 \end{abstract}
 
 %
@@ -42,21 +48,70 @@ Smart traffic \sep Transit indicators \sep Traffic forecast \sep Mobility analys
 
 \end{frontmatter}
 
+\newpage
+
 \section*{Datos del proyecto}
-Investigador Principal
-Investigadores TAL
 \begin{itemize}
+\item Código: SPIP2014-1437
+\item Programa financiador: Ayudas a la I+D+i en materia de tráfico, movilidad y seguridad vial 2014.
+\item Entidad financiadora: Dirección General de Tráfico. Ministerio del Interior.
+\item Responsable: Pablo García Sánchez (pablogarcia@ugr.es)
+\item Fecha inicio: 18/11/2014
+\item Fecha fin: 14/10/2015
+\item Cantidad subvencionada: 21450 euros
 \end{itemize}
-Cuantía concedida
+
+Investigadores participantes
+
+\begin{itemize}
+\item Pablo García Sánchez (Investigador Principal)
+\item Antonio Fernández Ares
+\item Paloma de las Cuevas Delgado
+\item Pedro Ángel Castillo Valdivieso
+\item María Isabel García Arenas
+\item Jesús González Peñalver
+\item Pedro García Fernández
+\item Juan Julián Merelo Guervós
+\item Gustavo Romero López
+\end{itemize}
+
+\newpage
+
+\tableofcontents
+
+\newpage
 
 %-------------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------------------------------------------------------
 
+
 \section{Introducción}
 \label{sec:intro}
 
-Esta memoria presenta copón copón ñañaña
+Actualmente, la transformación de una ciudad a una Ciudad Inteligente (Smart City), con mayor rendimiento (ahorro de energía, tiempo de los ciudadanos, recursos y costes), es un proceso que debe basarse en tecnologías, métodos y sistemas potentes y confiables.
+
+Para conseguir esto, un sistema de monitorización de la movilidad es uno de los sistemas más importantes, ya que los datos que proporciona pueden usarse para mejorar distintos servicios en la carretera, ciudad, o incluso dentro de edificios dentro de ella.
+
+Los sistemas más comunes recolectan información del tráfico (mayormente paso de vehículos) utilizando varios tipos de dispositivos, como tubos neumáticos, detectores de espiras o Reconocimiento Óptico de Caracteres (Optical Character Recognition, OCR) \cite{rodrigue2013geography}. Sin embargo, la mayoría de esos sistemas no son capaces de identificar el mismo vehículo a lo largo de la red de carreteras. Aquellos que sí pueden hacerlo son muy costosos y por lo tanto suelen colocarse en puntos muy específicos de las carreteras.
+
+Los gobiernos locales, regionales o nacionales pueden usar esos datos para la mejora en el mantenimiento de carreteras y servicios, por ejemplo, midiendo el deterioro de las carreteras basados en la afluencia de vehículos. Además, se pueden obtener otras estadísticas útiles, que pueden ayudar a predecir atascos de tráfico, por ejemplo. Esta información puede utilizarse también dentro de una ciudad, por ejemplo, para ajustar la sincronización entre semáforos o para definir el mejor sentido de cada carretera, o incluso para los usuarios finales (los conductores), que pueden beneficiarse optimizando sus planes de acuerdo al estado actual o futuro del flujo del tráfico. Esta es la razón por la que la información del tráfico tiene que ser confiable.
+
+El proyecto PETRA (Predicción del Estado del Tráfico usando un sistema de monitorización de bajo coste), financiado por la Dirección General de Tráfico (DGT) tiene como objetivo principal la creación de un sistema de monitorización y predicción del tráfico, utilizando distintas fuentes de datos.
+
+Durante este proyecto se ha desarrollado un sistema de monitorización capaz de recolectar datos de movilidad de usuarios y vehículos, y también capaz de realizar seguimiento utilizando una red de dispositivos (o nodos), conectados a un servidor central. Esto permite la construcción fácil de modelos de flujo de tráfico o grafos de movilidad. El sistema propuesto está formado por dispositivos de bajo coste, de alrededor de 100 euros cada uno, lo cual es otra ventaja respecto a los sistemas de monitorización más comunes, ya que el coste es un factor importante a la hora de desplegar estos dispositivos.
+
+El dispositivo, que es una nueva versión del presentado en \cite{castillo2014_book_sipesca}, y que fue desarrollado en una convocatoria anterior de ayudas de la DGT (SINECA, número de expediente 0100DGT21185), se basa en un ordenador de placa única que monitoriza el espacio radioeléctrico, capturando señales Bluetooth (BT) y WiFi emitidas por otros dispositivos, como por ejemplo los smartphones o los manos libres de los vehículos. Estos dispositivos se detectan e identifican a partir de su número MAC (Media Access Control), el cual es único, y se almacena como evento de tráfico (o `paso').
+
+Así, dependiendo de la posición del dispositivo de monitorización (nodo), se puede obtener información sobre desplazamiento de personas o vehículos. Para respetar la privacidad, así como la protección de los datos, la MAC está encriptada utilizando un proceso unidireccional antes de almacenarse, por lo que no se puede asociar el identificador almacenado con ninguna persona.
+
+Otro de los objetivos de este proyecto es probar la confiabilidad y utilidad de este sistema, por lo que se han utilizado dos escenarios reales para demostrar su valor para resolver diferentes tipos de problema. Estos escenarios están centrados en la ciudad de Granada, donde se ha recolectado un gran conjunto real de datos. El primer escenario es un edificio de la Universidad de Granada, y ha sido usado como prueba de concepto. Un despliegue más ambicioso se realizó después colocando los dispositivos en la autovía entre Málaga y Granada.
+
+En cada escenario se han colocado distintos números de dispositivos. La gran cantidad de datos se ha procesado utilizando técnicas de \textit{Big Data}, transformándolos o agregándolos, para poder realizar otros tipos de análisis. Se han aplicado distintos métodos, como Data Mining, Predicción de Series Temporales, matrices de Entrada/Salida o procedimientos estadísticos. El objetivo ha sido extraer información útil y alcanzar conclusiones claras que nos puedan llevar a mejorar el rendimiento en distintos aspectos en cada escenario, probando el valor de este sistema de monitorización como herramienta para mejorar distintos aspectos dentro de una ciudad inteligente (carreteras o edificios).
+
+El uso de estos dispositivos puede enmarcarse dentro del paradigma de Internet de las Cosas (Internet of Things, IoT), ya que estamos integrando comunicaciones y tecnologías para identificación y seguimiento, junto con el uso de redes de sensores \cite{Atzori2010IoTSurvey}. 
+
+El resto de la memoria es como sigue: primero se realiza una descripción detallada del trabajo desarrollado en la Sección \ref{sec:descdetallada}. A continuación se describe el grado de consecución de los objetivos (Sección \ref{subsec:gradoobjetivos}) y de los resultados alcanzados (Sección \ref{sec:resultadosalcanzados}), incluyendo las publicaciones científicas. El interés de los resultados y grado de innovación se presentan respectivamente en la sección \ref{section:interesdelosresultados} y \ref{sec:gradodeinnovacionque} respectivamente. Finalmente, se describe la difusión de los resultados (Sección \ref{sec:difusionresults}) y las conclusiones y trabajo futuro.
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   TRAFFIC in a HIGHWAY  %%%%%%%%%%%%%%%%%%%%%%%%%
 %----------------------------------------------------------------------------
@@ -82,18 +137,18 @@ Se han realizado reuniones semanales con todos los miembros del proyecto, dentro
 
 \subsection{Cumplimento de las fases, actividades y tareas}
 
-A continuación se detallarán los distintos paquetes de trabajo, tareas realizadas y resultados obtenidos en cada uno de ellos. Además, se justifican cada una de las partidas de gastos del proyecto. ***HACERLO
+A continuación se detallarán los distintos paquetes de trabajo, tareas realizadas y resultados obtenidos en cada uno de ellos. Además, se justifican cada una de las partidas de gastos del proyecto.
 
 \subsubsection{Paquete 01: Coordinación}
 
 En este paquete, liderado por el IP se han realizado las tareas de coordinación tales como organización de reuniones y control del proyecto. Para ello se han usado herramientas libres, como gestores de tickets y otros mecanismos de comunicación y desarrollo.
 
-Justificación de los gastos:
-Reuniones en la DGT
+\textit{Justificación del presupuesto}
+En este paquete se incluyen los desplazamientos a reuniones en la sede de la DGT (2 a Madrid y 1 a Málaga) por parte de tres investigadores del proyecto (Pablo García Sánchez, Antonio Fernández Ares y Paloma de las Cuevas).
 
 \subsubsection{Paquete 02: Hardware}
 \label{subsubsec:paquete02}
-Este paquete ha sido el que más esfuerzo ha requerido, ya que ha implicado el montaje, diseño y programación de los dispositivos de monitorización. Se han desarrollado varios prototipos del sistema, comparando el rendimiento de distintos componentes Bluetooth y WiFi. Los resultados pueden verse a continuación.
+Este paquete ha sido el que más esfuerzo ha requerido, ya que ha implicado el montaje, diseño y programación de los dispositivos de monitorización. Se han desarrollado varios prototipos del sistema, comparando el rendimiento de distintos componentes Bluetooth y WiFi. A diferencia del proyecto anterior (SINECA) los nuevos dispositivos han sido diseñados y programados desde cero. Los resultados pueden verse a continuación.
 
 El dispositivo de monitorización final está basado en \textit{Raspberry Pi}\footnote{\url{https://www.raspberrypi.org/}}, 
 en concreto se ha optado por una placa Raspberry Pi 2 Model B (Figura \ref{fig:raspberry}), ya que cuenta con una mayor capacidad de cómputo paralelo que su predecesora puede suponer una optimización significativa del funcionamiento del dispositivo de captación.
@@ -118,14 +173,20 @@ La caja estanca empleada para albergar el dispositivo de monitorización cumple l
 
 \begin{figure*}[htb] 
 \centering
-\includegraphics[width=10cm]{imags/raspi.eps}
+\includegraphics[width=10cm]{imgs/raspi.eps}
 \caption{Raspberry Pi Model B utilizada en los dispositivos de monitorización.} 
 \label{fig:raspberry} 
 \end{figure*}
 
-Como se puede apreciar en la Figura \ref{fig:sistema}, se han programado cinco partes bien diferenciadas a las que hemos etiquetado con un nombre, \textit{Raziel, Lilith, Abdiel, Ezequiel} y \textit{Anan}, 
-que se relacionan entre ellas unidireccionalmente según el flujo de los datos. En el dispositivo se ejecutan Raziel y Lilith, que están implementados en Java y en PHP respectivamente. Ambas se ejecutan sobre el sistema operativo, llamado Horeb en este sistema. 
+Como se puede apreciar en la Figura \ref{fig:sistema}, se han programado cinco partes bien diferenciadas a las que hemos etiquetado con un nombre, \textit{Raziel, Lilith, Abdiel, Ezequiel} y \textit{Anan}, que se relacionan entre ellas unidireccionalmente según el flujo de los datos. En el dispositivo se ejecutan Raziel y Lilith, que están implementados en Java y en PHP respectivamente. Ambas se ejecutan sobre el sistema operativo, llamado Horeb en este sistema. 
 Ambas partes envían datos a Abdiel de forma independiente. Éste también está  implementado en PHP, y es el único que tiene acceso de escritura en la base de datos Alejandría gestionada por MySQL. 
+
+\begin{figure*}[htb] 
+\centering
+\includegraphics[width=10cm]{imgs/mobywit.eps}
+\caption{Esquema del sistema desarrollado.} 
+\label{fig:sistema} 
+\end{figure*}
 
 Las Raspberry Pi 2 Model B empleadas tienen un procesador ARM7 por lo cual es necesario instalar un sistema operativo que sea compatible con la arquitectura de dicho procesador. En este caso el Sistema Operativo elegido es Raspbian, distribución basada en Debian enfocada en la compatibilidad con Raspberry Pi. Hace uso de la versión 3.10.24+ del kernel de Linux y nos permite disponer de un entorno Linux completo en un sistema de placa única como es Raspberry.
 
@@ -161,9 +222,11 @@ Dado que el sistema puede ser implantado en una arquitectura de red compleja, co
 Para ello se puede habilitar una Raspberry Pi con Horeb como sistema operativo, que haría uso del sistema \textit{Lilith} para hacer la transmisión del tráfico entre las otras Raspberry y el Servidor.
 De esta forma Lilith sirve como pasarela entre las dos redes, la local y la red global que comunica al servidor.
 
-\subsubsection{Paquete 03: Infraestructura}
+\textit{Justificación del presupuesto} Este ha sido el paquete que más recursos ha necesitado, incluyendo los materiales para montar los dispositivos (tarjetas Raspberry Pi, tarjetas SD para cargar el software, o cajas estancas), junto con el diseño de piezas específicas y montaje. Además, parte de la partida de fungibles ha sido aplicada también en el desarrollo del hardware (tenazas, material de ferretería, etc.).
 
-Esta subsección describe la programación y diseño de la infraestructura desarrollada.
+\subsubsection{Paquete 03: Infraestructura}
+\label{subsubsec:paquete03}
+Esta subsección describe la programación y diseño de la infraestructura desarrollada. Las partes de infraestructura (mencionadas brevemente en la descripción del paquete anterior) pueden consultarse en la Figura \ref{fig:sistema}, y se denominan Abdiel, Alejandría, Ezequiel y Annan.
 
 
 
@@ -176,18 +239,52 @@ Alejandría es la \textbf{base de datos} donde se almacena la información de los 
 Dispone de procedimientos optimizados para el cálculo del número total de pasos captados en ventanas temporales para los dispositivos de captación, así como para el cálculo de re-ocurrencia de dispositivos (detectados) en distintos nodos.
 Estos procedimientos son invocados por el software \textit{Ezequiel} para recolectar los datos y publicarlos en la nube.
 
-\subsubsection{Ezequiel: Publicación en la nube}
-Ezequiel es el \textbf{software para publicación en la nube} encargado del acceso a la base datos, consulta y generación de resúmenes de datos, aplicación de algoritmos de predicción y minería de datos y difusión los resultados en la nube \textit{Anan}.
+Ezequiel (Publicación en la nube) es el \textbf{software para publicación en la nube} encargado del acceso a la base datos, consulta y generación de resúmenes de datos, aplicación de algoritmos de predicción y minería de datos y difusión los resultados en la nube \textit{Anan}.
 Actualmente realiza predicción en tiempo real empleando tanto métodos basados en regresión lineal como en máquinas de vector soporte.
 
 Anan es el nombre otorgado a \textbf{la nube} basada en la tecnología de Google en la que se almacenan los datos con el fin de darle difusión a los mismos. En Anan los datos son almacenados en tablas \textit{BigTable NoSQL} mediante la tecnología de Google Fusion Tables. Esta tecnología provee una base de datos geolocalizada (empleada en otras tecnologías de Google como Google Maps).
 Anan se encarga también de proveer gráficas interactivas y mapas del estado histórico, actual y predicho de los distintos nodos.
+
 ***MENCIONAR AZURE
 
-***ETSIIT****
-Una primera prueba de concepto se realizó en la ETS. de Ingeniería y Telecomunicación de la Universidad de Granada. ***TERMINA***
 
-Finalmente, los dispositivos se colocaron en distintas localizaciones propuestas por el Centro de Gestión del Tráfico del Sureste. Estas localizaciones fueron elegidas porque son las más cercanas a las espiras de la DGT, y además cuentan con conexión a Internet para el envío de datos a nuestro servidor y a la nube. Se crearon dos grupos de nodos: un grupo en la provincia de Granada (1010,1020 y 1030) y otro en la provincia de Málaga (1040, 1050 y 1060).
+Una primera prueba de concepto se realizó en la ETS. de Ingeniería y Telecomunicación (ETSIIT) de la Universidad de Granada. El edificio se estudió como una prueba de concepto para el dispositivo descrito en el paquete anterior. Con el fin de controlar el flujo de personas, tres dispositivos se han colocado en los tres accesos al edificio, que se puede ver en la figura \ref{fig:etsiit_map}. Este estudio fue una prueba de concepto antes de desplegar los nodos en las carreteras de la DGT (como se verá más adelante).
+
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[height=4cm]{imgs/etsiit_nodes.eps}
+		\caption{Localización de los dispositivos en la ETSIIT.}
+		\label{fig:etsiit_map}
+	\end{center}
+\end{figure}
+
+Dado que los dispositivos pueden detectar señales WIFI y BT, tanto del personal de la universidad y los estudiantes, dos de ellos se ha colocado muy cerca del acceso principal tratando de distinguir el personal (62) de los estudiantes (52). La puerta del parking (42) sólo puede ser utilizado por el personal.
+
+Los dispositivos han estado grabando datos en distintos días. Con estos datos se ha calculado el histograma origen-destino que se puede ver en la figura \ref{fig:etsiit_io}. Un examen cuidadoso de esta figura nos permite extraer algunas conclusiones.
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=\textwidth]{imgs/etsiit_graph_origin-destination-histogram.eps}
+		\caption{Histograma de Origen/Destino de las personas en la ETSIIT}
+		\label{fig:etsiit_io}
+	\end{center}
+\end{figure}
+
+\begin{itemize}
+\item La mayoría de las personas son estudiantes y que acceden al edificio por la puerta de los estudiantes (sensor 52 en la figura \ref{fig:etsiit_map}).
+\item Los profesores y el personal administrativo parecen dividir su forma de entrar y salir. Utilizan el aparcamiento (sensor 42) tanto como la puerta del edificio principal (sensor 62).
+\item Muchos estudiantes salen por el edificio principal (62), después de una supuesta visita a un profesor o un administrativo (ya que están en el mismo edificio).
+\item La gente que entra por la puerta principal (62) casi nunca sale por la misma puerta. Puede deberse a que la mayoría son estudiantes y salen por la puerta 52, más cercana a sus clases.
+\end{itemize}
+
+Con algunos sensores adicionales el flujo de personas podría ser estudiado de una manera más optima, ya que con los tres utilizados muchas personas no pueden ser interpretadas correctamente como un tipo de visitante concreto. El lugar más interesante para un nuevo sensor está en la puerta del edificio de aulas en el norte en el mapa.
+
+La información recogida puede ser útil para la gestión del edificio, por ejemplo, para determinar cuando debe iniciarse la calefacción, cuantos estudiantes hay en clase o si hay suficientes asientos libres en la biblioteca. Muchas de estas preguntas necesitan un poco más de tiempo para obtener los datos suficientes y contestarlas correctamente.
+
+Tras esta prueba de concepto, los dispositivos se colocaron en distintas localizaciones propuestas por el Centro de Gestión del Tráfico del Sureste. Estas localizaciones fueron elegidas porque son las más cercanas a las espiras de la DGT, y además cuentan con conexión a Internet para el envío de datos a nuestro servidor y a la nube. Se crearon dos grupos de nodos: un grupo en la provincia de Granada (1010,1020 y 1030) y otro en la provincia de Málaga (1040, 1050 y 1060).
 
 La Figura \ref{fig:nodosDGT} muestra los identificadores de esos dispositivos y su emplazamiento.
 
@@ -233,7 +330,9 @@ Inicialmente se compararon distintas métricas para obtener una correlación corre
 \end{itemize}
 
 
-La Tabla \ref{tab:ratiosDGT} muestra los ratios obtenidos  Para simplificar la discusiónTo simplify the data analysis and discussion only the data of one node (1010) are shown. Results show that our device detects one vehicle per approximately 19 detected by the DGT, according Total, Mean and Median ratios. However, best results in MAE and MAPE are attained obtaining ratios dividing by quarter. Therefore, for the rest of the paper this ratio has been chosen, as we need to deal with absolute values to perform forecasting analysis later.
+La Tabla \ref{tab:ratiosDGT} muestra los ratios obtenidos. Para simplificar el análisis de datos y la discusión sólo se muestran los datos de un nodo (1010). Los resultados muestran que nuestro dispositivo detecta un vehículo por aproximadamente 19 detectados por la DGT, según los ratios Total, Media y Mediana. Sin embargo, los mejores resultados en el MAE y MAPE se logran obteniendo coeficientes de división por cuarto de hora. Por lo tanto, para el resto del trabajo se ha optado por esta relación, ya que tenemos que hacer frente a los valores absolutos para realizar análisis de predicción.
+
+
 
 \begin{table}[htb]
 \centering
@@ -242,57 +341,68 @@ La Tabla \ref{tab:ratiosDGT} muestra los ratios obtenidos  Para simplificar la d
 \hline
 			 &RATIO	  & MAE    &   MAPE   & MSE    & RMSE \\
  \hline
-Total Ratio  & 17.230 &   60.373 & 36.265 & \textbf{7371.579}  & \textbf{85.857} \\
-Mean Ratio   & 20.792 &   72.323 & 43.443 & 11216.070 & 105.905 \\
-Median Ratio & 18.2 &    62.454  & 37.515 & 8060.136  & 89.778 \\
-Mean By Quarter of Hour Ratio &   Depends on the hour  & 66.791 & 40.120 & 9890.978 & 99.453 \\
-Median By Quarter of Hour Ratio & Depends on the hour  & \textbf{58.326} & \textbf{35.035} & 7617.613 & 87.278 \\
+Ratio Total  & 17.230 &   60.373 & 36.265 & \textbf{7371.579}  & \textbf{85.857} \\
+Ratio Media  & 20.792 &   72.323 & 43.443 & 11216.070 & 105.905 \\
+Ratio Mediana & 18.2 &    62.454  & 37.515 & 8060.136  & 89.778 \\
+Ratio Medio por cuarto de hora &  Depende de la hora  & 66.791 & 40.120 & 9890.978 & 99.453 \\
+Ratio Mediana por cuarto de hora & Depende de la hora  & \textbf{58.326} & \textbf{35.035} & 7617.613 & 87.278 \\
 \hline
 
 \end{tabular}
 }
-\caption{Different ratios between the DGT data and the data gathered by MOBYWIT in node 1010.}
+\caption{Diferentes ratios entre la los datos recolectados por la DGT y por MOBYWIT en el nodo 1010.}
 \label{tab:ratiosDGT}
 \end{table}
 
 
-Figure \ref{fig:dgtRatios} shows the number of devices of the node 1010, applying the chosen correction ratio. As it can be seen, certain correlation exists. However, different peaks appear in the figure, being those elements the product of detecting few devices in comparison with the DGT.
-
-
+La Figura \ref{fig:dgtRatios} muestra el número de dispositivos detectados del nodo 1010, aplicando el ratio de corrección elegida. Como se puede observar, existe cierta correlación.
 
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[scale=0.22]{imgs/petra_graph_DGT-Mobywit-mended.eps}
-		\caption{Devices detected by DGT and detected by our device (node 1010) applying the correction ratio (median by quarter). Note: no DGT data available during October 14th.}
+		\caption{Dispositivos detectados por la DGT y detectados por nuestro dispositivo (nodo 1010) aplicando el ratio de corrección (mediana por cuarto de hora). Nota: no hay datos de la DGT disponibles durante el 14 de octubre.}
 	\label{fig:dgtRatios}
 	\end{center}
 \end{figure}
 
-\subsection{Traffic forecasting}
-\label{sub:ts_forecasting}
-Capturing data about traffic on a highway worth not only for describing its current situation, but also for forecasting future conditions. In this sense, counting the number of cars that have passed for a given point in a given time can be considered as a time series, allowing the use of automatic tools to perform forecasting.
+La captura de datos sobre el tráfico en una autopista no sólo sirve para la descripción de la situación actual, sino también para la previsión de las condiciones futuras. En este sentido, el número de coches que han pasado por un punto dado en un momento dado puede ser considerado como una serie temporal, permitiendo el uso de herramientas automáticas para llevar a cabo la predicción.
 
-For this work, four methods (three widely used time series forecasters, and one control method) have been used to, automatically, predict the number of cars that will pass in the next period. These methods are included in the forecast package ~\cite{Hyndman08automatictime} of the R program~\cite{R:Bloomfield:2014}, and are the following:
+Para este trabajo, cuatro métodos (tres predictores de series de tiempo ampliamente utilizados, y un método de control) se han utilizado para, predecir automáticamente el número de coches que pasarán en un próximo período. Estos métodos se incluyen en el paquete de previsión \cite{Hyndman08automatictime}  del programa de R \cite{R:Bloomfield:2014}, y son los siguientes:
+
+
+
 
 \begin{itemize}
-\item {\em Exponential smoothing state space model (ETS)~\cite{ETS:2008}}: Represent a set of methods that decompose the time-series in three different characteristics: error, trend and seasonal, modelling each one with a given equation. The forecasted values are obtained joining the previous equations by addition or multiplication. The corresponding function in the forecast package builds the different models included in the ETS set, and select the one with the best according to the Akaike's Information Criterion (AIC)~\cite{Akaike1973}.
-\item {\em ARIMA~\cite{BoxJenk}: This well known method, due to Box and Jenkins } integrates autoregressive (AR) and moving average (MA) models in a three-stage iterative cycle. The phases of every cycle consist of: identifying the time series, estimating of the model's parameters, and verifying the built model. Briefly, every model is defined as a sum of $p+q$ terms. The first $p$  terms are defined by $p$ past values, any of them multiplied by a coefficient; while the last $q$ terms represent the moving averages, also multiplied by their own coefficients.
-\item {\em Theta~\cite{Assima2000}}: This univariate forecasting method is based on modifying the local curvature of the time-series, after having applied a second difference to the data. It decomposes the original time series into several modified ones, which are separately extrapolated so that they have to be combined in order to provide the forecasting.
-\item {\em Mean}: This is the control method. The future values are computed as the mean of the previous ones.
+
+\item {\em Exponential smoothing state space model (ETS)~\cite{ETS:2008}}: Representa un conjunto de métodos que descomponen el tiempo de la serie en tres características diferentes: error, tendencia y estacional, modelando cada uno con una ecuación dada. Los valores pronosticados se obtienen sumando las ecuaciones anteriores por adición o multiplicación. La función correspondiente en el paquete de predicción construye los diferentes modelos incluidos en el paquete de ETS, y selecciona el mejor según Criterio de Información de Akaike (AIC)\cite{Akaike1973}.
+
+
+\item {\em ARIMA~\cite{BoxJenk}}: Este famoso método integra modelos autorregresivos (AR) y promedio móvil (MA) en un ciclo iterativo de tres etapas. Las fases de cada ciclo consisten en: la identificación de la serie temporal, la estimación de los parámetros del modelo, y la verificación del modelo construido. En pocas palabras, cada modelo se define como la suma de $p+g$ términos. Los primeros $p$ términos se definen por valores pasados $p$, cualquiera de ellos multiplicado por un coeficiente; mientras que los últimos $q$ términos representan las medias móviles, también multiplicada por sus propios coeficientes.
+
+
+\item {\em Theta~\cite{Assima2000}}: Este método de pronóstico univariante se basa en la modificación de la curvatura local de la serie temporal, después de haber aplicado una segunda diferencia con los datos. Se descompone la serie temporal original en varias series modificados, que son extrapolados por separado, para combinarse con el fin de proporcionar a la previsión.
+
+\item {\em Promedio}: Este es el método de control. Los valores futuros se calculan como la media de los anteriores.
+
 \end{itemize}
 
-The data used for the experiments are the ones provided by the node 1010 starting on 12-Oct-2015, 00:00 hours, and finishing on 31-Oct-2015, 23:45 hours, i.e., three entire weeks less one day (there exist no data for November, the first). As data is aggregated every 15 minutes, this means the time-series was composed of $20(days)*24(hours)*4(quarters)=1920$ values.
+
+
+Los datos utilizados para los experimentos son los proporcionados por el nodo de 1010 a partir del 12-Oct-2015, 00:00 horas, y terminando el 31-oct-2015, 23:45 horas, es decir, la totalidad de tres semanas menos un día. Como los datos se agregan cada 15 minutos, esto significa que la serie de tiempo se compone de $ 20 (dias) * 24 (horas) * 4 (cuartos) = 1920 $ valores.
+
+La Tabla \ref{tab:forecasting} muestra los valores de las medidas usadas calculados sobre $576$ valores, las correspondientes a los últimos 6 días (es decir, $30\% $ de los datos). El horizonte se ha establecido en 1, de modo que, con el fin de predecir un momento dado todos los datos anteriores conocidos, estos han sido utilizados para construir y entrenar a los modelos. Después, se predicen el siguiente valor. De esta manera, el problema se ha enfrentado como una simulación de lo que podría suceder en un sistema continuo en el que se reciben nuevos datos reales cada 15 minutos, por lo que los modelos de predicción podrían también adaptarse continuamente.
 
 
 
-Table ~\ref{tab:forecasting} shows the values for the ten used measures computed over $576$ values, the ones corresponding to the last 6 days (i.e., $30\%$ of the data). The horizon has been set to 1, so that, in order to forecast any given moment all the previous real known data were used to build and train the models and, after this, the next value was forecasted. This way, the problem has been faced as a simulation of what could happen in a continuous system in which new real data were received every 15 minutes so that forecasting models could be also continuously adapted.
+Como muestran los resultados, ETS, ARIMA y Theta se comportan claramente mejor que el método de control. Las diferencias entre los tres métodos considerados son casi inexistentes. En cualquier caso, ETS produce los valores más bajos en cuatro de las medidas que se están utilizando. Por estas razones, se podría probablemente considerar como el mejor candidato para ser elegido como el método preferido para pronosticar este tipo de series de tiempo. Figura \ref{fig:forecasted-values} representa los valores pronosticados por ETS comparándolos con los esperados.
 
-As the results show, ETS, ARIMA and Theta behave clearly better than the control method. The differences between the three considered methods are, almost nonexistent. In any case, ETS yields the lowest values in four of the measures being used. For these reasons, it could be probably considered the best candidate to be chosen as the preferred method to forecast this kind of time-series. Figure \ref{fig:forecasted-values} depicts the values forecasted by ETS comparing them with the expected ones.
+
+
 
 \begin{figure}[!ht]
     \begin{center}
         \includegraphics[width=14cm]{imgs/forecasting-PETRA-1011.eps}
-        \caption{Expected vs forecasted number of cars in node 1011, according to MOBYWIT's records. Forecasted values are provided by smoothing state space model (ETS). }
+        \caption{Número esperado vs número predicho de coches en el nodo de 1011, según los registros de MOBYWIT. Los valores predichos se han obtenido utilizando el Exponential smoothing state space model (ETS). }
         \label{fig:forecasted-values}
     \end{center}
 \end{figure}
@@ -302,27 +412,29 @@ As the results show, ETS, ARIMA and Theta behave clearly better than the control
 \resizebox{8cm}{!}{
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-Measure vs Method &Mean &ETS &ARIMA &Theta\\
+Medida vs Método &Promedio &ETS &ARIMA &Theta\\
 \hline
+%%%ME &$0.6631$ & $0.0059$ & $0.0043$ & $\textbf{0.0034}$\\
 MAE &$4.4611$ & $\textbf{2.7106}$ & $2.7409$ & $2.7126$\\
 MAPE &$4.7226$ & $\textbf{1.0128}$ & $1.0822$ & $1.0599$\\
 MSE &$28.5711$ & $\textbf{13.0194}$ & $13.2775$ & $13.0421$\\
 RMSE &$5.3452$ & $\textbf{3.6082}$ & $3.6438$ & $3.6114$\\
+
 \hline
 \end{tabular}
 }
-\caption{Error values yielded when forecasting data recorded by MOBYWIT. Measures are computed using differences between expected values and yielded ones from 25-Oct-2015, 00:00 hours to 31-Oct-2105, 23:45 hours, establishing the horizon to 1. Best (=lowest) values are highlighted in bold.}
+\caption{Valores de error obtenidos usando la predicción con los datos registrados por el sistema. Las medidas se calculan utilizando las diferencias entre los valores esperados y los obtenidos desde 25-Oct-2015, 00:00 horas al 31-oct-2105, 23:45 horas, estableciendo el horizonte a 1. Los mejores valores se resaltan en negrita.}
 \label{tab:forecasting}
 \end{table}
 
-Finally, once forecasting with MOBYWIT's data has been carried out, the number of cars that would have been detected by the DGT can be estimated by the ratios previously calculated (see table \ref{tab:ratiosDGT}). Concretely, table \ref{tab:errorForecastingRatio} shows the error computed when applying the Median Ratio By Quarter conversion. As can be seen, newly ETS stands for its capability of yielding the lowest errors. 
+Por último, una vez que la previsión con los datos del sistema se ha llevado a cabo, el número de coches que han sido detectados por la DGT se puede utilizar con los ratios calculados anteriormente (véase la Tabla \ref{tab:ratiosDGT}). Concretamente, la Tabla \ref{tab:errorForecastingRatio} muestra el error calculado al aplicar el Ratio Mediana por cuarto de hora. Como puede verse, el método ETS destaca de nuevo por su capacidad de producir los errores más bajos. 
 
 \begin{table}[htb]
 \centering
 \resizebox{8cm}{!}{
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-Measure vs Method &Mean &ETS &ARIMA &Theta\\
+Medida vs Método &Promedio &ETS &ARIMA &Theta\\
  \hline
 MAE   & $72.162$ & $\textbf{42.789}$ & $43.335$ & $43.158$ \\
 MAPE  & $27.961$ & $\textbf{27.609}$ & $27.961$ & $27.847$ \\
@@ -334,7 +446,7 @@ RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
 \end{tabular}
 }
 
-\caption{Error values computed using the differences between DGT real data and data recorded by MOBYWIT with Median Ratio By Quarter Hour conversion. The period to be forecasted started on 25-Oct-2015, 00:00 hours and finished on 31-Oct-2105, 23:45 hours, establishing the horizon to 1. Best (=lowest) values are highlighted in bold.}
+\caption{Valores de error obtenidos usando las diferencias entre los datos reales de la DGT con los datos registrados por el sistema usando el ratio de Mediana por cuarto de hora. El periodo va desde 25-Oct-2015, 00:00 horas al 31-oct-2105, 23:45 horas, estableciendo el horizonte a 1. Los mejores valores se resaltan en negrita.}
 
 \label{tab:errorForecastingRatio}
 \end{table}
@@ -342,13 +454,15 @@ RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
 \begin{figure}[!ht]
     \begin{center}
         \includegraphics[width=14cm]{imgs/petra_graph_ts-forecasting.eps}
-        \caption{Real DGT number of cars in node 1011 vs forecasted according to MOBYWIT's records with Median Ratio By Quarter conversion. Forecasted values are provided by Mean, ETS, ARIMA and THETA methods. }
+        \caption{Número de coches en el nodo 1011 detectados por la DGT vs la predicha a partir de los registros de nuestro sistema usando la conversión por ratio Mediana por cuarto de hora. Los valores pronosticados son proporcionados por métodos Promedio, ETS, ARIMA y Theta.}
         \label{fig:forecasted-values-ratio}
     \end{center}
 \end{figure}
 
-Finally, according to the results obtained, performing traffic forecasting using data provided by MOBYWIT seems to be an affordable task for traditional methods (i.e., ETS or ARIMA). Furthermore, ratios computed from data recorded by DGT allow to convert forecasted values to their equivalent representing the number of cars in a given location. Thus, the joint use of this two techniques makes possible to closely approximate the number of cars that will have passed 15 minutes later by the position of the MOBYWIT; and this process can be newly repeated every 15 minutes so that forecasting models can be enhanced and adapted to the new conditions of the road.
+Por último, de acuerdo con los resultados obtenidos, la realización de predicción de tráfico a partir de datos proporcionados por nuestro dispositivo parece ser una tarea asequible para los métodos tradicionales (es decir, ETS o ARIMA). Por otra parte, las proporciones calculadas a partir de los datos registrados por la DGT permiten convertir los valores pronosticados a sus equivalentes, que representan el número de vehículos en un lugar determinado. Por lo tanto, la utilización conjunta de estas dos técnicas hace posible aproximar estrechamente el número de coches que han pasado 15 minutos más tarde por la posición del nodo; por lo que este proceso puede repetirse nuevamente cada 15 minutos para que los modelos de predicción pueden ser mejorados y adaptados a las nuevas condiciones de la carretera.
 
+
+***CORRIGE**
 Para ello, lo primero que hicimos fue diseñar una encuesta que nos permita saber qué hábitos de uso tienen los usuarios de teléfonos móviles para ver si todos los dispositivos móviles podrían ser captados monitorizando la tecnología BT. Esta encuesta fue publicada de forma abierta y difundida a través de redes sociales y correo electrónico. Los puntos más importantes de esta encuesta pueden resumirse como:
 El rango de edad más frecuente de los informantes es el que abarca entre los 20 y los 50 años formando un total de 528 respuestas de una muestra de 601. Este rango concuerda en lo esperado puesto que los principales usuarios de teléfonos o dispositivos relacionados con la tecnología que nosotros detectamos están dentro de ese rango.
 Del total de la muestra, el 25,46\% no son conductores habituales
@@ -356,9 +470,13 @@ Del resto de la muestra, que sí son conductores habituales, más de la mitad, un 
 Si tomamos sólo los conductores habituales, el 50,2\% no saben o no tienen BT integrado en su vehículo, y el resto de la muestra sí lo tiene ya sea integrado o no, lo que nos indica que aunque para nosotros, que nos movemos en el mundo tecnológico y de la investigación la tecnología BT es algo conocido, no lo es para el ciudadano de a pie, puesto que perderíamos un 49,8\% de dispositivos móviles si  utilizamos sólo la monitorización de las señales BT.
 Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras que no lo están utilizando, sin embargo, sólo el 31,11\% apagan la señal Wifi mientras que no lo están utilizando. Este dato nos indica que aunque el usuario conozca la tecnología y la use, la gran mayoría de usuarios lo llevan desconectado. Sin embargo, si incluimos en el proyecto la tecnología Wifi y tenemos en cuenta que el 69,89\% de la gente la llevan permanentemente activada, el rango de datos capturados es mejor. Es por eso que hemos incluido la captación de señales Wifi dentro del desarrollo normal del proyecto además de las de BT que era lo inicialmente previsto.
 
+\textit{Justificación del presupuesto:} En este paquete se ha utilizado el presupuesto destinado a ``Otros gastos'' como el uso de computación en nube (en Loggly o Microsoft Azure). Además, parte de la partida de ``Aparatos y equipos'' que estaba destinada a la colocación de los dispositivos (como la instalación de los dispositivos en la ETSIIT).
+
 \subsubsection{Paquete 05: Difusión}
 
 En este paquete el IP ha sido el encargado de realizar la coordinación de la difusión de resultados, tanto en la publicación de artículos científicos (ver sección \ref{subsec:publicacionescientificas}) como otros tipos de difusión. Por ejemplo, las noticias relacionadas con el proyecto se han publicado en la página web \url{https://proyectopetra.wordpress.com/} o en la cuenta de Twitter \url{https://twitter.com/proyectoPETRA}, así como en distintos eventos de divulgación científica, como la Noche de los Investigadores (consultar sección \ref{subsec:otrosmedios}).
+
+\textit{Justificación del presupuesto:} Los gastos asociados a la difusión han sido la inscripción y asistencia a congresos (como las JCE, por Antonio Fernández Ares), y reuniones de investigación (BusinessTIC en Málaga y Metaheuristics in the Large Nottingham, ambas por Pablo García Sánchez y Juan Julián Merelo Guervós).
 
 \subsection{Dificultades y problemas surgidos}
 
@@ -418,7 +536,7 @@ En lo relativo a la seguridad de red, los dispositivos colocados están aislados 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   OBJETIVOS  %%%%%%%%%%%%%%%%%%%%%%%%%
 %----------------------------------------------------------------------------
 \section{Grado de consecución de los objetivos propuestos y otros posibles objetivos alcanzados}
-
+\label{subsec:gradoobjetivos}
 Una vez explicada la descripción detallada de todos los trabajos realizados se resumen los objetivos alcanzados respecto a los objetivos que se presentaron en la solicitud.
 
 \subsection{Objetivo 1: Obtención de datos de tráfico más precisos y completos.}
@@ -432,7 +550,7 @@ Se propuso usar otras fuentes, como los aforadores oficiales de la DGT o datos p
 
 \subsection{Objetivo 3: Predicción del tráfico de forma más precisa}
 
-Usando las nuevas fuentes de datos anterirmente mencionadas, se ha realizado un estudio de distintos métodos de predicción de series temporales. Se han utilizado distintas técnicas de predicción como ETS, ARIMA y Theta. Estas técnicas se han aplicado tanto sobre los datos reales de la DGT, como sobre los datos obtenidos por nuestro sistema, mostrando la posibilidad de predecir a 15 minutos la situación del tráfico de forma precisa.
+Usando las nuevas fuentes de datos anteriormente mencionadas, se ha realizado un estudio de distintos métodos de predicción de series temporales. Se han utilizado distintas técnicas de predicción como ETS, ARIMA y Theta. Estas técnicas se han aplicado tanto sobre los datos reales de la DGT, como sobre los datos obtenidos por nuestro sistema, mostrando la posibilidad de predecir a 15 minutos la situación del tráfico de forma precisa.
 
 \subsection{Objetivo 4: Facilitar el acceso a los resultados}
 Los resultados y datasets están disponibles de forma abierta en el repositorio Github del proyecto \footnote{\url{https://github.com/proyectopetra}}, permitiendo a otros investigadores (no sólo de las administraciones, sino a cualquier usuario) extraer información relevante a partir de  los datos obtenidos, promoviendo el Open Data. Se han promovido además, distintos Hackathones que han permitido a la comunidad científica colaborar en la mejora de este proyecto.
@@ -453,7 +571,7 @@ A pesar de no haberse planteado en la memoria de solicitud, podemos considerar q
 %----------------------------------------------------------------------------
 
 \section{Descripción global de los resultados alcanzados y significación de los mismos en las correspondientes áreas de conocimiento}
-
+\label{sec:resultadosalcanzados}
 Esta sección describe los resultados obtenidos durante la realización del proyecto.
 
 \subsection{Publicaciones científicas}
@@ -463,7 +581,7 @@ Durante el desarrollo del proyecto se han realizado varias publicaciones científ
 
 En estas publicaciones se ha descrito el sistema desarrollado \cite{GarciaSanchez15JCE}, experimentación en predicción con datos recogidos \cite{Romero15ITISE,Castillo15ITISE,RIVAS15MAEB,Castillo15MAEB}.
 
-La publicación más relevente \cite{MOBYWIT15}, ya que es la que describe el proyecto PETRA, se encuentra actualmente en proceso de revisión por pares en la revista Future Generation Computer Systems, con índice de calidad IF = 2.786, posición 8 de 102 Q1 en la rama Computer Science, Theory and Methods. Este trabajo describe el sistema de captación realizado, sus elementos y sus posibles aplicaciones. Los resultados experimentales mostrados en la sección \ref{subsubsec:paquete04}, descritos con más profundidad en ese trabajo, han permitido obtener información sobre el ratio real de vehículos detectados por el sistema.
+La publicación más relevante es \cite{MOBYWIT15}, ya que es la que describe el proyecto PETRA, se encuentra actualmente en proceso de revisión por pares en la revista Future Generation Computer Systems, con índice de calidad IF = 2.786, posición 8 de 102 Q1 en la rama Computer Science, Theory and Methods. Este trabajo describe el sistema de captación realizado, sus elementos y sus posibles aplicaciones. Los resultados experimentales mostrados en la sección \ref{subsubsec:paquete04}, descritos con más profundidad en ese trabajo, han permitido obtener información sobre el ratio real de vehículos detectados por el sistema.
 
 Otro artículo de revista está en revisión ***IGI AQUI***
 
@@ -472,9 +590,9 @@ Además de estas publicaciones, la sección \ref{subsec:otrosresultados} describe 
 
 \subsection{Participación en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
 
-Se ha asistido a varios congresos donde se han presentado los resultados de varias de las publicaciones mencionadas. En el Congreso ITISE (International Work Conference on Time Series Analysis) se presentaron los trabajos \ref{Romero15ITISE,Castillo15ITISE}. La descripción del sistema desarrollado fue presentado en las Jornadas de Computación Empotrada, celebradas en Córdoba \cite{GarciaSanchez15JCE}.
+Se ha asistido a varios congresos donde se han presentado los resultados de varias de las publicaciones mencionadas. En el Congreso ITISE (International Work Conference on Time Series Analysis) se presentaron los trabajos \cite{Romero15ITISE,Castillo15ITISE}. La descripción del sistema desarrollado fue presentado en las Jornadas de Computación Empotrada, celebradas en Córdoba \cite{GarciaSanchez15JCE}.
 
-Otros medios de difusión, de caracter divulgativo como la Noche de los Investigadores, se mencionan más adelante en la sección \ref{subsec:otrosmedios}.
+Otros medios de difusión, de carácter divulgativo como la Noche de los Investigadores, se mencionan más adelante en la sección \ref{subsec:otrosmedios}.
 
 \subsection{Generación de conocimientos que supongan un avance importante en el estado del arte}
 
@@ -513,10 +631,10 @@ Aunque no se ha desarrollado aún ninguna, está en trámite el desarrollo de una p
 \subsection{Otros resultados}
 \label{subsec:otrosresultados}
 
-***AQUI SE EXPLICA LO DE LA SEGURIDAD Y OPTIMIZACION Y TODO ESO ***
+Durante el desarrollo del proyecto distintas técnicas de Data Mining, Machine Learning, Cloud Computing y Optimización relacionadas con el proyecto han sido aplicadas a otros tipos de problemas. Las referencias \cite{BotsMAEB15,GarciaOrtega15MADEevostar,FernandezAres15BotsEvostar,FernandezAres15Cosecivi,GarciaSanchez15CIG} muestran distintas publicaciones relacionadas con la generación automática de IAs. También se han realizado distintos estudios relacionados con el Cloud Computing \cite{Garcia15ASOCO,Merelo15geccoCompanion} o la comparativa de métodos de optimización \cite{Rico15IWANN} y la seguridad \cite{delasCuevas2015CC}. Todas las referencias anteriores cuentan con la mención al proyecto en los agradecimientos y han sido publicadas en conferencias nacionales e internacionales con revisión por pares, dos de ellas siendo publicadas en dos revistas con índice JCR en Q1 \cite{delasCuevas2015CC,Garcia15ASOCO}.
 
 \subsection{Referentes teóricos y metodológicos de especial interés}
-
+***TERMINA***
 \subsection{Riesgo científico}
 
 \subsection{Novedad de las conclusiones y resultados alcanzados}
@@ -592,7 +710,7 @@ Todas estas actividades han mejorado el posicionamiento de su Grupo de Investiga
 
 Este proyecto ha permitido una formación del personal especializado en I+D+i, principalmente para el IP, Pablo García Sánchez, que se ha enfrentado por primera vez a la dirección de un proyecto de investigación. Además, ha permitido el aumento del número de personas dedicadas a I+D+i dentro del Grupo de Investigación, facilitando la incorporación de miembros de otros departamentos (como el de Electrónica), así como la captación/ retención de personal especialmente cualificado. 
 
-Además, este proyecto ha supuesto un incremento de la capacidad científico-tecnológica, prestigio y posición competitiva del Grupo de Investigación, establenciendo una linea de investigación que ha recibido interés por parte de distintas empresas y organismos públicos (DGT, Universidad de Málaga y Ayuntamiento de Granada).
+Además, este proyecto ha supuesto un incremento de la capacidad científico-tecnológica, prestigio y posición competitiva del Grupo de Investigación, estableciendo una linea de investigación que ha recibido interés por parte de distintas empresas y organismos públicos (DGT, Universidad de Málaga y Ayuntamiento de Granada).
 
 Se ha permitido identificar nuevos mercados/áreas de investigación (como el marketing y la monitorización de personas en lugares públicos), así como una mejora en la internacionalización del Grupo de Investigación (con una futura propuesta H2020) y la firma de contratos con empresas.
 
@@ -605,18 +723,93 @@ Se ha permitido identificar nuevos mercados/áreas de investigación (como el mark
 %----------------------------------------------------------------------------
 
 \section{Grado de innovación que se ha conseguido con la investigación}
-
+\label{sec:gradodeinnovacionque}
 \subsection{Aprendizaje de nuevos conocimientos y técnicas}
 
 Durante el desarrollo del proyecto los distintos investigadores han adquirido una serie de destrezas en distintos ámbitos ***TERMINA
 
 \subsubsection{Gestión y coordinación} Al ser el primer proyecto de dirigido por el IP, el haber tenido que coordinar y dirigir un equipo investigador, además una serie de recursos, ha supuesto la mejora en las destrezas como investigador senior, habiendo supuesto una mejora en la experiencia.
-\subsubsection{Desarrollo en sistemas de tiempo real y dispositivos empotrados} El uso de la tarjeta Raspberry Pi ha supuesto una serie de avances en los conocimientos de Sistemas Operativos y programación concurrente en los investigadores que trabajaban en el paquete 2. Se ha profundizado en el uso y optimización de sistemas operativos en entornos volátiles y en la coordinación y mecanismos de sincronización en sofware en tiempo real.
+\subsubsection{Desarrollo en sistemas de tiempo real y dispositivos empotrados} El uso de la tarjeta Raspberry Pi ha supuesto una serie de avances en los conocimientos de Sistemas Operativos y programación concurrente en los investigadores que trabajaban en el paquete 2. Se ha profundizado en el uso y optimización de sistemas operativos en entornos volátiles y en la coordinación y mecanismos de sincronización en software en tiempo real.
 \subsubsection{Despliegue y computación en Nube} El haber tratado con una infraestructura distribuida, con distintos sistemas de procesamiento en los dispositivos y en la Nube (Azure y Google App Engine) ha incrementado el conocimiento de estas tecnologías por parte de los investigadores.
 \subsubsection{Análisis y predicción} Se han realizado estudios con distintas técnicas de análisis de datos (MSE, ***TERMINA) así como técnicas de predicción (Mean, Arima, Theta, etc).
 \subsubsection{}
 
 \subsection{Ambito de originalidad}
+
+Existen distintas tecnologías usadas para recolectar datos y obtener información del estado de las carreteras. Las tecnologías de monitorización del tráfico pueden clasificarse como \textit{intrusivas}, instaladas en el pavimento, y \textit{no-intrusivas}, sin contacto con la carretera, causando un efecto mínimo en el flujo de tráfico \cite{martin2003detector}. 
+
+Como se ha indicado en la introducción, las principales tecnologías incluyen tubos neumáticos, espiras inductivas y sistemas OCR, entre otros \cite{rodrigue2013geography}.
+
+Los tubos neumáticos se colocan encima del carril para detectar vehículos mediante el cambio de presión generado cuando un vehículo pasan por ellos. Una espira inductiva es un cable empotrado dentro de la carretera, normalmente formando un cuadrado. Se envía una corriente eléctrica al cable y cuando una superficie de metal con un área mínima pasa por encima se envía un pulso que se detecta. El principal problema de estos dos sistemas es que son incapaces de detectar el vehículo específico detectado por el sensor. Así que, a diferencia de nuestro sistema, no se pueden calcular matrices de entrada/salida, sólo el tipo y cantidad de los vehículos. Esto impide, por ejemplo, detectar pasos repetitivos del mismo vehículo. Debido a su alto coste de instalación y mantenimiento no es posible instalarlo en todas las carreteras. Esta es la razón por la que suelen verse en carreteras principales o puntos de especial interés.
+
+Por último, la tecnología de reconocimiento automático ha experimentado un aumento de la
+los últimos años debido a su capacidad para detectar vehículos individuales sin depender
+de los sistemas a bordo de vehículos. La detección de imágenes de vídeo es un buen ejemplo; en este caso se usa una
+región de la carretera para grabar los datos de tráfico, por ejemplo, detectando las matrículas. Además, estos sistemas se pueden
+utilizar para la detección automática de incidentes en la carretera, siendo esa es la principal
+ventaja sobre los sistemas de información anteriores. Sin embargo, la fiabilidad del sistema podría
+no ser óptima, ya que el clima puede limitar la precisión. Por otra parte, estos sistemas son
+muy caros comparados con los descritos anteriormente \cite{skszek2001state}.
+Además, la Agencia de Protección de Datos considera el número de matrícula del coche
+como datos personales. por lo que se requiere el consentimiento del usuario para que pueda almacenarse.
+
+
+Existen varias empresas que trabajan en el campo de información de tráfico. Algunas de las más relevantes son:
+
+\begin{itemize}
+\item Bit Carrier \cite{mendez2011system, Bitcarrier}: Dispone de un sistema de gestión de tráfico en función de BT para contar a las personas y las rutas comerciales. Su tecnología se desplegó en las autopistas gestionadas por Abertis para el control del flujo de tráfico y monitorización. Actualmente, cuenta con una red de 150 dispositivos en Cataluña (España) capaz de rastrear 200000 personas cada día.
+\item Trafficnow \cite{Trafficnow}: Ofrece un centro de control de flujo de tráfico para las ciudades pequeñas. Se requiere una red de sensores de BT.
+\item Traffax Inc \cite{TraffaxInc}: Es una empresa que también ha utilizado BT para el cálculo de matrices de origen/destino y el tiempo de transporte.
+\item Savari Networks \cite{SavariNetworks}: Ofrece el producto comercial StreetWAVE para la vigilancia del tráfico en tiempo real.
+\item TrafficCast \cite{TrafficCast}: Han desarrollado modelos predictivos en diferentes ciudades basados en diferentes tecnologías, como cámaras de vídeo, dispositivos BT y las etiquetas RFID incluidas en los vehículos que querían monitorizar.
+\end{itemize}
+
+
+El tráfico ha sido muy explotado como campo de investigación, y se ha centrado principalmente en la previsión de los futuros flujos considerando la información actual como una Serie Temporal.
+El pronóstico de estos flujos en cualquier sistema de transporte juega un papel importante, ya sea para el alivio de la congestión urbana, o para el ajuste de control de tráfico y sistemas de guía. El objetivo es crear un sistema de transporte inteligente (ITS), que dependa en gran medida de la capacidad de predecir las condiciones del tráfico, al menos a corto plazo (menos de una hora en el futuro), ya que las predicciones a medio y largo plazo son menos precisas y fiables. Esto es a día de hoy un problema difícil de resolver, en el campo de series temporales \cite{ParrasGutierrez2014433}.
+
+Usando un corto plazo la previsión de los sistemas de control de tráfico podría auto-adaptarse continuamente. Por ejemplo, un semáforo podría ajustar su tiempo en rojo o verde, dependiendo de la previsión a corta plazo de las calles cercanas.
+
+Existen muchos trabajos relacionados con la previsión de flujo de tráfico, cada uno de ellos abordando el problema con diferentes modelos, por ejemplo: Teoría de Filtros de Kalman \cite{ASJC:ASJC1051}, modelos de cadenas de Markov \cite{Qi201495}, métodos no paramétricos \cite{Noparametrico2014}, modelos de simulación \cite{simulaciontrafico2012} o enfoques basados en Big-Data \cite{SurveyKumar2007}.
+
+Además, al ser la predicción del flujo de tráfico un tema en tendencia, se pueden encontrar en la literatura varios estudios del estado del arte, como \cite{Survey2004} y \cite{SurveyKumar2007}; siendo el más importante el de Bolshinsky y Friedman \cite{SurveyBolshinsky2012}, ya que los autores además de completar la información de los anteriores añaden un valor añadido a su trabajo, incluyendo las técnicas utilizadas, los datos de entrada para cada contribución, y la arquitectura de hardware utilizado, siempre que el trabajo original los hubiera descrito. También hay estudios específicos, como \cite{Vlahogianni2014}, que presenta una clasificación de los documentos revisados sobre los principales aportes de los trabajos, es decir, técnicas de predicción, sistemas de recolección, o conjuntos de datos, entre otros.
+
+En los últimos años las investigaciones están asimilando nuevas tecnologías para el análisis de datos en este ámbito, tales como Big Data \cite{TrafficFlowPredictionWithBigData2015} o Cloud-Computing \cite{CloudComputing2014}. En la primera, Yisheng et al. tratan el problema previsión de flujo de tráfico utilizando modelos temporales y espaciales al mismo tiempo, usando modelos de predicción simples y montándolos en un sistema global más complejo. Los resultados proporcionan una tiempo y una localización espacial para cada predicción. El segundo trabajo, por Zhaosheng Yang et al., presenta un modelo de predicción del flujo de tráfico de una red de carreteras a gran escala usando técnicas de computación en la nube. Así, implementaron con éxito un Algoritmo Genético (AG) para la optimización de una Máquina de Vector Soporte (Support Vector Machine, SVM) para conseguir una mayor precisión de la predicción y un tiempo de ejecución menor.
+
+
+
+
+
+
+Varias publicaciones recientes presentan cuestiones espaciales relacionadas con el ámbito de este tema, tales como \cite{Zhang20141}, que incluye los últimos avances en la investigación en la predicción del tráfico teniendo en cuenta el tiempo y las variables espaciales. Otras obras proponen la predicción de los flujos de tráfico y tiempos de actuación \cite{Dong201420,Zou201433} mediante de patrones espacio-temporales del tráfico congestionado y no congestionado. También existen trabajos con nuevos enfoques en la predicción en tiempo real \cite{Zhang201465} o nuevas propuestas como \cite{Wang201479}, en las que mejora el método de combinación bayesiano (Bayesian combination method, BCM), propuesto por Petridis et al. en 2001, o \cite{Qi201495} que mejora la predicción a corto plazo en autopistas utilizando un modelo de Markov.
+
+%***CAMBIAR POR PROYECTO Y ENLAZAR BIEN
+En el presente proyecto, se ha llevado a cabo un estudio sobre la previsión del tráfico (en la sección \ref{subsubsec:paquete03}), sin embargo, se han aplicado los métodos clásicos, porque el objetivo es mostrar el valor de los datos recogidos por nuestro sistema en comparación con los datos recogidos por la DGT utilizando detectores de espiras. Por lo tanto, nuestra contribución en esta línea es el uso de Series Temporales de tráfico reales, creadas a partir de los datos extraídos a través de nuestros eventos de tráfico (WiFi y BT detecciones).
+%*****PROYECTO
+Otra línea de estudio en este trabajo ha sido el seguimiento personal o la movilidad de las personas (o geomárketing). Este tipo de movilidad se estudia por muchas razones, entre ellas, los beneficios económicos: la tasa de conversión, la efectividad del marketing o de la planificación del personal son algunas de las más conocidas \cite{stanton1967fundamentals}. La tasa de conversión es el porcentaje de visitantes que efectivamente hacen una compra. Se puede deducir si una mejora en la tienda  se debe a un mayor número de personas que la visitan, o si de los visitantes realmente compran algo. En este ámbito, los profesionales de centros comerciales estudian el comportamiento de las personas con el fin de saber si sus técnicas de marketing están dando sus frutos. En la misma línea, la planificación del personal está directamente relacionada con la cantidad de visitantes, así como el mantenimiento y las necesidades de limpieza, entre otras.
+
+
+Otras razones son más prácticas que comerciales: ¿Cuántas personas visitan un edificio público? ¿Cuándo? Estos datos pueden ayudar a mejorar la planificación de la prestación de servicios, calefacción o refrigeración del edificio, limpieza de las instalaciones, y los cambios del personal, entre otros. En un museo o un estadio deportivo, se puede ajustar muchos parámetros para ayudar a la gente disfrutar de una mejor experiencia mientras aumentan los beneficios.
+
+La tecnología para el conteo o seguimiento de personas ha evolucionado con el tiempo. A principios se usaron contadores de haces infrarrojos \cite{Hashimoto199850}. Estos dispositivos eran baratos pero propenso a fallos, como cuando dos personas pasan una puerta a la vez. También se ha propuesto el uso de contadores térmicos \cite{635472}, también baratos, pero con serias limitaciones, como la corta distancia desde el dispositivo de recuento de las personas a contar. Las últimas tecnologías utilizan cámaras de vídeo \cite {4107051,Schofield19961421} o detectores WiFi \cite{7134066,7130402} y Bluetooth \cite{6526732,nicolai2007relationship}.
+
+
+
+
+Los dispositivos de vídeo son más caros, así como el software encargado de procesamiento de imágenes, más costoso en términos de consumo de recursos. Sin embargo se pueden realizar otra tareas además del conteo de personas. Por ejemplo, se pueden rastrear sus trayectorias y comportamientos. Las señales de radio son también un gran método para rastrear a las personas, pero más baratos en términos de precio de hardware y coste computacional de los algoritmos. Por otra parte, el rango de detección es más ancho, 100 metros aproximadamente.
+
+Nuestro enfoque se basa en detección WiFi y BT \cite{824570}, pero se ha centrado en los dispositivos personales, de los se puede extraer y almacenar un identificador único (tras anonimizarlo). Esto hace que sea fácil seguir a estas personas en un edificio o una carretera, por ejemplo. Este método tiene la ventaja de un ser más barato que otros sistemas, como los de vídeo, y también ofrece la posibilidad de crear matrices de flujos origen-destino o cualquier otro modelo de movimiento deseado.
+
+
+
+
+La idea de usar los dispositivos personales de BT no es nueva una, si no que ha sido probada por muchos investigadores. En \cite{nicolai2007relationship} Tom Nicolai, como nosotros, utiliza un detector colocado de forma estática para rastrear a las personas. También, en el trabajo de Morrison \cite{morrison2009visualisation} el mismo procedimiento se aplica para seguir la actividad de los espectadores en un estadio. Kostakos utilizó esta misma idea para rastrear a las personas en viajes de autobuses de transporte público \cite{kostakos2008using}.
+Un buen punto de partida para aprender sobre el tema es \cite{6526732} ya que presenta la idea adicional de mezclar detectores estacionarios con los dinámicos para estimar la densidad multitud en un estadio de fútbol durante un campeonato.
+
+También la idea de seguimiento de personas con sus dispositivos WiFi personales ha sido explotado anteriormente. A medida que más y más personas lo utilizan cada día se está convirtiendo en uno de los mejores métodos para seguirlos. Esta idea se ha puesto en práctica recientemente por varios autores, por ejemplo: Wei Xi en \cite{6847958} muestra cómo este método puede contar con personas con gran precisión, y Gabe Fierro en \cite{Fierro:2012:ZOC:2422531.2422572} lo utiliza para medir el nivel de ocupación de un edificio sin necesidad de infraestructura adicional.
+
+Sin embargo, al combinar BT y WiFi en este proyecto se busca aumentar la tasa de detección más allá que la mayoría de los investigadores ha logrado. Aparentemente puede parecer redundante, pero la probabilidad de detección es más alta. Se necesita estudiar más profundamente la mejora de las detecciones combinados pero en promedio detectamos un 80 \% de los dispositivos Wi-Fi y un 20 \% de BT. BT es especialmente importante para la detección de los automóviles debido a que es una tecnología incluida en casi todos los coches nuevos. El mismo hecho es cierto para WiFi en los teléfonos inteligentes. 
+
 
 \subsection{Originalidad y posibilidad de repercusión de los resultados en distintos ámbitos}
 
@@ -641,7 +834,7 @@ Profundizar en las políticas de I+D+I basadas en la demanda
 
 
 \section{Difusión de los resultados}
-
+\label{sec:difusionresults}
 En esta sección se describe la difusión de resultados en distintos medios.
 
 \subsection{Publicaciones en revistas y congresos}
@@ -689,15 +882,37 @@ Finalmente, todas las noticias de este proyecto se han publicado en el blog del 
 \section{Conclusiones}
 \label{sec:conclusions}
 
-En este proyecto
+En esta memoria se presenta el proyecto PETRA (Predicción del Estado del Tráfico usando un sistema de monitorización de bajo coste), con código SPIP2014-1437, dentro del programa financiador de Ayudas a la I+D+i en materia de tráfico, movilidad y seguridad vial 2014 y financiado por la Dirección General de Tráfico, Ministerio del Interior.
+
+Se ha descrito un nuevo sistema de monitorización y seguimiento que almacena datos de movilidad de personas y vehículos. Se han presentado algunas de sus aplicaciones, utilizando los datos reales capturados por el sistema para tratar con distintos problemas relacionados con la movilidad. Se han estudiado dos escenarios:
+
+
+\begin{itemize}
+	\item Un edificio público de la Universidad de Granada, en el que los movimientos de estudiantes, profesores y personal han sido analizados usando matrices de origen/destino para un estudio de la seguridad, mejora de accesos y (posiblemente) marketing. Esta fue la primera prueba de concepto del sistema.
+    \item Una carretera interurbana, donde se ha estudiado el flujo del tráfico y se ha contrastado con datos reales proporcionados por la DGT, utilizando métodos estadísticos para estimar el número real de vehículos. Se han utilizado técnicas de predicción con buenos resultados a corto plazo. La predicción se ha realizado con datos de tráfico reales y capturados por el sistema, ajustados con la relación entre vehículos detectados y reales. Además, se ha calculado una matriz para mostrar el tiempo medio de duración entre nodos.
+  
+\end{itemize}
+
+El objetivo de este proyecto ha sido demostrar que los resultados de estos dos estudios pueden ser la base para resolver distintos problemas de movilidad, así como probar el valor y confiabilidad del sistema presentado.
+
+A partir estos resultados se han podido abrir nuevas líneas de investigación. Por ejemplo, se continuará trabajando con nuevos datos capturados, utilizando otras técnicas, lo cual mejorará la calidad de los resultados. Además, podemos aplicar todos los métodos del estado del arte para distintos problemas, como la predicción del tráfico, utilizando datos reales, y ofreciendo estos datos como {\em benchmarks} a disposición de la comunidad científica.
+
+Además, otro tipo de problemas pueden tratarse con este sistema, por ejemplo, analizando la movilidad en la ciudad o en la carretera, para mejorar servicios existentes (por ejemplo, turísticos), realizar análisis de geomárketing \cite{Flyers-GeoMarketing,LaMarca-GeoMarketing}, incrementar mecanismos de seguridad, o mejorar el sistema de transporte público. Esto requerirá la colocación de más dispositivos, para construir mejores grafos de movilidad, matrices de origen y destino y otros modelos. 
+
+El sistema aún tiene algunas pegas o puntos débiles que pueden mejorarse, como evitar el solapamiento entre direcciones en dos diferentes nodos (utilizando antenas unidireccionales o algún tipo de filtro).
+
+Otro punto de mejora puede ser el uso de técnicas de predicción de series temporales para completar `agujeros' en los eventos detectados, por ejemplo, cuando un dispositivo se desconecta.
+
+***TERMINA Y PON LAS COSAS EMPRESARIALES Y QUE SE SIGUEN RECOGIENDO DATOS
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Agradecimientos}
+\section*{Agradecimientos}
 
-También queremos agradecer personalmente al personal de la DGT en Madrid (), en Málaga (Alberto Serrano, Silvia Cabo y Adolfo Santos del Centro de Gestión del Tráfico del Sureste) y a los técnicos de la UTE-ACISA (), ya que sin su colaboración este proyecto no podría haber sido llevado a cabo.
+Queremos agradecer personalmente al personal de la DGT Pedro Tomás Martínez y Ramón González (Sede de la DGT), y Alberto Serrano, Silvia Cabo, Rafael Castro y Adolfo Santos (Centro de Gestión del Tráfico del Sureste). También a los miembros de la UTE-ACISA, Jose Antonio Arrese, Javier Segovia, Jesús Rodríguez, y especialmente a Miguel Ángel León y a Miguel ***PONER APELLIDO***, ya que sin su colaboración este proyecto no podría haber sido llevado a cabo.
+
 
 \bibliographystyle{elsarticle-num}
-\bibliography{memoria-final}
+\bibliography{memoria-final,mobility}
 
 \end{document}
