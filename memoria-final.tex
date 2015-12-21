@@ -1,6 +1,7 @@
 \documentclass[preprint]{elsarticle}
 \usepackage[latin1]{inputenc}
-\usepackage[english]{babel}
+\usepackage[spanish, es-tabla]{babel}
+\selectlanguage{spanish}
 %\usepackage[T1]{fontenc}
 %\usepackage{textcomp}
 \usepackage{graphicx}
@@ -161,12 +162,9 @@ Además de la Raspberry Pi que hace de centro de procesamiento, se han optado por
 \item Caja protectora estanca certificada.
 \end{itemize}
 
-La elección de la tarjeta de red no ha sido trivial, pues debía cumplir varios requisitos: Era necesario que fuera compatible con el sistema operativo elegido, que fuera capaz de operar en modo monitor, lo que ha permitido la captura promiscua de paquetes (conocido como \textit{sniffering}). Además, según el emplazamiento del dispositivo, puede ser requerida una antena con características especiales (omnidireccional o direccional, con mayor o menor ganancia, integrada en el dispositivo o alejada varios metros) por lo que disponer de un sistema estándar de antena ha sido un requerimiento añadido. La tarjeta finalmente elegida fue una \textit{TP-Link TL-WN722N} 
-que dispone de interfaz USB de conexión y conexión RP-SMA 
-para la antena.
+%La elección de la tarjeta de red no ha sido trivial, pues debía cumplir varios requisitos: Era necesario que fuera compatible con el sistema operativo elegido, que fuera capaz de operar en modo monitor, lo que ha permitido la captura promiscua de paquetes (conocido como \textit{sniffering}). Además, según el emplazamiento del dispositivo, puede ser requerida una antena con características especiales (omnidireccional o direccional, con mayor o menor ganancia, integrada en el dispositivo o alejada varios metros) por lo que disponer de un sistema estándar de antena ha sido un requerimiento añadido. La tarjeta finalmente elegida fue una \textit{TP-Link TL-WN722N} que dispone de interfaz USB de conexión y conexión RP-SMA para la antena.
 
-La tarjeta Bluetooth elegida es una \textit{Conceptronic CBT40 NANO} 
-ya que es una de las más comunes en el mercado compatibles con Bluetooth 4.0 y de Clase 1. El alcance teórico es de 100 metros, con uno efectivo de 25-30 metros, lo cual ha sido un radio de acción más que suficiente para el proyecto.
+%La tarjeta Bluetooth elegida es una \textit{Conceptronic CBT40 NANO}  ya que es una de las más comunes en el mercado compatibles con Bluetooth 4.0 y de Clase 1. El alcance teórico es de 100 metros, con uno efectivo de 25-30 metros, lo cual ha sido un radio de acción más que suficiente para el proyecto.
 
 La caja estanca empleada para albergar el dispositivo de monitorización cumple las certificaciones IP67 de protección frente a polvo y humedad y Clase II de aislamiento eléctrico. 
 
@@ -188,12 +186,11 @@ Ambas partes envían datos a Abdiel de forma independiente. Éste también está  im
 \label{fig:sistema} 
 \end{figure*}
 
-Las Raspberry Pi 2 Model B empleadas tienen un procesador ARM7 por lo cual es necesario instalar un sistema operativo que sea compatible con la arquitectura de dicho procesador. En este caso el Sistema Operativo elegido es Raspbian, distribución basada en Debian enfocada en la compatibilidad con Raspberry Pi. Hace uso de la versión 3.10.24+ del kernel de Linux y nos permite disponer de un entorno Linux completo en un sistema de placa única como es Raspberry.
+%Las Raspberry Pi 2 Model B empleadas tienen un procesador ARM7 por lo cual es necesario instalar un sistema operativo que sea compatible con la arquitectura de dicho procesador. En este caso el Sistema Operativo elegido es Raspbian, distribución basada en Debian enfocada en la compatibilidad con Raspberry Pi. Hace uso de la versión 3.10.24+ del kernel de Linux y nos permite disponer de un entorno Linux completo en un sistema de placa única como es Raspberry.
 
-Las ventajas de emplear un sistema operativo completo son numerosas: administración remota, sistema de logs y cron nativos, repositorios de software, etc. Se incorporaron también las librerías necesarias para la ejecución del software, siendo destacadas las librerías JDK de Java, JSR para el Bluetooth, {\em aircraft} para la captura Wifi o {\em Sakis3G} para las comunicaciones mediante 3G.
+%Las ventajas de emplear un sistema operativo completo son numerosas: administración remota, sistema de logs y cron nativos, repositorios de software, etc. Se incorporaron también las librerías necesarias para la ejecución del software, siendo destacadas las librerías JDK de Java, JSR para el Bluetooth, {\em aircraft} para la captura Wifi o {\em Sakis3G} para las comunicaciones mediante 3G.
 
-Respecto al \textbf{software} desarrollado, llamado Raziel, es software integrado como demonio del sistema encargado de la detección de pasos de dispositivos (correspondientes a personas o vehículos) mediante la captura de paquetes Wifi y la localización de dispositivos Bluetooth cercanos. Estas capturas son procesadas enviadas a un servidor (Abdiel) periódicamente.
-El software ha sido desarrollado en Java siguiendo un metodología de programación orientada a eventos y multihebrada.
+Respecto al \textbf{software} desarrollado, llamado Raziel, es software integrado como demonio del sistema encargado de la detección de pasos de dispositivos (correspondientes a personas o vehículos) mediante la captura de paquetes Wifi y la localización de dispositivos Bluetooth cercanos. Estas capturas son procesadas enviadas a un servidor (Abdiel) periódicamente. El software ha sido desarrollado en Java siguiendo un metodología de programación orientada a eventos y multihebrada.
 
 Se ha implementado de forma modular cada una de las funcionalidades del software de forma que operen de manera autónoma. Las distintas hebras y subsistemas se comunicarán por medio de memoria compartida. Entre las tareas del software se encuentran funciones para el mantenimiento de sí mismo, ya que cabe la posibilidad de que el sistema no disponga de administración remota (dependiendo de la infraestructura de red donde sea colocado).
 
@@ -208,19 +205,21 @@ Cada sistema de captación (Bluetooth y Wifi) tiene un funcionamiento similar com
 \item Difusor
 \end{itemize}
 
-La \textbf{hebra de control} es la encargada de iniciar las interfaces y comunicaciones con el dispositivo físico, así como estar a la escucha de las peticiones del sistema, como por ejemplo, para detenerse.
-El \textbf{escaneador} es el encargado implementar el \textit{listener} que obedece al evento de captura de paquete \textit{wifiRaw} o la detección de dispositivos Bluetooth. Éste realiza la interpretación de los octetos conseguidos por la interfaz de red, es decir, todos los bits capturados como trama.
+%La \textbf{hebra de control} es la encargada de iniciar las interfaces y comunicaciones con el dispositivo físico, así como estar a la escucha de las peticiones del sistema, como por ejemplo, para detenerse.
+%El \textbf{escaneador} es el encargado implementar el \textit{listener} que obedece al evento de captura de paquete \textit{wifiRaw} o la detección de dispositivos Bluetooth. Éste realiza la interpretación de los octetos conseguidos por la interfaz de red, es decir, todos los bits capturados como trama.
 
-Si el octeto obedece a un formato conocido e interpretable se genera una ocurrencia de dispositivo que es enviado al monitor mediante memoria compartida. Esta ocurrencia de dispositivo incluye la hora en la que ha sido detectado, la intensidad de la señal (solo en Wifi) así como un hash de la MAC del dispositivo que ha realizado el envío, así como el fabricante, gracias a que los primeros 24 bits de la MAC son otorgados por el IEEE y pueden usarse para identificar univocamente al fabricante del dispositivo que genera la MAC. 
+%Si el octeto obedece a un formato conocido e interpretable se genera una ocurrencia de dispositivo que es enviado al monitor mediante memoria compartida. Esta ocurrencia de dispositivo incluye la hora en la que ha sido detectado, la intensidad de la señal (solo en Wifi) así como un hash de la MAC del dispositivo que ha realizado el envío, así como el fabricante, gracias a que los primeros 24 bits de la MAC son otorgados por el IEEE y pueden usarse para identificar univocamente al fabricante del dispositivo que genera la MAC. 
 
-En Wifi esta información se obtiene gracias al protocolo {\em radiotap}, que permite conseguir información de la propia tarjeta sobre el paquete capturado. De esta forma se consigue la intensidad de la señal con la que ha sido capturado el paquete y la cabecera 802.11 que incluye las MACs. En ningún momento, se procesa ni accede a los octetos capturados pertenecientes al cuerpo de la trama.
-En Bluetooth, se obedece al evento de dispositivo visible, es decir, actualmente solo podemos detectar dispositivos que se encuentran visibles de forma pública. Sin embargo, gracias al protocolo Bluetooth podemos saber que tipo de dispositivo es el que hemos detectado gracias a los bits de tipo de dispositivo y servicios ofrecidos.
-El \textbf{monitor} gestiona la cola de ocurrencias detectadas. Esta hebra es la encargada de determinar si un dispositivo es descubierto por primera vez o ya ha sido detectado anteriormente a lo largo del tiempo. Actualiza la lista de dispositivos detectados recientemente con la información de la ocurrencia del nuevo. De forma periódica comprueba dicha lista, buscando dispositivos que no hayan sido detectados transcurrido un tiempo prudencial. Los dispositivos que no han sido localizados en dicho periodo de tiempo, son empaquetados como pasos de dispositivos y enviados como memoria compartida al difusor. Un paso de dispositivo está compuesto por dos instantes de tiempo que indican la primera y última vez que se localizó al dispositivo, las intensidades de las señales en esas dos ocasiones y un hash de la MAC de dicho dispositivo.
-El \textbf{difusor}, manda periódicamente al servidor, mediante una petición REST, los datos comprimidos de los pasos de los dispositivos.
+%En Wifi esta información se obtiene gracias al protocolo {\em radiotap}, que permite conseguir información de la propia tarjeta sobre el paquete capturado. De esta forma se consigue la intensidad de la señal con la que ha sido capturado el paquete y la cabecera 802.11 que incluye las MACs. En ningún momento, se procesa ni accede a los octetos capturados pertenecientes al cuerpo de la trama.
+%En Bluetooth, se obedece al evento de dispositivo visible, es decir, actualmente solo podemos detectar dispositivos que se encuentran visibles de forma pública. Sin embargo, gracias al protocolo Bluetooth podemos saber que tipo de dispositivo es el que hemos detectado gracias a los bits de tipo de dispositivo y servicios ofrecidos.
+%El \textbf{monitor} gestiona la cola de ocurrencias detectadas. Esta hebra es la encargada de determinar si un dispositivo es descubierto por primera vez o ya ha sido detectado anteriormente a lo largo del tiempo. Actualiza la lista de dispositivos detectados recientemente con la información de la ocurrencia del nuevo. De forma periódica comprueba dicha lista, buscando dispositivos que no hayan sido detectados transcurrido un tiempo prudencial. Los dispositivos que no han sido localizados en dicho periodo de tiempo, son empaquetados como pasos de dispositivos y enviados como memoria compartida al difusor. Un paso de dispositivo está compuesto por dos instantes de tiempo que indican la primera y última vez que se localizó al dispositivo, las intensidades de las señales en esas dos ocasiones y un hash de la MAC de dicho dispositivo.
+%El \textbf{difusor}, manda periódicamente al servidor, mediante una petición REST, los datos comprimidos de los pasos de los dispositivos.
 
-Dado que el sistema puede ser implantado en una arquitectura de red compleja, como puede ser la perteneciente a un organismo público, nos hemos visto en la problemática de comunicar los dispositivos con el servidor de forma que no suponga una vulnerabilidad en la red o en redes que no dispongan de salida a Internet (las de ámbito local).
-Para ello se puede habilitar una Raspberry Pi con Horeb como sistema operativo, que haría uso del sistema \textit{Lilith} para hacer la transmisión del tráfico entre las otras Raspberry y el Servidor.
-De esta forma Lilith sirve como pasarela entre las dos redes, la local y la red global que comunica al servidor.
+%Dado que el sistema puede ser implantado en una arquitectura de red compleja, como puede ser la perteneciente a un organismo público, nos hemos visto en la problemática de comunicar los dispositivos con el servidor de forma que no suponga una vulnerabilidad en la red o en redes que no dispongan de salida a Internet (las de ámbito local).
+%Para ello se puede habilitar una Raspberry Pi con Horeb como sistema operativo, que haría uso del sistema \textit{Lilith} para hacer la transmisión del tráfico entre las otras Raspberry y el Servidor.
+%De esta forma Lilith sirve como pasarela entre las dos redes, la local y la red global que comunica al servidor.
+
+Puede consultarse más información sobre el hardware y el software de monitorización en el manuscrito de difusión adjunto a esta memoria (concretamente, en la Sección 3).
 
 \textit{Justificación del presupuesto} Este ha sido el paquete que más recursos ha necesitado, incluyendo los materiales para montar los dispositivos (tarjetas Raspberry Pi, tarjetas SD para cargar el software, o cajas estancas), junto con el diseño de piezas específicas y montaje. Además, parte de la partida de fungibles ha sido aplicada también en el desarrollo del hardware (tenazas, material de ferretería, etc.).
 
@@ -231,21 +230,18 @@ Esta subsección describe la programación y diseño de la infraestructura desarrol
 
 
 Abdiel (\textbf{servidor de captura de datos}) es el software que provee los servicios de la API REST de comunicación empleados por Raziel. Está desarrollado en PHP considerando especialmente la atomicidad de las operaciones.
-Entre otros servicios, proporciona la conexión y desconexión al sistema del software de captación, el sistema de privilegios, el servicio de actualización del software y el almacenamiento de pasos de dispositivos al sistema.
-Este servicio es el encargado de almacenar los datos de los pasos, por tanto, se encarga de descomprimirlos, procesarlos y mandarlos en lotes a la base de datos (Alejandría).
+%Entre otros servicios, proporciona la conexión y desconexión al sistema del software de captación, el sistema de privilegios, el servicio de actualización del software y el almacenamiento de pasos de dispositivos al sistema. Este servicio es el encargado de almacenar los datos de los pasos, por tanto, se encarga de descomprimirlos, procesarlos y mandarlos en lotes a la base de datos (Alejandría).
 % -------------------------------------------------------------------
 
 Alejandría es la \textbf{base de datos} donde se almacena la información de los pasos capturada en los dispositivos. Está basada en MySQL haciendo uso de diversos mecanismos de optimización tales como particionado de tablas e índices, que permiten el acceso a la información en tiempo constante. Esta base de datos es privada y no es difundida en la nube, ya que contiene los pasos individuales.
-Dispone de procedimientos optimizados para el cálculo del número total de pasos captados en ventanas temporales para los dispositivos de captación, así como para el cálculo de re-ocurrencia de dispositivos (detectados) en distintos nodos.
+%Dispone de procedimientos optimizados para el cálculo del número total de pasos captados en ventanas temporales para los dispositivos de captación, así como para el cálculo de re-ocurrencia de dispositivos (detectados) en distintos nodos.
 Estos procedimientos son invocados por el software \textit{Ezequiel} para recolectar los datos y publicarlos en la nube.
 
 Ezequiel (Publicación en la nube) es el \textbf{software para publicación en la nube} encargado del acceso a la base datos, consulta y generación de resúmenes de datos, aplicación de algoritmos de predicción y minería de datos y difusión los resultados en la nube \textit{Anan}.
 Actualmente realiza predicción en tiempo real empleando tanto métodos basados en regresión lineal como en máquinas de vector soporte.
 
-Anan es el nombre otorgado a \textbf{la nube} basada en la tecnología de Google en la que se almacenan los datos con el fin de darle difusión a los mismos. En Anan los datos son almacenados en tablas \textit{BigTable NoSQL} mediante la tecnología de Google Fusion Tables. Esta tecnología provee una base de datos geolocalizada (empleada en otras tecnologías de Google como Google Maps).
+Anan es el nombre otorgado a \textbf{la nube} basada en la tecnología de Microsoft Azure, en la que se almacenan los datos con el fin de darle difusión a los mismos. En Anan los datos son almacenados en tablas \textit{BigTable NoSQL}. Esta tecnología provee una base de datos geolocalizada (empleada en otras tecnologías de Google como Google Maps).
 Anan se encarga también de proveer gráficas interactivas y mapas del estado histórico, actual y predicho de los distintos nodos.
-
-***MENCIONAR AZURE
 
 
 Una primera prueba de concepto se realizó en la ETS. de Ingeniería y Telecomunicación (ETSIIT) de la Universidad de Granada. El edificio se estudió como una prueba de concepto para el dispositivo descrito en el paquete anterior. Con el fin de controlar el flujo de personas, tres dispositivos se han colocado en los tres accesos al edificio, que se puede ver en la figura \ref{fig:etsiit_map}. Este estudio fue una prueba de concepto antes de desplegar los nodos en las carreteras de la DGT (como se verá más adelante).
@@ -260,9 +256,9 @@ Una primera prueba de concepto se realizó en la ETS. de Ingeniería y Telecomunic
 	\end{center}
 \end{figure}
 
-Dado que los dispositivos pueden detectar señales WIFI y BT, tanto del personal de la universidad y los estudiantes, dos de ellos se ha colocado muy cerca del acceso principal tratando de distinguir el personal (62) de los estudiantes (52). La puerta del parking (42) sólo puede ser utilizado por el personal.
+Dado que los dispositivos pueden detectar señales WIFI y BT, tanto del personal de la universidad y los estudiantes, dos de ellos se ha colocado muy cerca del acceso principal tratando de distinguir el personal (62) de los estudiantes (52). La puerta del parking (42) sólo puede ser utilizado por el personal. Se han generado diversos diagramas (como el mostrado en la Figura \ref{fig:etsiit_io}) para extraer distintas conclusiones.
 
-Los dispositivos han estado grabando datos en distintos días. Con estos datos se ha calculado el histograma origen-destino que se puede ver en la figura \ref{fig:etsiit_io}. Un examen cuidadoso de esta figura nos permite extraer algunas conclusiones.
+%Los dispositivos han estado grabando datos en distintos días. Con estos datos se ha calculado el histograma origen-destino que se puede ver en la figura \ref{fig:etsiit_io}. Un examen cuidadoso de esta figura nos permite extraer algunas conclusiones.
 
 
 \begin{figure}[!ht]
@@ -273,16 +269,18 @@ Los dispositivos han estado grabando datos en distintos días. Con estos datos se
 	\end{center}
 \end{figure}
 
-\begin{itemize}
-\item La mayoría de las personas son estudiantes y que acceden al edificio por la puerta de los estudiantes (sensor 52 en la figura \ref{fig:etsiit_map}).
-\item Los profesores y el personal administrativo parecen dividir su forma de entrar y salir. Utilizan el aparcamiento (sensor 42) tanto como la puerta del edificio principal (sensor 62).
-\item Muchos estudiantes salen por el edificio principal (62), después de una supuesta visita a un profesor o un administrativo (ya que están en el mismo edificio).
-\item La gente que entra por la puerta principal (62) casi nunca sale por la misma puerta. Puede deberse a que la mayoría son estudiantes y salen por la puerta 52, más cercana a sus clases.
-\end{itemize}
+%\begin{itemize}
+%\item La mayoría de las personas son estudiantes y que acceden al edificio por la puerta de los estudiantes (sensor 52 en la figura \ref{fig:etsiit_map}).
+%\item Los profesores y el personal administrativo parecen dividir su forma de entrar y salir. Utilizan el aparcamiento (sensor 42) tanto como la puerta del edificio principal (sensor 62).
+%\item Muchos estudiantes salen por el edificio principal (62), después de una supuesta visita a un profesor o un administrativo (ya que están en el mismo edificio).
+%\item La gente que entra por la puerta principal (62) casi nunca sale por la misma puerta. Puede deberse a que la mayoría son estudiantes y salen por la puerta 52, más cercana a sus clases.
+%\end{itemize}
 
-Con algunos sensores adicionales el flujo de personas podría ser estudiado de una manera más optima, ya que con los tres utilizados muchas personas no pueden ser interpretadas correctamente como un tipo de visitante concreto. El lugar más interesante para un nuevo sensor está en la puerta del edificio de aulas en el norte en el mapa.
+Se puede consultar más información sobre este prototipo en la Sección 4 del manuscrito de difusión adjuntado a esta memoria.
 
-La información recogida puede ser útil para la gestión del edificio, por ejemplo, para determinar cuando debe iniciarse la calefacción, cuantos estudiantes hay en clase o si hay suficientes asientos libres en la biblioteca. Muchas de estas preguntas necesitan un poco más de tiempo para obtener los datos suficientes y contestarlas correctamente.
+%Con algunos sensores adicionales el flujo de personas podría ser estudiado de una manera más optima, ya que con los tres utilizados muchas personas no pueden ser interpretadas correctamente como un tipo de visitante concreto. El lugar más interesante para un nuevo sensor está en la puerta del edificio de aulas en el norte en el mapa.
+
+%La información recogida puede ser útil para la gestión del edificio, por ejemplo, para determinar cuando debe iniciarse la calefacción, cuantos estudiantes hay en clase o si hay suficientes asientos libres en la biblioteca. Muchas de estas preguntas necesitan un poco más de tiempo para obtener los datos suficientes y contestarlas correctamente.
 
 Tras esta prueba de concepto, los dispositivos se colocaron en distintas localizaciones propuestas por el Centro de Gestión del Tráfico del Sureste. Estas localizaciones fueron elegidas porque son las más cercanas a las espiras de la DGT, y además cuentan con conexión a Internet para el envío de datos a nuestro servidor y a la nube. Se crearon dos grupos de nodos: un grupo en la provincia de Granada (1010,1020 y 1030) y otro en la provincia de Málaga (1040, 1050 y 1060).
 
@@ -313,6 +311,9 @@ ID   & Provincia & Localización & Latitud & Longitud \\ \hline
 \caption{Localización de los dispositivos (P.K. = Punto Kilométrico).}
 \label{tab:nodosDGT}
 \end{table}
+
+
+\textit{Justificación del presupuesto:} En este paquete se ha utilizado el presupuesto destinado a ``Otros gastos'' como el uso de computación en nube (en Loggly o Microsoft Azure). Además, parte de la partida de ``Aparatos y equipos'' que estaba destinada a la colocación de los dispositivos (como la instalación de los dispositivos en la ETSIIT). Sin embargo, y como se describe en la sección \ref{subsubsec:presupuesto}  parte del presupuesto dedicado a la colocación de dispositivos que en la memoria de solicitud se incluyó en el apartado ``Aparatos y equipos'' no se ha gastado, debido a que la DGT y la empresa UTE-ACISA, ofrecieron la colocación de dispositivos de forma gratuita.
 
 \subsubsection{Paquete 04: Predicción}
 \label{subsubsec:paquete04}
@@ -350,7 +351,7 @@ Ratio Mediana por cuarto de hora & Depende de la hora  & \textbf{58.326} & \text
 
 \end{tabular}
 }
-\caption{Diferentes ratios entre la los datos recolectados por la DGT y por MOBYWIT en el nodo 1010.}
+\caption{Diferentes ratios entre la los datos recolectados por la DGT y por el sistema en el nodo 1010.}
 \label{tab:ratiosDGT}
 \end{table}
 
@@ -367,42 +368,43 @@ La Figura \ref{fig:dgtRatios} muestra el número de dispositivos detectados del n
 
 La captura de datos sobre el tráfico en una autopista no sólo sirve para la descripción de la situación actual, sino también para la previsión de las condiciones futuras. En este sentido, el número de coches que han pasado por un punto dado en un momento dado puede ser considerado como una serie temporal, permitiendo el uso de herramientas automáticas para llevar a cabo la predicción.
 
-Para este trabajo, cuatro métodos (tres predictores de series de tiempo ampliamente utilizados, y un método de control) se han utilizado para, predecir automáticamente el número de coches que pasarán en un próximo período. Estos métodos se incluyen en el paquete de previsión \cite{Hyndman08automatictime}  del programa de R \cite{R:Bloomfield:2014}, y son los siguientes:
+Para este trabajo, cuatro métodos (tres predictores de series de tiempo ampliamente utilizados, y un método de control) se han utilizado para, predecir automáticamente el número de coches que pasarán en un próximo período. %Estos métodos se incluyen en el paquete de previsión \cite{Hyndman08automatictime}  del programa de R \cite{R:Bloomfield:2014}, y son los siguientes:
 
 
 
 
 \begin{itemize}
 
-\item {\em Exponential smoothing state space model (ETS)~\cite{ETS:2008}}: Representa un conjunto de métodos que descomponen el tiempo de la serie en tres características diferentes: error, tendencia y estacional, modelando cada uno con una ecuación dada. Los valores pronosticados se obtienen sumando las ecuaciones anteriores por adición o multiplicación. La función correspondiente en el paquete de predicción construye los diferentes modelos incluidos en el paquete de ETS, y selecciona el mejor según Criterio de Información de Akaike (AIC)\cite{Akaike1973}.
+\item {\em Exponential smoothing state space model (ETS)~\cite{ETS:2008}}%: Representa un conjunto de métodos que descomponen el tiempo de la serie en tres características diferentes: error, tendencia y estacional, modelando cada uno con una ecuación dada. Los valores pronosticados se obtienen sumando las ecuaciones anteriores por adición o multiplicación. La función correspondiente en el paquete de predicción construye los diferentes modelos incluidos en el paquete de ETS, y selecciona el mejor según Criterio de Información de Akaike (AIC)\cite{Akaike1973}.
 
 
-\item {\em ARIMA~\cite{BoxJenk}}: Este famoso método integra modelos autorregresivos (AR) y promedio móvil (MA) en un ciclo iterativo de tres etapas. Las fases de cada ciclo consisten en: la identificación de la serie temporal, la estimación de los parámetros del modelo, y la verificación del modelo construido. En pocas palabras, cada modelo se define como la suma de $p+g$ términos. Los primeros $p$ términos se definen por valores pasados $p$, cualquiera de ellos multiplicado por un coeficiente; mientras que los últimos $q$ términos representan las medias móviles, también multiplicada por sus propios coeficientes.
+\item {\em ARIMA~\cite{BoxJenk}}%: Este famoso método integra modelos autorregresivos (AR) y promedio móvil (MA) en un ciclo iterativo de tres etapas. Las fases de cada ciclo consisten en: la identificación de la serie temporal, la estimación de los parámetros del modelo, y la verificación del modelo construido. En pocas palabras, cada modelo se define como la suma de $p+g$ términos. Los primeros $p$ términos se definen por valores pasados $p$, cualquiera de ellos multiplicado por un coeficiente; mientras que los últimos $q$ términos representan las medias móviles, también multiplicada por sus propios coeficientes.
 
 
-\item {\em Theta~\cite{Assima2000}}: Este método de pronóstico univariante se basa en la modificación de la curvatura local de la serie temporal, después de haber aplicado una segunda diferencia con los datos. Se descompone la serie temporal original en varias series modificados, que son extrapolados por separado, para combinarse con el fin de proporcionar a la previsión.
+\item {\em Theta~\cite{Assima2000}}%: Este método de pronóstico univariante se basa en la modificación de la curvatura local de la serie temporal, después de haber aplicado una segunda diferencia con los datos. Se descompone la serie temporal original en varias series modificados, que son extrapolados por separado, para combinarse con el fin de proporcionar a la previsión.
 
-\item {\em Promedio}: Este es el método de control. Los valores futuros se calculan como la media de los anteriores.
+\item {\em Promedio}%: Este es el método de control. Los valores futuros se calculan como la media de los anteriores.
 
 \end{itemize}
 
 
 
-Los datos utilizados para los experimentos son los proporcionados por el nodo de 1010 a partir del 12-Oct-2015, 00:00 horas, y terminando el 31-oct-2015, 23:45 horas, es decir, la totalidad de tres semanas menos un día. Como los datos se agregan cada 15 minutos, esto significa que la serie de tiempo se compone de $ 20 (dias) * 24 (horas) * 4 (cuartos) = 1920 $ valores.
+%Los datos utilizados para los experimentos son los proporcionados por el nodo de 1010 a partir del 12-Oct-2015, 00:00 horas, y terminando el 31-oct-2015, 23:45 horas, es decir, la totalidad de tres semanas menos un día. Como los datos se agregan cada 15 minutos, esto significa que la serie de tiempo se compone de $ 20 (dias) * 24 (horas) * 4 (cuartos) = 1920 $ valores.
 
-La Tabla \ref{tab:forecasting} muestra los valores de las medidas usadas calculados sobre $576$ valores, las correspondientes a los últimos 6 días (es decir, $30\% $ de los datos). El horizonte se ha establecido en 1, de modo que, con el fin de predecir un momento dado todos los datos anteriores conocidos, estos han sido utilizados para construir y entrenar a los modelos. Después, se predicen el siguiente valor. De esta manera, el problema se ha enfrentado como una simulación de lo que podría suceder en un sistema continuo en el que se reciben nuevos datos reales cada 15 minutos, por lo que los modelos de predicción podrían también adaptarse continuamente.
+La Tabla \ref{tab:forecasting} muestra los valores de las medidas usadas calculados sobre $576$ valores, las correspondientes a los últimos 6 días (es decir, $30\% $ de los datos). %El horizonte se ha establecido en 1, de modo que, con el fin de predecir un momento dado todos los datos anteriores conocidos, estos han sido utilizados para construir y entrenar a los modelos. Después, se predicen el siguiente valor. De esta manera, el problema se ha enfrentado como una simulación de lo que podría suceder en un sistema continuo en el que se reciben nuevos datos reales cada 15 minutos, por lo que los modelos de predicción podrían también adaptarse continuamente.
 
 
 
-Como muestran los resultados, ETS, ARIMA y Theta se comportan claramente mejor que el método de control. Las diferencias entre los tres métodos considerados son casi inexistentes. En cualquier caso, ETS produce los valores más bajos en cuatro de las medidas que se están utilizando. Por estas razones, se podría probablemente considerar como el mejor candidato para ser elegido como el método preferido para pronosticar este tipo de series de tiempo. Figura \ref{fig:forecasted-values} representa los valores pronosticados por ETS comparándolos con los esperados.
+Como muestran los resultados %, ETS, ARIMA y Theta se comportan claramente mejor que el método de control. Las diferencias entre los tres métodos considerados son casi inexistentes. En cualquier caso, 
+ETS produce los valores más bajos en cuatro de las medidas que se están utilizando. Por estas razones, se podría probablemente considerar como el mejor candidato para ser elegido como el método preferido para pronosticar este tipo de series de tiempo. La Figura \ref{fig:forecasted-values} representa los valores pronosticados por ETS comparándolos con los esperados.
 
 
 
 
 \begin{figure}[!ht]
     \begin{center}
-        \includegraphics[width=14cm]{imgs/forecasting-PETRA-1011.eps}
-        \caption{Número esperado vs número predicho de coches en el nodo de 1011, según los registros de MOBYWIT. Los valores predichos se han obtenido utilizando el Exponential smoothing state space model (ETS). }
+        \includegraphics[width=12cm]{imgs/forecasting-PETRA-1011.eps}
+        \caption{Número esperado vs número predicho de coches en el nodo de 1011, según los registros de nuestro dispositivo. Los valores predichos se han obtenido utilizando el Exponential smoothing state space model (ETS). }
         \label{fig:forecasted-values}
     \end{center}
 \end{figure}
@@ -427,50 +429,50 @@ RMSE &$5.3452$ & $\textbf{3.6082}$ & $3.6438$ & $3.6114$\\
 \label{tab:forecasting}
 \end{table}
 
-Por último, una vez que la previsión con los datos del sistema se ha llevado a cabo, el número de coches que han sido detectados por la DGT se puede utilizar con los ratios calculados anteriormente (véase la Tabla \ref{tab:ratiosDGT}). Concretamente, la Tabla \ref{tab:errorForecastingRatio} muestra el error calculado al aplicar el Ratio Mediana por cuarto de hora. Como puede verse, el método ETS destaca de nuevo por su capacidad de producir los errores más bajos. 
+Por último, una vez que la previsión con los datos del sistema se ha llevado a cabo, el número de coches que han sido detectados por la DGT se puede utilizar con los ratios calculados anteriormente (véase la Tabla \ref{tab:ratiosDGT}). %Concretamente, la Tabla \ref{tab:errorForecastingRatio} muestra el error calculado al aplicar el Ratio Mediana por cuarto de hora. Como puede verse, el método ETS destaca de nuevo por su capacidad de producir los errores más bajos. 
 
-\begin{table}[htb]
-\centering
-\resizebox{8cm}{!}{
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Medida vs Método &Promedio &ETS &ARIMA &Theta\\
- \hline
-MAE   & $72.162$ & $\textbf{42.789}$ & $43.335$ & $43.158$ \\
-MAPE  & $27.961$ & $\textbf{27.609}$ & $27.961$ & $27.847$ \\
-MSE   & $7040.303$ & $\textbf{3472.145}$ & $3569.706$ & $3517.506$ \\
-RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
-\hline
+%\begin{table}[htb]
+%\centering
+%\resizebox{8cm}{!}{
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%Medida vs Método &Promedio &ETS &ARIMA &Theta\\
+% \hline
+%MAE   & $72.162$ & $\textbf{42.789}$ & $43.335$ & $43.158$ \\
+%MAPE  & $27.961$ & $\textbf{27.609}$ & $27.961$ & $27.847$ \\
+%MSE   & $7040.303$ & $\textbf{3472.145}$ & $3569.706$ & $3517.506$ \\
+%RMSE  & $83.906$ & $\textbf{58.925}$  &  $59.747$ & $59.309$ \\
+%\hline
 
 
-\end{tabular}
-}
+%\end{tabular}
+%}
 
-\caption{Valores de error obtenidos usando las diferencias entre los datos reales de la DGT con los datos registrados por el sistema usando el ratio de Mediana por cuarto de hora. El periodo va desde 25-Oct-2015, 00:00 horas al 31-oct-2105, 23:45 horas, estableciendo el horizonte a 1. Los mejores valores se resaltan en negrita.}
+%\caption{Valores de error obtenidos usando las diferencias entre los datos reales de la DGT con los datos registrados por el sistema usando el ratio de Mediana por cuarto de hora. El periodo va desde 25-Oct-2015, 00:00 horas al 31-oct-2105, 23:45 horas, estableciendo el horizonte a 1. Los mejores valores se resaltan en negrita.}
 
-\label{tab:errorForecastingRatio}
-\end{table}
+%\label{tab:errorForecastingRatio}
+%\end{table}
 
 \begin{figure}[!ht]
     \begin{center}
-        \includegraphics[width=14cm]{imgs/petra_graph_ts-forecasting.eps}
+        \includegraphics[width=12cm]{imgs/petra_graph_ts-forecasting.eps}
         \caption{Número de coches en el nodo 1011 detectados por la DGT vs la predicha a partir de los registros de nuestro sistema usando la conversión por ratio Mediana por cuarto de hora. Los valores pronosticados son proporcionados por métodos Promedio, ETS, ARIMA y Theta.}
         \label{fig:forecasted-values-ratio}
     \end{center}
 \end{figure}
 
-Por último, de acuerdo con los resultados obtenidos, la realización de predicción de tráfico a partir de datos proporcionados por nuestro dispositivo parece ser una tarea asequible para los métodos tradicionales (es decir, ETS o ARIMA). Por otra parte, las proporciones calculadas a partir de los datos registrados por la DGT permiten convertir los valores pronosticados a sus equivalentes, que representan el número de vehículos en un lugar determinado. Por lo tanto, la utilización conjunta de estas dos técnicas hace posible aproximar estrechamente el número de coches que han pasado 15 minutos más tarde por la posición del nodo; por lo que este proceso puede repetirse nuevamente cada 15 minutos para que los modelos de predicción pueden ser mejorados y adaptados a las nuevas condiciones de la carretera.
+Y finalmente, de acuerdo con los resultados obtenidos, la realización de predicción de tráfico a partir de datos proporcionados por nuestro dispositivo parece ser una tarea asequible para los métodos tradicionales (es decir, ETS o ARIMA). Por otra parte, las proporciones calculadas a partir de los datos registrados por la DGT permiten convertir los valores pronosticados a sus equivalentes, que representan el número de vehículos en un lugar determinado. Por lo tanto, la utilización conjunta de estas dos técnicas hace posible aproximar estrechamente el número de coches que han pasado 15 minutos más tarde por la posición del nodo; por lo que este proceso puede repetirse nuevamente cada 15 minutos para que los modelos de predicción pueden ser mejorados y adaptados a las nuevas condiciones de la carretera.
 
 
-***CORRIGE**
-Para ello, lo primero que hicimos fue diseñar una encuesta que nos permita saber qué hábitos de uso tienen los usuarios de teléfonos móviles para ver si todos los dispositivos móviles podrían ser captados monitorizando la tecnología BT. Esta encuesta fue publicada de forma abierta y difundida a través de redes sociales y correo electrónico. Los puntos más importantes de esta encuesta pueden resumirse como:
-El rango de edad más frecuente de los informantes es el que abarca entre los 20 y los 50 años formando un total de 528 respuestas de una muestra de 601. Este rango concuerda en lo esperado puesto que los principales usuarios de teléfonos o dispositivos relacionados con la tecnología que nosotros detectamos están dentro de ese rango.
-Del total de la muestra, el 25,46\% no son conductores habituales
-Del resto de la muestra, que sí son conductores habituales, más de la mitad, un 52,64\% no utilizan habitualmente la tecnología BlueTooth (BT) mientras conduces y sólo el 22,56\% lo utilizan siempre, lo que deja un rango demasiado grande de conductores sin monitorizar.
-Si tomamos sólo los conductores habituales, el 50,2\% no saben o no tienen BT integrado en su vehículo, y el resto de la muestra sí lo tiene ya sea integrado o no, lo que nos indica que aunque para nosotros, que nos movemos en el mundo tecnológico y de la investigación la tecnología BT es algo conocido, no lo es para el ciudadano de a pie, puesto que perderíamos un 49,8\% de dispositivos móviles si  utilizamos sólo la monitorización de las señales BT.
-Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras que no lo están utilizando, sin embargo, sólo el 31,11\% apagan la señal Wifi mientras que no lo están utilizando. Este dato nos indica que aunque el usuario conozca la tecnología y la use, la gran mayoría de usuarios lo llevan desconectado. Sin embargo, si incluimos en el proyecto la tecnología Wifi y tenemos en cuenta que el 69,89\% de la gente la llevan permanentemente activada, el rango de datos capturados es mejor. Es por eso que hemos incluido la captación de señales Wifi dentro del desarrollo normal del proyecto además de las de BT que era lo inicialmente previsto.
+%***CORRIGE**
+%Para ello, lo primero que hicimos fue diseñar una encuesta que nos permita saber qué hábitos de uso tienen los usuarios de teléfonos móviles para ver si todos los dispositivos móviles podrían ser captados monitorizando la tecnología BT. Esta encuesta fue publicada de forma abierta y difundida a través de redes sociales y correo electrónico. Los puntos más importantes de esta encuesta pueden resumirse como:
+%El rango de edad más frecuente de los informantes es el que abarca entre los 20 y los 50 años formando un total de 528 respuestas de una muestra de 601. Este rango concuerda en lo esperado puesto que los principales usuarios de teléfonos o dispositivos relacionados con la tecnología que nosotros detectamos están dentro de ese rango.
+%Del total de la muestra, el 25,46\% no son conductores habituales
+%Del resto de la muestra, que sí son conductores habituales, más de la mitad, un 52,64\% no utilizan habitualmente la tecnología BlueTooth (BT) mientras conduces y sólo el 22,56\% lo utilizan siempre, lo que deja un rango demasiado grande de conductores sin monitorizar.
+%Si tomamos sólo los conductores habituales, el 50,2\% no saben o no tienen BT integrado en su vehículo, y el resto de la muestra sí lo tiene ya sea integrado o no, lo que nos indica que aunque para nosotros, que nos movemos en el mundo tecnológico y de la investigación la tecnología BT es algo conocido, no lo es para el ciudadano de a pie, puesto que perderíamos un 49,8\% de dispositivos móviles si  utilizamos sólo la monitorización de las señales BT.
+%Un 75,21\% de la muestra de conductores habituales apagan la señal BT mientras que no lo están utilizando, sin embargo, sólo el 31,11\% apagan la señal Wifi mientras que no lo están utilizando. Este dato nos indica que aunque el usuario conozca la tecnología y la use, la gran mayoría de usuarios lo llevan desconectado. Sin embargo, si incluimos en el proyecto la tecnología Wifi y tenemos en cuenta que el 69,89\% de la gente la llevan permanentemente activada, el rango de datos capturados es mejor. Es por eso que hemos incluido la captación de señales Wifi dentro del desarrollo normal del proyecto además de las de BT que era lo inicialmente previsto.
 
-\textit{Justificación del presupuesto:} En este paquete se ha utilizado el presupuesto destinado a ``Otros gastos'' como el uso de computación en nube (en Loggly o Microsoft Azure). Además, parte de la partida de ``Aparatos y equipos'' que estaba destinada a la colocación de los dispositivos (como la instalación de los dispositivos en la ETSIIT).
+
 
 \subsubsection{Paquete 05: Difusión}
 
@@ -483,7 +485,7 @@ En este paquete el IP ha sido el encargado de realizar la coordinación de la dif
 En esta subsección se describen los problemas encontrados durante la realización del proyecto, tanto a nivel de coordinación y gestión como los problemas de origen tecnológico. Los principales surgidos durante el proyecto han venido dados principalmente por la naturaleza de los dispositivos de captación, al tener que estar colocados en zonas de difícil acceso. Estos problemas han sido resueltos utilizando distintas técnicas que se describen a continuación.
 
 \subsubsection{Administración del presupuesto}
-
+\label{subsubsec:presupuesto}
 A la hora de realizar la solicitud del proyecto se destinó una partida del presupuesto al montaje de los dispositivos, suponiendo que la empresa de mantenimiento de carreteras UTE-ACISA cobraría por mano de obra y acceso a sus sistemas. Sin embargo, nos encontramos que de la colocación de los dispositivos, y el acceso a las redes de datos nos fue ofrecido de forma gratuita por parte de Acisa, por lo que esa parte del presupuesto no se ha gastado. Esto también se debió a que la colocación se realizó en la parte final del proyecto, por lo que no hubo tiempo de solicitar la modificación del presupuesto.
 
 En esta partida también había destinada una cantidad para la fabricación de piezas por parte del Centro de Investigación Científica de la UGR. Sin embargo, y debido a la inexperiencia del IP, no se tuvo en cuenta que el coste de fabricación para miembros de la UGR tiene un descuento del 80\%. Estas dos modificaciones (costes de colocación y fabricación de piezas) han hecho que exista un remanente del proyecto de 6408,2 euros.
@@ -583,9 +585,9 @@ En estas publicaciones se ha descrito el sistema desarrollado \cite{GarciaSanche
 
 La publicación más relevante es \cite{MOBYWIT15}, ya que es la que describe el proyecto PETRA, se encuentra actualmente en proceso de revisión por pares en la revista Future Generation Computer Systems, con índice de calidad IF = 2.786, posición 8 de 102 Q1 en la rama Computer Science, Theory and Methods. Este trabajo describe el sistema de captación realizado, sus elementos y sus posibles aplicaciones. Los resultados experimentales mostrados en la sección \ref{subsubsec:paquete04}, descritos con más profundidad en ese trabajo, han permitido obtener información sobre el ratio real de vehículos detectados por el sistema.
 
-Otro artículo de revista está en revisión ***IGI AQUI***
+Otro artículo de revista \cite{IGI15} está en revisión en la revista ``International Journal of Conceptual Structures and Smart Applications'', dentro del Special Issue ``Special Issue On: Smart Applications in Smart Cities''.
 
-Además de estas publicaciones, la sección \ref{subsec:otrosresultados} describe otras publicaciones derivadas durante la realización del proyecto, en temáticas como el Data Mining o la optimización.
+Además de estas publicaciones, la sección \ref{subsec:otrosresultados} describe otras publicaciones derivadas durante la realización del proyecto, en temáticas como el Data Mining, el Machine Learning, o la optimización.
  
 
 \subsection{Participación en congresos, seminarios o jornadas, para presentar los resultados del proyecto}	
@@ -604,13 +606,19 @@ La prueba de concepto que se realizó en la ETS Ingeniería informática y Telecomu
 
 \subsection{Tesis doctorales}
 
-Los resultados de este proyecto han servido para impulsar la tesis del investigador Antonio Fernández Ares, titualada ``Sistema Inteligente de captación, análisis y predicción de movilidad basado en técnicas de soft computing''. Concretamente, el artículo \cite{MOBYWIT15} es el que le permitirá leer su tesis en 2016, según la normativa de la Universidad de Granada.
+Los resultados de este proyecto han servido para impulsar la siguiente tesis:
+\begin{itemize}
+\item Título: Sistema Inteligente de captación, análisis y predicción de movilidad basado en técnicas de soft computing
+\item Autor: Antonio Fernández Ares
+\item Directores: Pedro Ángel Castillo Valdivieso y María Isabel García Arenas
+\item Fecha de lectura prevista: Junio de 2016
+\end{itemize}
 
-Además de esta tesis, se el 23 de Julio de 2015 se leyó el siguiente Trabajo Fin de Grado
+Concretamente, el artículo \cite{MOBYWIT15} es el que le permitirá leer su tesis en 2016, según la normativa de la Universidad de Granada. Además de esta tesis, se el 23 de Julio de 2015 se leyó el siguiente Trabajo Fin de Grado
 (Grado en Ingeniería Electrónica Industrial)
 
 \begin{itemize}
-\item Título: SISTEMA PARA RECONOCIMIENTO DE DISPOSITIVOS EN TIEMPO REAL
+\item Título: Sistema para Reconocimiento de Dispositivos en Tiempo Real
 \item Autora: María Tíscar Rodríguez Ortiz
 \item Director: Pedro García Fernández
 \item Departamento: Electrónica y Tecnología de Computadores
@@ -634,27 +642,17 @@ Aunque no se ha desarrollado aún ninguna, está en trámite el desarrollo de una p
 Durante el desarrollo del proyecto distintas técnicas de Data Mining, Machine Learning, Cloud Computing y Optimización relacionadas con el proyecto han sido aplicadas a otros tipos de problemas. Las referencias \cite{BotsMAEB15,GarciaOrtega15MADEevostar,FernandezAres15BotsEvostar,FernandezAres15Cosecivi,GarciaSanchez15CIG} muestran distintas publicaciones relacionadas con la generación automática de IAs. También se han realizado distintos estudios relacionados con el Cloud Computing \cite{Garcia15ASOCO,Merelo15geccoCompanion} o la comparativa de métodos de optimización \cite{Rico15IWANN} y la seguridad \cite{delasCuevas2015CC}. Todas las referencias anteriores cuentan con la mención al proyecto en los agradecimientos y han sido publicadas en conferencias nacionales e internacionales con revisión por pares, dos de ellas siendo publicadas en dos revistas con índice JCR en Q1 \cite{delasCuevas2015CC,Garcia15ASOCO}.
 
 \subsection{Referentes teóricos y metodológicos de especial interés}
-***TERMINA***
+La sección \ref{subsec:ambitodeoriginalidad} describe el ámbito de originalidad de la propuesta, comparándola con otros trabajos del estado del arte, pero además proporciona una serie de referencias que se han utilizado como base para el desarrollo del proyecto.
+
 \subsection{Riesgo científico}
 
-\subsection{Novedad de las conclusiones y resultados alcanzados}
+Debido a que este proyecto entra dentro de la rama de la ingeniería de computadores no se puede considerar que haya habido más riesgo científico que fallos en la metodología, por ejemplo, obteniendo resultados erróneos. Sin embargo, el poder haber podido comparar los datos captados con los reales, y viendo que existe correlación medible entre ellos nos permite descartar esto.
 
-\subsection{Contribución de los resultados al avance de la ciencia-técnica}
-
-El dinamismo económico del país	
-La sostenibilidad del modelo económico	
-La concentración e integración de la investigación en la UE	
-La estructuración del espacio europeo en investigación	
-El incremento del tamaño de los proyectos científicos en España	
-La mejora de la calidad de la investigación científica en España	
-Potenciar el papel del sistema público de I+D como generador de conocimiento	
-Mejora de la imagen de la ciencia en España	
-Promover un tejido empresarial innovador	
-Reducción de las emisiones contaminantes a la atmósfera	
-Aumento de la participación de las PYMES en el sistema de investigación e innovación	
-Fomentar la transferencia de los resultados de la investigación financiada con fondos públicos	
-Adecuación de las actividades de I+D a la demanda del sector productivo	
-Realización de investigación en las fronteras del conocimiento	
+%\subsection{Novedad de las conclusiones y resultados alcanzados}
+%***TERMINA***
+%\subsection{Contribución de los resultados al avance de la ciencia-técnica}
+%***TERMINA***
+	
 
 
 
@@ -666,7 +664,7 @@ Esta sección describe otros proyectos derivados, interés por otros grupos de inv
 
 \subsection{Proyectos y colaboraciones empresariales}
 \label{subsec:proyectosycolaboraciones}
-Esta sub-sección es de especial interés, ya que partiendo de la difusión de resultados en eventos, como la ``Jornada de Smart Cities y Movilidad'', han surgido distintas oportunidades de participación en distintos tipos de proyectos. Por ejemplo, la temática del proyecto fue utilizada en el ``H2020 Face2Face'' en el ICT Proposers Day 2015, organizado por ICT Proposers Day (ICT 2015 - Innovate, Connect, Transform) y la Red EEN (Lisboa, Portugal). Esto ha supuesto un incremento de la capacidad de liderazgo en H2020 y la creación de consorcios españoles para nuevos proyectos en H2020, ya que el grupo está dirigiendo la propuesta ***TERMINAR***, junto con las empresas Evozon (Rumanía), UXMobile (España) y Sweden Conectivity (Suecia). 
+Esta sub-sección es de especial interés, ya que partiendo de la difusión de resultados en eventos, como la ``Jornada de Smart Cities y Movilidad'', han surgido distintas oportunidades de participación en distintos tipos de proyectos. Por ejemplo, la temática del proyecto fue utilizada en el ``H2020 Face2Face'' en el ICT Proposers Day 2015, organizado por ICT Proposers Day (ICT 2015 - Innovate, Connect, Transform) y la Red EEN (Lisboa, Portugal). Esto ha supuesto un incremento de la capacidad de liderazgo en H2020 y la creación de consorcios españoles para nuevos proyectos en H2020, ya que el grupo está dirigiendo una propuesta dentro del ``Fast Track to Innovation Pilot'', junto con las empresas Evozon (Rumanía), UXMobile (España) y Sweden Conectivity (Suecia). 
 
 
 
@@ -696,7 +694,7 @@ Interdisciplinar:
 
 
 
-\subsubsection{Ampliación de la red de socios internacionales}
+\subsection{Ampliación de la red de socios internacionales}
 
 Se ha realizado la asistencia a reunión ``Metaheuristics in the Large'' organizada por la Universidad de Nottingham (29 y 30 de abril de 2015), donde se presentaron las distintas técnicas de predicción y optimización en nube usadas en este proyecto. Se inicia la colaboración con el Doctor Jerry Swan.
  
@@ -726,16 +724,16 @@ Se ha permitido identificar nuevos mercados/áreas de investigación (como el mark
 \label{sec:gradodeinnovacionque}
 \subsection{Aprendizaje de nuevos conocimientos y técnicas}
 
-Durante el desarrollo del proyecto los distintos investigadores han adquirido una serie de destrezas en distintos ámbitos ***TERMINA
+Durante el desarrollo del proyecto los distintos investigadores del grupo GeNeura han adquirido una serie de destrezas en distintos ámbitos:
 
-\subsubsection{Gestión y coordinación} Al ser el primer proyecto de dirigido por el IP, el haber tenido que coordinar y dirigir un equipo investigador, además una serie de recursos, ha supuesto la mejora en las destrezas como investigador senior, habiendo supuesto una mejora en la experiencia.
+\subsubsection{Gestión y coordinación} Al ser el primer proyecto de dirigido por el IP, el haber tenido que coordinar y dirigir un equipo investigador, además una serie de recursos, ha supuesto la mejora en las destrezas como investigador senior, habiendo supuesto una mejora en la experiencia coordinadora que será muy útil de cara a futuros proyectos.
 \subsubsection{Desarrollo en sistemas de tiempo real y dispositivos empotrados} El uso de la tarjeta Raspberry Pi ha supuesto una serie de avances en los conocimientos de Sistemas Operativos y programación concurrente en los investigadores que trabajaban en el paquete 2. Se ha profundizado en el uso y optimización de sistemas operativos en entornos volátiles y en la coordinación y mecanismos de sincronización en software en tiempo real.
-\subsubsection{Despliegue y computación en Nube} El haber tratado con una infraestructura distribuida, con distintos sistemas de procesamiento en los dispositivos y en la Nube (Azure y Google App Engine) ha incrementado el conocimiento de estas tecnologías por parte de los investigadores.
-\subsubsection{Análisis y predicción} Se han realizado estudios con distintas técnicas de análisis de datos (MSE, ***TERMINA) así como técnicas de predicción (Mean, Arima, Theta, etc).
-\subsubsection{}
+\subsubsection{Despliegue y computación en Nube} El haber tratado con una infraestructura distribuida, con distintos sistemas de procesamiento en los dispositivos y en la Nube (Microsoft Azure y Google App Engine) ha incrementado el conocimiento de estas tecnologías por parte de los investigadores. Esto permitirá el uso de estas infraestructuras en otras líneas de investigación en las que el grupo participa.
+\subsubsection{Análisis y predicción} Se han realizado estudios con distintas técnicas de análisis de datos (como MSE, MFSE, etc.), así como técnicas de predicción (Mean, Arima, Theta, etc).
+\subsubsection{Visualización y representación en Big-Data} A la hora de estudiar y representar grandes cantidades de datos se ha tenido que lidiar con diferentes programas de visualización y análisis de datos, como R o Weka. Las figuras presentadas en esta memoria (y en los manuscritos de difusión adjuntos) se han realizado utilizando estos programas.
 
-\subsection{Ambito de originalidad}
-
+\subsection{Ámbito de originalidad}
+\label{subsec:ambitodeoriginalidad}
 Existen distintas tecnologías usadas para recolectar datos y obtener información del estado de las carreteras. Las tecnologías de monitorización del tráfico pueden clasificarse como \textit{intrusivas}, instaladas en el pavimento, y \textit{no-intrusivas}, sin contacto con la carretera, causando un efecto mínimo en el flujo de tráfico \cite{martin2003detector}. 
 
 Como se ha indicado en la introducción, las principales tecnologías incluyen tubos neumáticos, espiras inductivas y sistemas OCR, entre otros \cite{rodrigue2013geography}.
@@ -783,15 +781,15 @@ En los últimos años las investigaciones están asimilando nuevas tecnologías para
 
 Varias publicaciones recientes presentan cuestiones espaciales relacionadas con el ámbito de este tema, tales como \cite{Zhang20141}, que incluye los últimos avances en la investigación en la predicción del tráfico teniendo en cuenta el tiempo y las variables espaciales. Otras obras proponen la predicción de los flujos de tráfico y tiempos de actuación \cite{Dong201420,Zou201433} mediante de patrones espacio-temporales del tráfico congestionado y no congestionado. También existen trabajos con nuevos enfoques en la predicción en tiempo real \cite{Zhang201465} o nuevas propuestas como \cite{Wang201479}, en las que mejora el método de combinación bayesiano (Bayesian combination method, BCM), propuesto por Petridis et al. en 2001, o \cite{Qi201495} que mejora la predicción a corto plazo en autopistas utilizando un modelo de Markov.
 
-%***CAMBIAR POR PROYECTO Y ENLAZAR BIEN
+
 En el presente proyecto, se ha llevado a cabo un estudio sobre la previsión del tráfico (en la sección \ref{subsubsec:paquete03}), sin embargo, se han aplicado los métodos clásicos, porque el objetivo es mostrar el valor de los datos recogidos por nuestro sistema en comparación con los datos recogidos por la DGT utilizando detectores de espiras. Por lo tanto, nuestra contribución en esta línea es el uso de Series Temporales de tráfico reales, creadas a partir de los datos extraídos a través de nuestros eventos de tráfico (WiFi y BT detecciones).
-%*****PROYECTO
-Otra línea de estudio en este trabajo ha sido el seguimiento personal o la movilidad de las personas (o geomárketing). Este tipo de movilidad se estudia por muchas razones, entre ellas, los beneficios económicos: la tasa de conversión, la efectividad del marketing o de la planificación del personal son algunas de las más conocidas \cite{stanton1967fundamentals}. La tasa de conversión es el porcentaje de visitantes que efectivamente hacen una compra. Se puede deducir si una mejora en la tienda  se debe a un mayor número de personas que la visitan, o si de los visitantes realmente compran algo. En este ámbito, los profesionales de centros comerciales estudian el comportamiento de las personas con el fin de saber si sus técnicas de marketing están dando sus frutos. En la misma línea, la planificación del personal está directamente relacionada con la cantidad de visitantes, así como el mantenimiento y las necesidades de limpieza, entre otras.
+
+Otra línea de estudio en este proyecto ha sido el seguimiento personal o la movilidad de las personas (o geomárketing). Este tipo de movilidad se estudia por muchas razones, entre ellas, los beneficios económicos: la tasa de conversión, la efectividad del marketing o de la planificación del personal son algunas de las más conocidas \cite{stanton1967fundamentals}. La tasa de conversión es el porcentaje de visitantes que efectivamente hacen una compra. Se puede deducir si una mejora en la tienda  se debe a un mayor número de personas que la visitan, o si de los visitantes realmente compran algo. En este ámbito, los profesionales de centros comerciales estudian el comportamiento de las personas con el fin de saber si sus técnicas de marketing están dando sus frutos. En la misma línea, la planificación del personal está directamente relacionada con la cantidad de visitantes, así como el mantenimiento y las necesidades de limpieza, entre otras.
 
 
 Otras razones son más prácticas que comerciales: ¿Cuántas personas visitan un edificio público? ¿Cuándo? Estos datos pueden ayudar a mejorar la planificación de la prestación de servicios, calefacción o refrigeración del edificio, limpieza de las instalaciones, y los cambios del personal, entre otros. En un museo o un estadio deportivo, se puede ajustar muchos parámetros para ayudar a la gente disfrutar de una mejor experiencia mientras aumentan los beneficios.
 
-La tecnología para el conteo o seguimiento de personas ha evolucionado con el tiempo. A principios se usaron contadores de haces infrarrojos \cite{Hashimoto199850}. Estos dispositivos eran baratos pero propenso a fallos, como cuando dos personas pasan una puerta a la vez. También se ha propuesto el uso de contadores térmicos \cite{635472}, también baratos, pero con serias limitaciones, como la corta distancia desde el dispositivo de recuento de las personas a contar. Las últimas tecnologías utilizan cámaras de vídeo \cite {4107051,Schofield19961421} o detectores WiFi \cite{7134066,7130402} y Bluetooth \cite{6526732,nicolai2007relationship}.
+La tecnología para el conteo o seguimiento de personas ha evolucionado con el tiempo. A principios se usaron contadores de haces infrarrojos \cite{Hashimoto199850}. Estos dispositivos eran baratos pero propenso a fallos, como cuando dos personas pasan una puerta a la vez. También se ha propuesto el uso de contadores térmicos \cite{635472}, también baratos, pero con serias limitaciones, como la corta distancia desde el dispositivo de recuento de las personas a contar. Las últimas tecnologías utilizan cámaras de vídeo \cite{4107051,Schofield19961421} o detectores WiFi \cite{7134066,7130402} y Bluetooth \cite{6526732,nicolai2007relationship}.
 
 
 
@@ -811,26 +809,24 @@ También la idea de seguimiento de personas con sus dispositivos WiFi personales 
 Sin embargo, al combinar BT y WiFi en este proyecto se busca aumentar la tasa de detección más allá que la mayoría de los investigadores ha logrado. Aparentemente puede parecer redundante, pero la probabilidad de detección es más alta. Se necesita estudiar más profundamente la mejora de las detecciones combinados pero en promedio detectamos un 80 \% de los dispositivos Wi-Fi y un 20 \% de BT. BT es especialmente importante para la detección de los automóviles debido a que es una tecnología incluida en casi todos los coches nuevos. El mismo hecho es cierto para WiFi en los teléfonos inteligentes. 
 
 
-\subsection{Originalidad y posibilidad de repercusión de los resultados en distintos ámbitos}
-
-\subsection{Impacto de los resultados en la transferencia de tecnología alcanzada o previsible}
+\subsection{Originalidad y posibilidad de repercusión de los resultados en distintos ámbitos y el impacto de los resultados en la transferencia de tecnología alcanzada o previsible}
 
 Teniendo en cuenta las técnicas, tecnologías y metodologías descritas en la memoria se puede decir que este proyecto ha servido para potenciar la formación y ocupación de los recursos humanos del grupo en actividades de I+D+i, tanto a nivel de coordinación, como de investigación. Esto ha permitido aumentar la calidad de la investigación científica y técnica para alcanzar el máximo nivel de excelencia e impacto.
 
-La existencia de contratos con empresas, como se ha descrito en la sección \ref{subsec:nuevosproyectos}, ha supuesto un incremento en la colaboración entre el sector público y el empresarial y una estimulación para nuevos retos de la sociedad, como la mobilidad sostenible.
+Por otra parte, permitir detectar comportamiento del tráfico antes de un viaje podrían evitarse atascos, permitiendo una reducción de las emisiones contaminantes a la atmósfera. Consideramos que los resultados de este proyecto pueden suponer una mejora en el dinamismo económico del país y en la sostenibilidad del modelo económico. Al ser un dispositivo de bajo coste puede suponer el aumento de la participación de las PYMES en el sistema de investigación e innovación. 
 
-La participación en eventos de difusión, como los hackathones o la Noche de los Investigadores (ver sección \ref{subsec:otrosmedios}), también suponen un incremento de la cultura científica, tecnológica e innovadora de la sociedad española.
+Finalmente, subvenciones a proyectos como el descrito en esta memoria permiten la mejora de la calidad de la investigación científica en España, potenciar el papel del sistema público de I+D como generador de conocimiento, fomentar la transferencia de los resultados de la investigación financiada con fondos públicos y la adecuación de las actividades de I+D a la demanda del sector productivo.
 
-Fortalecer las capacidades y el liderazgo internacional de las instituciones y centros de investigación científica y técnica	
-Facilitar el acceso a las infraestructuras científicas y tecnológicas y al equipamiento científico	
-Impulsar el liderazgo empresarial en I+D+i de las empresas y las PYME	
+La existencia de contratos con empresas, como se ha descrito en la sección \ref{subsec:nuevosproyectos}, ha supuesto un incremento en la colaboración entre el sector público y el empresarial y una estimulación para nuevos retos de la sociedad, como la movilidad sostenible.
 
-Incrementar la colaboración en materia de I+D+I entre el sector público y el sector empresarial	
-Estimular la I+D+I orientada para respuesta a los retos de nuestra sociedad	
-Impulsar la internacionalización de las actividades de I+D+I de los agentes del Sistema Español de Ciencia, Tecnología e Innovación	
-Incrementar la cultura científica, tecnológica e innovadora de la sociedad española	
-Profundizar en las políticas de I+D+I basadas en la demanda
+La participación en eventos de difusión, como los hackathones o la Noche de los Investigadores (ver sección \ref{subsec:otrosmedios}), también suponen un incremento de la cultura científica, tecnológica e innovadora de la sociedad española, así como una mejora de su imagen.
 
+
+%La concentración e integración de la investigación en la UE	
+%La estructuración del espacio europeo en investigación	
+%El incremento del tamaño de los proyectos científicos en España	
+%Promover un tejido empresarial innovador	
+%Realización de investigación en las fronteras del conocimiento
 
 
 \section{Difusión de los resultados}
@@ -839,25 +835,163 @@ En esta sección se describe la difusión de resultados en distintos medios.
 
 \subsection{Publicaciones en revistas y congresos}
 
-Puede consultarse la sección \ref{subsec:publicacionescientificas}
+La discusión de los resultados publicados puede consultarse la sección \ref{subsec:publicacionescientificas}, pero se listan a continuación para diferenciarla del resto de publicaciones de la bibliografía:
+
+\begin{itemize}
+\item A.~Fern\'andez-Ares, A.~Mora, M.~Arenas, P.~Garc\'ia-Sanchez, G.~Romero,
+  V.~Rivas, P.~Castillo, J.~Merelo, Studying real traffic and mobility
+  scenarios for a smart city using a new monitoring and tracking system, Future
+  Generation Computer SystemsEn revisi\'on.
+
+
+\item S.~M. Odeh, A.~M. Garc{\'{\i}}a, M.~N. Moreno, J.~J.~M. Guerv{\'{o}}s,
+  A hybrid fuzzy genetic algorithm
+  for an adaptive traffic signal system, Adv. Fuzzy Systems 2015 (2015)
+  378156:1--378156:11.
+
+\item
+P.~Garc{\'i}a-S{\'a}nchez, A.~Fern{\'a}ndez-Ares, P.~Castillo,
+  M.~Garc{\'i}a-Arenas, P.~de~las Cuevas, G.~Romero, J.~J. Merelo,
+  J.~Gonz{\'a}lez, A.~M. y~Pedro Garc{\'i}a-Fern{\'a}ndez, Arquitectura de bajo
+  coste para monitorizaci{\'o}n de veh{\'i}culos y personas usando bluetooth y
+  wifi, in: J.~G. P. M.~D. Hermoso (Ed.), Actas de las Jornadas de
+  Computaci\'on Emptotrada - JCE2015 23, 24 y 25 de Septiembre de 2015
+  C\'ordoba, 2015, pp. 115--122.
+
+\item
+D.~Romero, N.~Rico, M.~I. Garcia-Arenas, Modellation and forecast of traffic
+  series by a stochastic process, in: O.~Valenzuela, F.~Rojas, H.~Pomares,
+  I.~Rojas (Eds.), Proceedings ITISE 2015. International work-conference on
+  Time Series, Copicentro Granada S.L, 2015, pp. 797--805.
+
+\item
+P.~A. Castillo, A.~Fernandez-Ares, M.~Arenas, P.~Garcia-Sanchez, A.~Mora,
+  P.~Garcia-Fernandez, V.~Rivas, Sipesca-competition: a set of real data time
+  series benchmark for traffic prediction, in: O.~Valenzuela, F.~Rojas,
+  H.~Pomares, I.~Rojas (Eds.), Proceedings ITISE 2015. International
+  work-conference on Time Series, Copicentro Granada S.L, 2015, pp. 785--796.
+
+\item
+E.~P.-G. V{\'i}ctor M.~Rivas, A.~Fern{\'a}ndez-Ares, P.~A. Castillo,
+  P.~Garc{\'i}a-Fern{\'a}ndez, M.~G. Arenas, Predicci{\'o}n a muy corto plazo
+  de series temporales de volumen de tr\'afico rodado mediante co-evoluci{\'o}n
+  de rnfbr, in: F.~C. de~la O, R.~M.~L. Baena, F.~Luna, F.~F. de~Vega (Eds.),
+  Actas del X Congreso Espa{\~n}ol sobre Metaheur{\'i}sticas, Algoritmos
+  Evolutivos y Bioinspirados MAEB 2015, Centro Universitario de M{\'e}rida,
+  2015, pp. 181--188.
+
+\item
+P.~A. Castillo, A.~Fern{\'a}ndez-Ares, M.~G. Arenas, A.~M. Mora,
+  P.~Garc{\'i}a-S{\'a}nchez, P.~de~las Cuevas, V.~M. Rivas, Sipesca-b:
+  presentando un benchmark de series temporales de datos reales para la
+  predicci{\'o}n del tr{\'a}fico, in: F.~C. de~la O Rafael M. Luque Baena
+  Francisco Luna Francisco Fern{\'a}ndez~de Vega (Ed.), Actas del X Congreso
+  Espa{\~n}ol sobre Metaheur{\'i}sticas, Algoritmos Evolutivos y Bioinspirados
+  MAEB 2015, Centro Universitario de M{\'e}rida, 2015, pp. 197--204.
+
+\item
+A.~Fern\'andez-Ares, A.~Mora, M.~Arenas, P.~Garc\'ia-Sanchez, G.~Romero,
+  V.~Rivas, P.~Castillo, J.~Merelo, Analysis of mobility-based information
+  gathered by a novel low-cost monitoring and tracking system, International
+  Journal of Conceptual Structures and Smart Applications, Special Issue On:
+  Smart Applications in Smart CitiesEn revisi\'on.
+\end{itemize}
 
 \subsection{Otras publicaciones relacionadas con el proyecto}
 
-Durante el desarrollo del proyecto el grupo de investigación ha estado trabajando en otras investigaciones relacionadas con el proyecto.
+Durante el desarrollo del proyecto el grupo de investigación ha estado trabajando en otras investigaciones relacionadas con el proyecto. Estos resultados se han discutido en la sección \ref{subsec:otrosresultados}, pero la igual que en la subsección anterior, se listas a continuación para facilitar su consulta:
+\begin{itemize}
+\item
+A.~Fern{\'a}dez-Ares, P.~Garc{\'i}a-S{\'a}nchez, A.~Mora, P.~Castillo,
+  Dise{\~n}o de bots competitivos para un juego de estrategia en tiempo real
+  usando programaci{\'o}n gen{\'e}tica: an{\'a}lisis de funciones de fitness,
+  in: F.~C. de~la O Rafael M. Luque Baena Francisco Luna Francisco
+  Fern{\'a}ndez~de Vega (Ed.), Actas del X Congreso Espa{\~n}ol sobre
+  Metaheur{\'i}sticas, Algoritmos Evolutivos y Bioinspirados MAEB 2015, Centro
+  Universitario de M{\'e}rida, 2015, pp. 47--477.
+
+\item
+R.~H. Garc{\'{\i}}a{-}Ortega, P.~Garc{\'{\i}}a{-}S{\'{a}}nchez, J.~J.~M.
+  Guerv{\'{o}}s, M.~I.~G. Arenas, P.~A.~C. Valdivieso, A.~M. Mora, How the
+  world was {MADE:} parametrization of evolved agent-based models for backstory
+  generation, in: A.~M. Mora, G.~Squillero (Eds.), Applications of Evolutionary
+  Computation - 18th European Conference, EvoApplications 2015, Copenhagen,
+  Denmark, April 8-10, 2015, Proceedings, Vol. 9028 of Lecture Notes in
+  Computer Science, Springer, 2015, pp. 443--454.
+
+\item
+A.~Fern{\'{a}}ndez{-}Ares, P.~Garc{\'{\i}}a{-}S{\'{a}}nchez, A.~M. Mora,
+  P.~A.~C. Valdivieso, J.~J.~M. Guerv{\'{o}}s, M.~I.~G. Arenas, G.~Romero, It's
+  time to stop: {A} comparison of termination conditions in the evolution of
+  game bots, in: A.~M. Mora, G.~Squillero (Eds.), Applications of Evolutionary
+  Computation - 18th European Conference, EvoApplications 2015, Copenhagen,
+  Denmark, April 8-10, 2015, Proceedings, Vol. 9028 of Lecture Notes in
+  Computer Science, Springer, 2015, pp. 355--368.
+
+\item
+A.~Fern{\'{a}}ndez{-}Ares, P.~Garc{\'{\i}}a{-}S{\'{a}}nchez, A.~M. Mora,
+  P.~A.~C. Valdivieso, M.~G. Arenas, G.~Romero, An overview on the termination
+  conditions in the evolution of game bots, in: D.~Camacho, M.~A.
+  G{\'{o}}mez{-}Mart{\'{\i}}n, P.~A. Gonz{\'{a}}lez{-}Calero (Eds.),
+  Proceedings 2st Congreso de la Sociedad Espa{\~{n}}ola para las Ciencias del
+  Videojuego, Barcelona, Spain, June 24, 2015., Vol. 1394 of {CEUR} Workshop
+  Proceedings, CEUR-WS.org, 2015, pp. 186--191.
+
+\item
+P.~Garc{\'{\i}}a{-}S{\'{a}}nchez, A.~P. Tonda, A.~M. Mora, G.~Squillero,
+  J.~J.~M. Guerv{\'{o}}s, Towards automatic starcraft strategy generation using
+  genetic programming, in: 2015 {IEEE} Conference on Computational Intelligence
+  and Games, {CIG} 2015, Tainan, Taiwan, August 31 - September 2, 2015, {IEEE},
+  2015, pp. 284--291.
+
+\item
+P.~Garc{\'i}a-Sánchez, G.~Romero, J.~Gonz{\'a}lez, A.~M. Mora, M.~G. Arenas,
+  P.~{\'A}. Castillo, C.~Fernandes, J.~J. Merelo, Studying the effect of
+  population size in distributed evolutionary algorithms on heterogeneous
+  clusters, Applied Soft Computing 38 (2016) 530 -- 547.
+
+
+\item
+J.~J.~M. Guerv{\'{o}}s, P.~Garc{\'{\i}}a{-}S{\'{a}}nchez,
+Designing and modeling a
+  browser-based distributed evolutionary computation system, in: J.~L.~J.
+  Laredo, S.~Silva, A.~I. Esparcia{-}Alc{\'{a}}zar (Eds.), Genetic and
+  Evolutionary Computation Conference, {GECCO} 2015, Madrid, Spain, July 11-15,
+  2015, Companion Material Proceedings, {ACM}, 2015, pp. 1117--1124.
+
+
+\item
+N.~Rico, M.~G. Arenas, D.~Romero, J.~M. Crespo, P.~A. Castillo, J.~J.~M.
+  Guerv{\'{o}}s, Comparing
+  optimization methods, in continuous space, for modelling with a diffusion
+  process, in: I.~Rojas, G.~J. Caparr{\'{o}}s, A.~Catal{\`{a}} (Eds.),
+  Advances in Computational Intelligence - 13th International Work-Conference
+  on Artificial Neural Networks, {IWANN} 2015, Palma de Mallorca, Spain, June
+  10-12, 2015. Proceedings, Part {II}, Vol. 9095 of Lecture Notes in Computer
+  Science, Springer, 2015, pp. 380--390.
+
+\item
+P.~de~las Cuevas, A.~Mora, J.~Merelo, P.~Castillo, P.~Garc{\'i}a-S{\'a}nchez,
+  A.~Fern{\'a}ndez-Ares,
+Corporate
+  security solutions for byod: A novel user-centric and self-adaptive system,
+  Computer Communications 68 (2015) 83 -- 95, security and Privacy in Unified
+  Communications: Challenges and Solutions.
+\end{itemize}
 
 \subsection{Otros medios de difusión}
 \label{subsec:otrosmedios}
 
 Además de las publicaciones científicas, se ha participado en distintas actividades para la difusión de los resultaos del proyecto.
 
-Dentro del congreso International Work-Conference on Time Series Analysis, ITISE 2015, el personal investigador de este proyecto ha organizado una sesión especial relacionada con el la predicción del flujo de tráfico real. Concretamente, la descripción de la sesión especial puede verse en \url{http://itise.ugr.es/sessions\_proposals.php} en el apartado SS6 y la descripción de la sesión especial está en \url{http://itise.ugr.es/pdf/ProposalSpecialSession.pdf}.
+Dentro del congreso International Work-Conference on Time Series Analysis, ITISE 2015, el personal investigador de este proyecto ha organizado una sesión especial relacionada con el la predicción del flujo de tráfico real. Concretamente, la descripción de la sesión especial puede verse en la web del congreso \footnote{\url{http://itise.ugr.es/sessions_proposals.php}} en el apartado SS6 y la descripción de la sesión especial está en la web que anuncia la sesión \footnote{\url{http://itise.ugr.es/pdf/ProposalSpecialSession.pdf}}.
 
-Esta sesión especial se ha presentado como un reto a los asistentes al congreso. Los datos utilizados para dicho reto están en \url{http://geneura.ugr.es/timeseries/} y el reto consistía en realizar una predicción de dichas series cometiendo el menor error posible utilizando métodos de predicción tanto heurísticos como estadísticos.
+Esta sesión especial se ha presentado como un reto a los asistentes al congreso. Los datos utilizados para dicho reto están en la web del grupo \footnote{\url{http://geneura.ugr.es/timeseries/}} y el reto consistía en realizar una predicción de dichas series cometiendo el menor error posible utilizando métodos de predicción tanto heurísticos como estadísticos.
 
 Además, dentro de este proyecto se ha participado en la organización de dos hackathones relacionados con la predicción del estado del tráfico y datos abiertos: Open Data Day (celebrado en Granada) y  Hackathon Fujitsu-UGR (celebrado en Málaga). Los resultados de los hackathones fueron un estudio preliminar del estado del arte en artículos de predicción del tráfico y desarrollo de programas que extraen estado de la predicción del tráfico a partir de distintas fuentes.
 
 
-El grupo ha participado también en distintas actividades de divulgación científica, como la ``Noche de los investigadores'', donde se presentó el proyecto dentro de la actividad ``El Ojo que todo lo ve'': \url{https://lanochedelosinvestigadores.fundaciondescubre.es/actividades/nanociencia-y-nanotecnologia-2/}
+El grupo ha participado también en distintas actividades de divulgación científica, como la ``Noche de los investigadores'', donde se presentó el proyecto dentro de la actividad ``El Ojo que todo lo ve'' \footnote{\url{https://lanochedelosinvestigadores.fundaciondescubre.es/actividades/nanociencia-y-nanotecnologia-2/}}.
 
 
 
@@ -865,8 +999,7 @@ El grupo ha participado también en distintas actividades de divulgación científi
 
 El día 26 de noviembre de 2015 se celebró en la sala de usos múltiples del
 CITIC de la Universidad de Granada la ``Jornada de Smart Cities y Movilidad'' a la que 
-asistieron 30 personas:
-https://geneura.wordpress.com/2015/12/03/jornada-sobre-smart-cities-y-movilidad/  
+asistieron 30 personas\footnote{\url{https://geneura.wordpress.com/2015/12/03/jornada-sobre-smart-cities-y-movilidad/}}.
 
 Los objetivos finales fueron crear sinergia entre los diversos grupos de investigación y 
 empresas en el área de la gestión de la movilidad, internet de las cosas y smart cities, así 
@@ -899,17 +1032,19 @@ A partir estos resultados se han podido abrir nuevas líneas de investigación. Po
 
 Además, otro tipo de problemas pueden tratarse con este sistema, por ejemplo, analizando la movilidad en la ciudad o en la carretera, para mejorar servicios existentes (por ejemplo, turísticos), realizar análisis de geomárketing \cite{Flyers-GeoMarketing,LaMarca-GeoMarketing}, incrementar mecanismos de seguridad, o mejorar el sistema de transporte público. Esto requerirá la colocación de más dispositivos, para construir mejores grafos de movilidad, matrices de origen y destino y otros modelos. 
 
-El sistema aún tiene algunas pegas o puntos débiles que pueden mejorarse, como evitar el solapamiento entre direcciones en dos diferentes nodos (utilizando antenas unidireccionales o algún tipo de filtro).
+El sistema aún tiene algunas pegas o puntos débiles que pueden mejorarse, como evitar el solapamiento entre direcciones en dos diferentes nodos (utilizando antenas unidireccionales o algún tipo de filtro). Otro punto de mejora puede ser el uso de técnicas de predicción de series temporales para completar `agujeros' en los eventos detectados, por ejemplo, cuando un dispositivo se desconecta.
 
-Otro punto de mejora puede ser el uso de técnicas de predicción de series temporales para completar `agujeros' en los eventos detectados, por ejemplo, cuando un dispositivo se desconecta.
+Al cierre de esta memoria los dispositivos colocados siguen recolectando datos, y está abierta la posibilidad de colocar más dispositivos en otras localizaciones sugeridas por la DGT, por lo que se espera continuar trabajando en este proyecto, aún habiéndose cerrado económicamente, por lo que es de esperar que surjan más colaboraciones y publicaciones relacionadas.
 
-***TERMINA Y PON LAS COSAS EMPRESARIALES Y QUE SE SIGUEN RECOGIENDO DATOS
+Este proyecto además, ha proporcionado la posibilidad de nuevas líneas de investigación, como el geomárketing, obteniendo resultados de utilidad a la hora de medir la movilidad de las personas.
+
+Finalmente, este proyecto ha supuesto un avance otros ámbitos fuera del científico, ya que también ha permitido la ampliación de la red de socios internacionales del grupo de investigación, así como la ampliación de proyectos y colaboraciones empresariales, facilitando un tejido empresarial innovador.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section*{Agradecimientos}
 
-Queremos agradecer personalmente al personal de la DGT Pedro Tomás Martínez y Ramón González (Sede de la DGT), y Alberto Serrano, Silvia Cabo, Rafael Castro y Adolfo Santos (Centro de Gestión del Tráfico del Sureste). También a los miembros de la UTE-ACISA, Jose Antonio Arrese, Javier Segovia, Jesús Rodríguez, y especialmente a Miguel Ángel León y a Miguel ***PONER APELLIDO***, ya que sin su colaboración este proyecto no podría haber sido llevado a cabo.
+Queremos agradecer personalmente al personal de la DGT Pedro Tomás Martínez y Ramón González (Sede de la DGT), y Alberto Serrano, Silvia Cabo, Rafael Castro y Adolfo Santos (Centro de Gestión del Tráfico del Sureste). También a los miembros de la UTE-ACISA, Jose Antonio Arrese, Javier Segovia, Jesús Rodríguez, y especialmente a Miguel Ángel León y a Miguel Cervilla, ya que sin su colaboración este proyecto no podría haber sido llevado a cabo.
 
 
 \bibliographystyle{elsarticle-num}
