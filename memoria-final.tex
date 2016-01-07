@@ -9,6 +9,15 @@
 %\usepackage{setspace}
 \usepackage{url}
 
+\makeatletter
+\def\ps@pprintTitle{%
+ \let\@oddhead\@empty
+ \let\@evenhead\@empty
+ \def\@oddfoot{}%
+ \let\@evenfoot\@oddfoot}
+\makeatother
+
+
 \begin{document}
 
 \begin{frontmatter}
@@ -841,7 +850,7 @@ La discusión de los resultados publicados puede consultarse la sección \ref{subs
 \item A.~Fern\'andez-Ares, A.~Mora, M.~Arenas, P.~Garc\'ia-Sanchez, G.~Romero,
   V.~Rivas, P.~Castillo, J.~Merelo, Studying real traffic and mobility
   scenarios for a smart city using a new monitoring and tracking system, Future
-  Generation Computer SystemsEn revisi\'on.
+  Generation Computer Systems En revisi\'on.
 
 
 \item S.~M. Odeh, A.~M. Garc{\'{\i}}a, M.~N. Moreno, J.~J.~M. Guerv{\'{o}}s,
@@ -894,7 +903,7 @@ A.~Fern\'andez-Ares, A.~Mora, M.~Arenas, P.~Garc\'ia-Sanchez, G.~Romero,
   V.~Rivas, P.~Castillo, J.~Merelo, Analysis of mobility-based information
   gathered by a novel low-cost monitoring and tracking system, International
   Journal of Conceptual Structures and Smart Applications, Special Issue On:
-  Smart Applications in Smart CitiesEn revisi\'on.
+  Smart Applications in Smart Cities En revisi\'on.
 \end{itemize}
 
 \subsection{Otras publicaciones relacionadas con el proyecto}
