@@ -495,7 +495,7 @@ En esta subsección se describen los problemas encontrados durante la realización
 
 \subsubsection{Administración del presupuesto}
 \label{subsubsec:presupuesto}
-A la hora de realizar la solicitud del proyecto se destinó una partida del presupuesto al montaje de los dispositivos, suponiendo que la empresa de mantenimiento de carreteras UTE-ACISA cobraría por mano de obra y acceso a sus sistemas. Sin embargo, nos encontramos que de la colocación de los dispositivos, y el acceso a las redes de datos nos fue ofrecido de forma gratuita por parte de Acisa, por lo que esa parte del presupuesto no se ha gastado. Esto también se debió a que la colocación se realizó en la parte final del proyecto, por lo que no hubo tiempo de solicitar la modificación del presupuesto.
+A la hora de realizar la solicitud del proyecto se destinó una partida del presupuesto al montaje de los dispositivos, suponiendo que la empresa de mantenimiento de carreteras UTE-ACISA cobraría por mano de obra y acceso a sus sistemas. Sin embargo, nos encontramos que de la colocación de los dispositivos, y el acceso a las redes de datos nos fue ofrecido de forma gratuita por parte de ACISA, por lo que esa parte del presupuesto no se ha gastado. Esto también se debió a que la colocación se realizó en la parte final del proyecto, por lo que no hubo tiempo de solicitar la modificación del presupuesto.
 
 En esta partida también había destinada una cantidad para la fabricación de piezas por parte del Centro de Investigación Científica de la UGR. Sin embargo, y debido a la inexperiencia del IP, no se tuvo en cuenta que el coste de fabricación para miembros de la UGR tiene un descuento del 80\%. Estas dos modificaciones (costes de colocación y fabricación de piezas) han hecho que exista un remanente del proyecto de 6408,2 euros.
 
@@ -532,10 +532,10 @@ Una de las características más importantes del sistema es la comunicación con el
 Como se ha mencionado anteriormente, el haber colocado los dispositivos en la etapa final del proyecto ha supuesto algunos problemas de gestión de recursos. Para nuevas convocatorias, quizás habría sido una mejor opción colocar los dispositivos al principio del proyecto e ir actualizándolos con cada nueva mejora, en vez de colocar la versión final y testeada. Esto habría supuesto más gasto en viajes y dietas, pero habría permitido tener mayor número de datos, y aunque en principio fueran erróneos y no pudieran usarse, con las distintas actualizaciones del software se podría haber mejorado iterativamente el sistema.
 
 \subsection{Protección de datos y seguridad}
-
+\label{subsec:proteccion}
 Para cumplir con la LOPD, los datos recogidos por el sistema (MAC de los dispositivos) no se guardan en la base de datos. En lugar de eso se realiza una función Hash que genera un nuevo identificador para anonimizar los datos. Es decir, sabemos que un dispositivo X ha pasado por cierto dispositivo en cierta hora, pero nunca podremos saber la MAC real del usuario.
 
-En lo relativo a la seguridad de red, los dispositivos colocados están aislados del resto de elementos de la red de la empresa UTE-Acisa, y su comunicación con el servidor se realiza utilizando unas credenciales VPN que cifra toda la comunicación.
+En lo relativo a la seguridad de red, los dispositivos colocados están aislados del resto de elementos de la red de la empresa UTE-ACISA, y su comunicación con el servidor se realiza utilizando unas credenciales VPN que cifra toda la comunicación.
 
 
 
@@ -590,7 +590,7 @@ Esta sección describe los resultados obtenidos durante la realización del proyec
 
 Durante el desarrollo del proyecto se han realizado varias publicaciones científicas. Las publicaciones en congresos en el área de ingeniería informática y las ciencias de la computación también requieren el envío de un artículo completo y revisión por pares, al igual que en revistas, así que se han añadido en esta sección \cite{MOBYWIT15,Odeh15Fuzzy,GarciaSanchez15JCE,Romero15ITISE,Castillo15ITISE,RIVAS15MAEB,Castillo15MAEB}.
 
-En estas publicaciones se ha descrito el sistema desarrollado \cite{GarciaSanchez15JCE}, experimentación en predicción con datos recogidos \cite{Romero15ITISE,Castillo15ITISE,RIVAS15MAEB,Castillo15MAEB}.
+En estas publicaciones se ha descrito el sistema desarrollado \cite{GarciaSanchez15JCE}, así como la experimentación en predicción con datos recogidos \cite{Romero15ITISE,Castillo15ITISE,RIVAS15MAEB,Castillo15MAEB}.
 
 La publicación más relevante es \cite{MOBYWIT15}, ya que es la que describe el proyecto PETRA, se encuentra actualmente en proceso de revisión por pares en la revista Future Generation Computer Systems, con índice de calidad IF = 2.786, posición 8 de 102 Q1 en la rama Computer Science, Theory and Methods. Este trabajo describe el sistema de captación realizado, sus elementos y sus posibles aplicaciones. Los resultados experimentales mostrados en la sección \ref{subsubsec:paquete04}, descritos con más profundidad en ese trabajo, han permitido obtener información sobre el ratio real de vehículos detectados por el sistema.
 
@@ -607,7 +607,7 @@ Otros medios de difusión, de carácter divulgativo como la Noche de los Investiga
 
 \subsection{Generación de conocimientos que supongan un avance importante en el estado del arte}
 
-Los principales conocimientos obtenidos pueden dividirse en dos grandes campos: conocimientos a nivel Ingeniería de Computadores (relacionados con el hardware y software del sistema) y a nivel de Ciencias Informáticas (aplicación de algoritmos a grandes conjuntos de datos). En el primero cabe destacar el uso de ordenadores de baja potencia, como el Raspberry Pi y la aplicación de distintas técnicas de optimización en este tipo de dispositivos. En el segudno bloque podemos destacar la aplicación de operaciones sobre grandes cantidades de datos y gestión y administración de instancias en Cloud Computing.
+Los principales conocimientos obtenidos pueden dividirse en dos grandes campos: conocimientos a nivel Ingeniería de Computadores (relacionados con el hardware y software del sistema) y a nivel de Ciencias Informáticas (aplicación de algoritmos a grandes conjuntos de datos). En el primero cabe destacar el uso de ordenadores de baja potencia, como el Raspberry Pi y la aplicación de distintas técnicas de optimización en este tipo de dispositivos. En el segundo bloque podemos destacar la aplicación de operaciones sobre grandes cantidades de datos y gestión y administración de instancias en Cloud Computing.
 
 \subsection{Generación de conocimientos que hayan supuesto la apertura de nuevas líneas de investigación}
 
@@ -648,7 +648,7 @@ Aunque no se ha desarrollado aún ninguna, está en trámite el desarrollo de una p
 \subsection{Otros resultados}
 \label{subsec:otrosresultados}
 
-Durante el desarrollo del proyecto distintas técnicas de Data Mining, Machine Learning, Cloud Computing y Optimización relacionadas con el proyecto han sido aplicadas a otros tipos de problemas. Las referencias \cite{BotsMAEB15,GarciaOrtega15MADEevostar,FernandezAres15BotsEvostar,FernandezAres15Cosecivi,GarciaSanchez15CIG} muestran distintas publicaciones relacionadas con la generación automática de IAs. También se han realizado distintos estudios relacionados con el Cloud Computing \cite{Garcia15ASOCO,Merelo15geccoCompanion} o la comparativa de métodos de optimización \cite{Rico15IWANN} y la seguridad \cite{delasCuevas2015CC}. Todas las referencias anteriores cuentan con la mención al proyecto en los agradecimientos y han sido publicadas en conferencias nacionales e internacionales con revisión por pares, dos de ellas siendo publicadas en dos revistas con índice JCR en Q1 \cite{delasCuevas2015CC,Garcia15ASOCO}.
+Durante el desarrollo del proyecto distintas técnicas de Data Mining, Machine Learning, Cloud Computing y Optimización relacionadas con el proyecto han sido aplicadas a otros tipos de problemas. Las referencias \cite{BotsMAEB15,GarciaOrtega15MADEevostar,FernandezAres15BotsEvostar,FernandezAres15Cosecivi,GarciaSanchez15CIG} muestran distintas publicaciones relacionadas con la generación automática de IAs. También se han realizado distintos estudios relacionados con el Cloud Computing \cite{Garcia15ASOCO,Merelo15geccoCompanion,Merelo15Volunteer} o la comparativa de métodos de optimización \cite{Rico15IWANN} y la seguridad \cite{delasCuevas2015CC}. Todas las referencias anteriores cuentan con la mención al proyecto en los agradecimientos y han sido publicadas en conferencias nacionales e internacionales con revisión por pares, varias de ellas siendo publicadas en tres revistas con índice JCR en Q1 \cite{delasCuevas2015CC,Garcia15ASOCO,Merelo15Volunteer}.
 
 \subsection{Referentes teóricos y metodológicos de especial interés}
 La sección \ref{subsec:ambitodeoriginalidad} describe el ámbito de originalidad de la propuesta, comparándola con otros trabajos del estado del arte, pero además proporciona una serie de referencias que se han utilizado como base para el desarrollo del proyecto.
@@ -711,7 +711,7 @@ Estancia de Alexander Lyubchenko, de la Omsk State Transport University (OSTU), 
 
 Finalmente, el grupo lidera la propuesta de proyecto H2020 descrito en la sección \ref{subsec:proyectosycolaboraciones}.
 
-Todas estas actividades han mejorado el posicionamiento de su Grupo de Investigación dentro de la red de socios internacionales y la mejora de la calidad y nivel tecnológico del Grupo de Investigación así como la colaboración con nuevos grupos de investigación internacionales.
+Todas estas actividades han mejorado el posicionamiento de su Grupo de Investigación dentro de la red de socios internacionales y la mejora de la calidad y nivel tecnológico del grupo así como la colaboración con nuevos grupos de investigación internacionales.
 	
 \subsection{Formación del personal especializado en I+D+i}
 
@@ -743,11 +743,14 @@ Durante el desarrollo del proyecto los distintos investigadores del grupo GeNeur
 
 \subsection{Ámbito de originalidad}
 \label{subsec:ambitodeoriginalidad}
+
+En esta subsección se explican las distintas técnicas, metodologías y literatura relacionadas con la temática del proyecto, y como han sido usadas como base para el desarrollo del mismo, relacionando cada una con las distintas partes explicadas en esta memoria.
+
 Existen distintas tecnologías usadas para recolectar datos y obtener información del estado de las carreteras. Las tecnologías de monitorización del tráfico pueden clasificarse como \textit{intrusivas}, instaladas en el pavimento, y \textit{no-intrusivas}, sin contacto con la carretera, causando un efecto mínimo en el flujo de tráfico \cite{martin2003detector}. 
 
 Como se ha indicado en la introducción, las principales tecnologías incluyen tubos neumáticos, espiras inductivas y sistemas OCR, entre otros \cite{rodrigue2013geography}.
 
-Los tubos neumáticos se colocan encima del carril para detectar vehículos mediante el cambio de presión generado cuando un vehículo pasan por ellos. Una espira inductiva es un cable empotrado dentro de la carretera, normalmente formando un cuadrado. Se envía una corriente eléctrica al cable y cuando una superficie de metal con un área mínima pasa por encima se envía un pulso que se detecta. El principal problema de estos dos sistemas es que son incapaces de detectar el vehículo específico detectado por el sensor. Así que, a diferencia de nuestro sistema, no se pueden calcular matrices de entrada/salida, sólo el tipo y cantidad de los vehículos. Esto impide, por ejemplo, detectar pasos repetitivos del mismo vehículo. Debido a su alto coste de instalación y mantenimiento no es posible instalarlo en todas las carreteras. Esta es la razón por la que suelen verse en carreteras principales o puntos de especial interés.
+Los tubos neumáticos se colocan encima del carril para detectar vehículos mediante el cambio de presión generado cuando un vehículo pasan por ellos. Una espira inductiva es un cable empotrado dentro de la carretera, normalmente formando un cuadrado. Se envía una corriente eléctrica al cable y cuando una superficie de metal con un área mínima pasa por encima se envía un pulso que se detecta. El principal problema de estos dos sistemas es que son incapaces de detectar el vehículo específico detectado por el sensor. Así que, a diferencia de nuestro sistema, no se pueden calcular matrices de entrada/salida, sólo el tipo y cantidad de los vehículos. Esto impide, por ejemplo, detectar pasos repetitivos del mismo vehículo. Debido a su alto coste de instalación y mantenimiento no es posible instalarlo en todas las carreteras. Esta es la razón por la que suelen verse en carreteras principales o puntos de especial interés, como las descritas en la sección \ref{subsubsec:paquete03}.
 
 Por último, la tecnología de reconocimiento automático ha experimentado un aumento de la
 los últimos años debido a su capacidad para detectar vehículos individuales sin depender
@@ -758,7 +761,7 @@ ventaja sobre los sistemas de información anteriores. Sin embargo, la fiabilidad
 no ser óptima, ya que el clima puede limitar la precisión. Por otra parte, estos sistemas son
 muy caros comparados con los descritos anteriormente \cite{skszek2001state}.
 Además, la Agencia de Protección de Datos considera el número de matrícula del coche
-como datos personales. por lo que se requiere el consentimiento del usuario para que pueda almacenarse.
+como datos personales. por lo que se requiere el consentimiento del usuario para que pueda almacenarse. Es por esta razón que nosotros hemos enmascarado las MAC de los dispositivos (como se explica en la sección \ref{subsec:proteccion}).
 
 
 Existen varias empresas que trabajan en el campo de información de tráfico. Algunas de las más relevantes son:
@@ -904,6 +907,7 @@ A.~Fern\'andez-Ares, A.~Mora, M.~Arenas, P.~Garc\'ia-Sanchez, G.~Romero,
   gathered by a novel low-cost monitoring and tracking system, International
   Journal of Conceptual Structures and Smart Applications, Special Issue On:
   Smart Applications in Smart Cities En revisi\'on.
+
 \end{itemize}
 
 \subsection{Otras publicaciones relacionadas con el proyecto}
@@ -986,6 +990,12 @@ Corporate
   security solutions for byod: A novel user-centric and self-adaptive system,
   Computer Communications 68 (2015) 83 -- 95, security and Privacy in Unified
   Communications: Challenges and Solutions.
+
+ \item
+J.-J. Merelo, M.~Garc\'ia-Valdez, P.~A. Castillo, P.~Garc\'ia-S\'anchez,
+  P.~de~las Cuevas, N.~Rico, Volunteers in the clouds: A web based architecture
+  to harness volunteer resources for low cost distributed evolutionary
+  computation, IEEE Computational Intelligence Magazine. 
 \end{itemize}
 
 \subsection{Otros medios de difusión}
